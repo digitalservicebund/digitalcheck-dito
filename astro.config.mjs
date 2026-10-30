@@ -35,6 +35,7 @@ const rawRedirects = {
   "/interoperabel?tab=angrenzendes-eu-recht":
     "/interoperabel/angrenzendes-eu-recht",
   "/grundlagen/fuenf-prinzipien": "/prinzipien",
+  "/methoden": "/assistent/erarbeitung",
   "/methoden/fuenf-prinzipien": "/prinzipien",
   // Not a dynamic [principleId] redirect, as Astro drops `base` from those
   "/methoden/fuenf-prinzipien/digitale-angebote-fuer-alle-nutzbar-gestalten":
@@ -48,6 +49,8 @@ const rawRedirects = {
   "/methoden/fuenf-prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen":
     "/prinzipien/datenschutz-und-informationssicherheit-schaffen-vertrauen",
   "/unterstuetzung": "/kontakt",
+  "/vorpruefung": "/assistent/vorpruefung",
+  "/dokumentation": "/assistent/dokumentation",
 };
 
 // Some pages were moved to the Zentrum für Legistik

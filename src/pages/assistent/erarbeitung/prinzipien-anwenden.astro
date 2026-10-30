@@ -1,0 +1,48 @@
+---
+import { assistent_dokumentation, prinzipien } from "@/config/routes";
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_BEISPIELE,
+  ZFL_PATH_SCHULUNGEN,
+} from "@/resources/constants";
+import { contact } from "@/resources/content/shared/contact";
+import StepPage from "./_StepPage.astro";
+
+export const frontmatter = {
+  title: "Prinzipien anwenden",
+  sitemap: false,
+  navOrder: 3,
+};
+---
+
+<!-- The Checkliste per Prinzip follows once its content is ready -->
+<StepPage
+  title={frontmatter.title}
+  subline="Die Regelung anhand der fünf Prinzipien digitaltauglich gestalten"
+  steps={[
+    "Gehen Sie die Prüfpunkte je Prinzip in der Checkliste durch.",
+    "Haken Sie ab, was für Ihr Vorhaben bereits gilt. “EU” markiert Punkte mit Interoperabilitätsbezug.",
+    `Tragen Sie Ihre Überlegungen direkt in der <a class="kern-link" href="${assistent_dokumentation.path}">Dokumentation</a> ein.`,
+  ]}
+  result="Eine geprüfte Regelung und die Grundlage für Ihre Dokumentation."
+  tools={[
+    {
+      preline: "Grundlage",
+      title: "Die fünf Prinzipien im Detail",
+      href: prinzipien.path,
+    },
+    {
+      preline: "Beispiele",
+      title: "Praxisbeispiele zu den Prinzipien",
+      href: ZFL_BASE_URL + ZFL_PATH_BEISPIELE,
+    },
+  ]}
+  support={{
+    text: "Prinzipien-Schulung und Digitalcheck-Support.",
+    links: [
+      { label: "Zu den Schulungen", href: ZFL_BASE_URL + ZFL_PATH_SCHULUNGEN },
+      { label: contact.email, href: `mailto:${contact.email}` },
+      { label: contact.phoneDisplay, href: contact.phone },
+    ],
+  }}
+/>

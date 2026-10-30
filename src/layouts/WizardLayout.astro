@@ -1,0 +1,97 @@
+---
+import HelpSidepanel from "@/components/HelpSidepanel.astro";
+import Layout from "@/layouts/Layout.astro";
+
+type Props = {
+  title: string;
+  /** Shown as progress bar, e.g. "Prinzipien · Schritt 4 von 7" */
+  progress?: { label?: string; current: number; total: number };
+  isWide?: boolean;
+};
+
+const { title, progress, isWide = false } = Astro.props;
+---
+
+<!--
+  Slots:
+  - default: step content (heading, text, form)
+  - context: context bar, e.g. "Vorprüfung für: Bund". Positioned, so menus
+    in it can span its full width on mobile.
+  - button-bar: <WizardButtonBar />, at the end of the content
+  - help: <HelpSection />s, shown in the help panel next to the content
+  The section sidebar is rendered by Layout.astro.
+-->
+<Layout title={title} noFooter>
+  <!-- h-full fills the sidebar grid cell, flex-1 the body without sidebar -->
+  <div class="flex h-full min-w-0 flex-1">
+    <div class="flex min-w-0 flex-1 flex-col">
+      {Astro.slots.has("context") && (
+        <div class="relative px-kern-md pt-kern-md pb-kern-sm">
+          <slot name="context" />
+        </div>
+      )}
+      <main
+        class:list={[
+          "flex-1 py-48 sm:pt-64 sm:pb-80 print:pb-0",
+          !isWide && "px-kern-md",
+        ]}
+      >
+        <!-- breakout-grid brings its own gutters and lets content span the full width -->
+        <div
+          class:list={[
+            "space-y-kern-xl",
+            isWide ? "breakout-grid" : "mx-auto w-full max-w-736",
+          ]}
+        >
+          {progress && (
+            <div class="kern-progress">
+              <label for="wizard-progress" class="kern-label">
+                {progress.label && `${progress.label} · `}Schritt{" "}
+                {progress.current} von {progress.total}
+              </label>
+              <progress
+                id="wizard-progress"
+                value={progress.current}
+                max={progress.total}
+              />
+            </div>
+          )}
+          <slot />
+          {/* pt + space-y: 64px between the content and the buttons */}
+          {Astro.slots.has("button-bar") && (
+            <div class="pt-kern-xl">
+              <slot name="button-bar" />
+            </div>
+          )}
+        </div>
+      </main>
+    </div>
+    {Astro.slots.has("help") && (
+      <HelpSidepanel class="xl:w-300 xl:shrink-0 min-[94rem]:w-384">
+        <slot name="help" />
+      </HelpSidepanel>
+    )}
+  </div>
+  <!-- Inline, so it scrolls before the first paint -->
+  <script is:inline>
+    // Scrolls the page header out when coming from another step, so the
+    // sticky sidebar and help panel don't jump on every step change.
+    // Back/forward and reload are left to the browser's scroll restoration.
+    {
+      const key = "wizard-step-left";
+      const header = document.querySelector(".page-header");
+      const [navigation] = performance.getEntriesByType("navigation");
+      if (
+        navigation?.type === "navigate" &&
+        document.referrer &&
+        sessionStorage.getItem(key) === document.referrer
+      ) {
+        window.scrollTo({ top: header.offsetHeight, behavior: "instant" });
+      }
+      // On pagehide, not on load: pages restored from the bfcache don't rerun this
+      addEventListener("pagehide", () => {
+        sessionStorage.setItem(key, location.href);
+      });
+    }
+  </script>
+</Layout>

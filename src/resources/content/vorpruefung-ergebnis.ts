@@ -1,8 +1,7 @@
 import {
+  assistent_erarbeitung,
+  assistent_vorpruefung,
   interoperabel,
-  methoden,
-  vorpruefung,
-  vorpruefung_hinweise,
 } from "@/config/routes";
 import { steps } from "@/resources/content/shared/naechste-schritte";
 import type { ContentLink, Step } from "@/utils/contentTypes.ts";
@@ -46,7 +45,7 @@ export const preCheckResult = {
     hint: `Bitte kontaktieren Sie den Digitalcheck-Support unter: ${contact.mdPhoneLink()} oder schreiben Sie uns eine E-Mail an ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")} mit Ihren Fragen. Wir helfen Ihnen, die Vorprüfung auszufüllen.`,
     actionButton: {
       text: "Vorprüfung wiederholen",
-      to: vorpruefung.path,
+      to: assistent_vorpruefung.path,
     } satisfies ContentLink,
     nextStep: {
       title:
@@ -54,7 +53,7 @@ export const preCheckResult = {
       text: "Wenn digitale Umsetzung für Ihr Regelungsvorhaben wichtig ist, finden Sie hier passende Methoden und Werkzeuge. Sie erfahren, wie Sie den Prozess darstellen und durchdenken, mit Beteiligten ins Gespräch kommen und die fünf Prinzipien anwenden.",
       link: {
         text: "Zu „Erarbeiten“",
-        to: methoden.path,
+        to: assistent_erarbeitung.path,
       } satisfies ContentLink,
     },
   },
@@ -82,8 +81,6 @@ export const preCheckResult = {
       **Beachten Sie in diesem Kontext:** Interoperabilität ist die Fähigkeit digitaler Systeme, miteinander zu kommunizieren und Daten auszutauschen. **Das heisst, ohne Digitalbezug ist Interoperabilität nicht möglich.**
 
       Haben Sie Fragen? Kontaktieren Sie uns unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email)}.
-
-      [Zurück zum Vorprüfungs-Formular](${vorpruefung_hinweise.path})
     `,
   },
   interoperability: {

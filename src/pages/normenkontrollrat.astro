@@ -7,11 +7,11 @@ import IconEditNote from "~icons/ic/round-edit-note";
 import IconLaptop from "~icons/ic/round-laptop";
 import IconSwapCalls from "~icons/ic/round-swap-calls";
 import {
-  dokumentation,
+  assistent_dokumentation,
   interoperabel,
-  methoden,
+  assistent_erarbeitung,
   prinzipien,
-  vorpruefung,
+  assistent_vorpruefung,
 } from "@/config/routes";
 import { ZFL_BASE_URL, ZFL_PATH_FLUSSDIAGRAMME } from "@/resources/constants";
 
@@ -25,19 +25,19 @@ const documents = [
     icon: IconLaptop,
     title: "Ergebnis der Vorprüfung",
     body: "Informieren Sie den NKR frühzeitig über Ihr Vorhaben und geben Sie an, ob ein Digitalbezug besteht.",
-    link: { label: "Zur Vorprüfung", href: vorpruefung.path },
+    link: { label: "Zur Vorprüfung", href: assistent_vorpruefung.path },
   },
   {
     icon: IconEditNote,
     title: "Digitalcheck Dokumentation",
     body: "Damit kann der NKR nachvollziehen, wie Sie die Digitaltauglichkeit Ihres Vorhabens sicherstellen.",
-    link: { label: "Zur Dokumentation", href: dokumentation.path },
+    link: { label: "Zur Dokumentation", href: assistent_dokumentation.path },
   },
   {
     icon: IconDescription,
     title: "Regelungsentwurf",
     body: "Der NKR prüft die Umsetzbarkeit und den Erfüllungsaufwand Ihres Vorhabens anhand des Referentenentwurfs.",
-    link: { label: "Regelung erarbeiten", href: methoden.path },
+    link: { label: "Regelung erarbeiten", href: assistent_erarbeitung.path },
   },
   {
     icon: IconSwapCalls,

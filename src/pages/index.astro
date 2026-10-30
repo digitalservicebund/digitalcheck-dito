@@ -8,12 +8,13 @@ import Hero from "@/components/Hero.astro";
 import KernCard from "@/components/KernCard.astro";
 import {
   bundeslaender,
-  dokumentation,
   interoperabel,
   interoperabel_nationaleKontaktstelle,
-  methoden,
   prinzipien,
-  vorpruefung,
+  assistent,
+  assistent_dokumentation,
+  assistent_erarbeitung,
+  assistent_vorpruefung,
 } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import {
@@ -51,7 +52,7 @@ const steps = [
         text: "Individueller Digital- und Interoperabilitätsbezug",
       },
     ],
-    link: { text: "Vorprüfung starten", href: vorpruefung.path },
+    link: { text: "Vorprüfung starten", href: assistent_vorpruefung.path },
   },
   {
     title: "Regelung erarbeiten",
@@ -67,7 +68,7 @@ const steps = [
         text: "Digitaltaugliche Regelung und Visualisierungen",
       },
     ],
-    link: { text: "Zur Erarbeitung", href: methoden.path },
+    link: { text: "Zur Erarbeitung", href: assistent_erarbeitung.path },
     externalLink: {
       text: "Ressourcen",
       href: ZFL_BASE_URL + ZFL_PATH_RESSOURCEN,
@@ -85,7 +86,10 @@ const steps = [
         text: "Abgeschlossene Dokumentation der Digitaltauglichkeit",
       },
     ],
-    link: { text: "Dokumentation erstellen", href: dokumentation.path },
+    link: {
+      text: "Dokumentation erstellen",
+      href: assistent_dokumentation.path,
+    },
   },
 ];
 
@@ -113,7 +117,7 @@ const principles = (await getCollection("prinzipien"))
         Ländern.
       </p>
       <div class="flex flex-wrap gap-24 pt-24 pb-16">
-        <LinkButton href={vorpruefung.path} iconLeft="kern-icon--arrow-forward">
+        <LinkButton href={assistent.path} iconLeft="kern-icon--arrow-forward">
           Digitalcheck starten
         </LinkButton>
         <a

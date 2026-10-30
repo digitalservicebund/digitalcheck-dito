@@ -1,0 +1,47 @@
+---
+import HelpSection from "@/components/HelpSection.astro";
+import QuestionPage from "./_QuestionPage.astro";
+
+export const frontmatter = {
+  title: "Verpflichtungen für Beteiligte",
+  sitemap: false,
+  navOrder: 2,
+};
+---
+
+<QuestionPage
+  title={frontmatter.title}
+  questionId="verpflichtungen-fuer-beteiligte"
+  question="Entstehen durch die Regelung Mitwirkungspflichten für Akteurinnen und Akteure?"
+>
+  <Fragment>
+    <strong>Praxisbeispiel</strong>: Für eine staatliche Förderung ist neben der
+    Land- und Forstwirtschaft nun auch das produzierende Gewerbe berechtigt. Der
+    Anspruch dieser Unternehmen kann nicht nach denselben Kriterien geprüft
+    werden. Die Vorhalte-/Nachweispflichten müssen auf diese Gruppe angepasst
+    werden. Dabei müssen die für die Beteiligten üblichen digitalen
+    Möglichkeiten mitgedacht bzw. geschaffen werden.
+  </Fragment>
+  <HelpSection
+    slot="help"
+    id="verpflichtungen-fuer-beteiligte"
+    title="Wer sind Akteurinnen und Akteure?"
+  >
+    <p>
+      Akteurinnen und Akteure sind in diesem Zusammenhang all diejenigen, die an
+      der Umsetzung des Regelungsvorhabens beteiligt sind. Das können sowohl
+      Vollzugsakteurinnen und -akteure als auch Betroffene sein.
+    </p>
+    <p>Beispiele für Akteurinnen und Akteure sind:</p>
+    <ul>
+      <li>Bürgerinnen und Bürger,</li>
+      <li>Einwohnende,</li>
+      <li>
+        Kommunen, Verwaltungen und Behörden, deren IT- oder Rechtsabteilungen,
+      </li>
+      <li>IT-Dienstleistende,</li>
+      <li>Unternehmen und</li>
+      <li>weitere Organisationen wie z. B. Vereine.</li>
+    </ul>
+  </HelpSection>
+</QuestionPage>

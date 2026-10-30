@@ -1,7 +1,13 @@
 ---
 import Self from "@/components/global/AccordionMenuLevel.astro";
+import WizardLockedModal from "@/components/wizard/WizardLockedModal.astro";
 import { twMerge } from "tailwind-merge";
 import type { AccordeonNavigationEntry } from "@/utils/navigation/accordion";
+import {
+  getWizardIdForPath,
+  getWizardSession,
+  wizardFlows,
+} from "@/wizard/session";
 
 interface Props {
   entries: AccordeonNavigationEntry[];
@@ -11,11 +17,8 @@ interface Props {
 
 const { entries, currentPath, level = 0 } = Astro.props;
 
-function isFirstLevelChildWithChildren(
-  entry: AccordeonNavigationEntry,
-  currentLevel: number,
-) {
-  return currentLevel === 1 && entry.children.length > 0;
+function isCollapsible(entry: AccordeonNavigationEntry, currentLevel: number) {
+  return currentLevel >= 1 && entry.children.length > 0;
 }
 
 function arrowHoverStyle(isCurrent = false) {
@@ -37,25 +40,57 @@ function headerStyle(isCurrent = false) {
 }
 
 function indentStyle(currentLevel: number) {
+  // each level below 2 is indented further
   const paddingLeft =
     currentLevel > 1
-      ? "var(--kern-metric-space-x-large)"
+      ? `calc(var(--kern-metric-space-x-large) + ${currentLevel - 2} * var(--kern-metric-space-default))`
       : "var(--kern-metric-space-small)";
   return `padding: var(--kern-metric-space-small) var(--kern-metric-space-small) var(--kern-metric-space-small) ${paddingLeft}`;
+}
+
+// Wizard pages that can't be reached without user data, e.g. the result page,
+// are disabled at build time. The script below enables them with the stored data.
+function isLockedWizardPage(path: string) {
+  const wizardId = getWizardIdForPath(path);
+  if (!wizardId) return false;
+  const { initialPath } = wizardFlows[wizardId];
+  return !getWizardSession(wizardId, initialPath).isReachable(path);
+}
+
+// The final page of a wizard (e.g. the Ergebnis) opens a modal instead while
+// it's locked, which links the first unanswered question. Other locked pages
+// (e.g. the EU steps without EU-Bezug) stay disabled. Returns its wizard.
+function lockedFinalPageWizard(entry: AccordeonNavigationEntry) {
+  const wizardId = getWizardIdForPath(entry.path);
+  return wizardId &&
+    !entry.isCurrent &&
+    wizardFlows[wizardId].isFinal(entry.path) &&
+    isLockedWizardPage(entry.path)
+    ? wizardId
+    : undefined;
 }
 
 function panelId(path: string) {
   return `accordion-panel-${path.replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-+|-+$/g, "")}`;
 }
+
+const items = entries.map((entry) => ({
+  ...entry,
+  lockedWizard: lockedFinalPageWizard(entry),
+}));
 ---
 
-{entries.map((entry) =>
-  isFirstLevelChildWithChildren(entry, level) ? (
-    <div class="accordion-item" x-data={`{ open: ${entry.isInCurrentBranch} }`}>
+{items.map((entry) =>
+  isCollapsible(entry, level) ? (
+    <div
+      class:list={["accordion-item", entry.eyebrow && "with-eyebrow"]}
+      x-data={`{ open: ${entry.isInCurrentBranch} }`}
+    >
       <div
         class={twMerge(
           headerStyle(entry.isCurrent),
-          "kern-accordion__header rounded-sm",
+          // bottom-aligned, so the toggle stays next to the label below an eyebrow
+          "kern-accordion__header items-end rounded-sm",
         )}
       >
         <a
@@ -67,13 +102,18 @@ function panelId(path: string) {
           )}
           aria-current={entry.isCurrent ? "page" : undefined}
         >
+          {entry.eyebrow && (
+            <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+              {entry.eyebrow}
+            </span>
+          )}
           {entry.label}
         </a>
         <button
           type="button"
           class={twMerge(
             arrowHoverStyle(entry.isCurrent),
-            "mr-3 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm cursor-pointer",
+            "mr-3 mb-4 flex h-32 w-32 shrink-0 items-center justify-center rounded-sm cursor-pointer",
           )}
           aria-label={`Untermenü ${entry.label} ein-/ausklappen`}
           aria-controls={panelId(entry.path)}
@@ -109,15 +149,83 @@ function panelId(path: string) {
     </div>
   ) : (
     <>
+      {entry.lockedWizard && (
+        <>
+          <button
+            type="button"
+            data-wizard-locked-link={entry.path}
+            popovertarget={`${entry.lockedWizard}-menu-locked-modal`}
+            class={twMerge(
+              linkHoverStyle(),
+              "accordion-item kern-body block w-full cursor-pointer rounded-sm text-left",
+              entry.eyebrow && "with-eyebrow",
+            )}
+            style={indentStyle(level)}
+          >
+            {entry.eyebrow && (
+              <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+                {entry.eyebrow}
+              </span>
+            )}
+            {entry.label}
+          </button>
+          <WizardLockedModal
+            id={`${entry.lockedWizard}-menu-locked-modal`}
+            wizardId={entry.lockedWizard}
+          />
+        </>
+      )}
       <a
-        href={entry.path}
+        href={isLockedWizardPage(entry.path) ? undefined : entry.path}
+        hidden={!!entry.lockedWizard}
+        data-wizard-link={getWizardIdForPath(entry.path)}
+        data-path={entry.path}
+        aria-disabled={isLockedWizardPage(entry.path) ? "true" : undefined}
         class={twMerge(
           linkHoverStyle(currentPath === entry.path),
-          "accordion-item link-unstyled kern-body block rounded-sm",
+          "accordion-item link-unstyled kern-body relative block rounded-sm",
+          entry.eyebrow && "with-eyebrow",
+          "aria-disabled:text-kern-layout-text-muted aria-disabled:cursor-not-allowed aria-disabled:hover:bg-transparent aria-disabled:hover:text-kern-layout-text-muted",
         )}
         style={indentStyle(level)}
         aria-current={currentPath === entry.path ? "page" : undefined}
       >
+        {/* Placed in the left padding, so the label doesn't shift when the
+            script reveals an icon after loading the stored answers.
+            Not on the current page, which would warn as soon as one types. */}
+        {getWizardIdForPath(entry.path) && currentPath !== entry.path && (
+          <>
+            <span
+              data-wizard-status="answered"
+              data-testid="CheckIcon"
+              class="absolute top-kern-sm left-kern-xxs flex"
+              hidden
+            >
+              <span
+                class="kern-icon kern-icon--check kern-icon--default bg-kern-feedback-success"
+                aria-hidden="true"
+              />
+              <span class="sr-only">Beantwortet:</span>
+            </span>
+            <span
+              data-wizard-status="incomplete"
+              data-testid="WarningIcon"
+              class="absolute top-kern-sm left-kern-xxs flex"
+              hidden
+            >
+              <span
+                class="kern-icon kern-icon--warning kern-icon--default bg-kern-feedback-warning"
+                aria-hidden="true"
+              />
+              <span class="sr-only">Unvollständig:</span>
+            </span>
+          </>
+        )}
+        {entry.eyebrow && (
+          <span class="eyebrow block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+            {entry.eyebrow}
+          </span>
+        )}
         {entry.label}
       </a>
       {entry.children.length > 0 && (
@@ -131,6 +239,46 @@ function panelId(path: string) {
   ),
 )}
 
+<script>
+  import type { WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  document
+    .querySelectorAll<HTMLAnchorElement>("a[data-wizard-link]")
+    .forEach((link) => {
+      const wizardId = link.dataset.wizardLink as WizardId;
+      const path = link.dataset.path ?? "";
+
+      // Also update when the answers change later, e.g. in another tab
+      wizardStores[wizardId].$answerStatus.subscribe((answerStatus) => {
+        link
+          .querySelectorAll<HTMLElement>("[data-wizard-status]")
+          .forEach((mark) => {
+            mark.hidden = mark.dataset.wizardStatus !== answerStatus(path);
+          });
+      });
+
+      // A locked final page has a button opening the modal, which replaces the link
+      const lockedButton = document.querySelector<HTMLElement>(
+        `[data-wizard-locked-link="${path}"]`,
+      );
+
+      wizardStores[wizardId].$isReachable.subscribe((isReachable) => {
+        if (isReachable(path)) {
+          link.href = path;
+          link.removeAttribute("aria-disabled");
+        } else {
+          link.removeAttribute("href");
+          link.setAttribute("aria-disabled", "true");
+        }
+        if (lockedButton) {
+          link.hidden = !isReachable(path);
+          lockedButton.hidden = isReachable(path);
+        }
+      });
+    });
+</script>
+
 <style>
   .kern-accordion__header,
   .kern-accordion__body {
@@ -143,5 +291,21 @@ function panelId(path: string) {
 
   .accordion-item {
     margin-top: 8px;
+  }
+
+  .accordion-item.with-eyebrow {
+    margin-top: 24px;
+  }
+
+  /* Muted, unless the link turns white on hover (see linkHoverStyle, headerStyle) */
+  .eyebrow {
+    color: var(--kern-color-layout-text-muted);
+  }
+
+  a:not([aria-current]):hover > .eyebrow,
+  .kern-accordion__header:has(> button:hover)
+    > a:not([aria-current])
+    > .eyebrow {
+    color: inherit;
   }
 </style>

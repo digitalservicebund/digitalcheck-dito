@@ -13,28 +13,31 @@ const styles = tv({
       plain: "",
       dark: "hero-dark bg-kern-darkblue-800",
     },
+    largeText: {
+      true: "hero-large-text",
+    },
   },
   defaultVariants: {
     variant: "default",
+    largeText: true,
   },
 });
 
-const { class: className, variant } = Astro.props;
+const { class: className, variant, largeText } = Astro.props;
 ---
 
-<section class={styles({ variant, className })}>
+<section class={styles({ variant, largeText, className })}>
   <slot />
 </section>
 
 <style>
-  section {
-    > :global(h1) {
-      margin-bottom: 24px;
-    }
-    :global(p, ul, ol) {
-      font-size: var(--kern-typography-font-size-large-static, 21px);
-      line-height: var(--kern-typography-line-height-large-static, 32px);
-    }
+  section > :global(h1) {
+    margin-bottom: 24px;
+  }
+
+  .hero-large-text :global(p, ul, ol) {
+    font-size: var(--kern-typography-font-size-large-static, 21px);
+    line-height: var(--kern-typography-line-height-large-static, 32px);
   }
 
   /* Re-map KERN's contextual colors so text and buttons render light-on-dark. */

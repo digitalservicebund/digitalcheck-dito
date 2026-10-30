@@ -1,0 +1,182 @@
+---
+import IconQueryBuilder from "~icons/ic/outline-query-builder";
+import IconTimer from "~icons/ic/outline-timer";
+import { LinkButton } from "@/components/Button";
+import Hero from "@/components/Hero.astro";
+import TimelineList from "@/components/TimelineList.astro";
+import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
+import {
+  assistent_dokumentation,
+  assistent_erarbeitung,
+  assistent_vorpruefung,
+} from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import WordDownloadButton from "./dokumentation/_WordDownloadButton";
+
+export const frontmatter = {
+  title: "Drei Schritte zur Digitaltauglichkeit",
+  navLabel: "Übersicht",
+  sitemap: false,
+};
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
+---
+
+<Layout title={frontmatter.title} noFooter>
+  <main class="breakout-grid">
+    <Hero variant="plain">
+      <h1>{frontmatter.title}</h1>
+      <p>
+        Mit diesem Tool durchlaufen Sie die relevanten Schritte, um
+        Digitaltauglichkeit in Ihrem Regelungsvorhaben sicherzustellen.
+      </p>
+    </Hero>
+    <div class="pb-32">
+      <TimelineList>
+        <li>
+          <div class="flex max-w-776 flex-col gap-16 rounded-sm bg-kern-darkblue-025 px-16 py-32 sm:px-64">
+            <p class="text-kern-layout-text-muted text-(length:--kern-typography-font-size-small-static) italic">
+              Schritt 1
+            </p>
+            <h2 class="m-0">Vorprüfung</h2>
+            <p class="flex items-center gap-8">
+              <IconTimer
+                class="size-24 shrink-0 text-kern-darkblue-850"
+                aria-hidden="true"
+              />
+              <span>
+                <strong>Dauer</strong>: Wenige Minuten
+              </span>
+            </p>
+            <p class="flex items-center gap-8">
+              <IconQueryBuilder
+                class="size-24 shrink-0 text-kern-darkblue-850"
+                aria-hidden="true"
+              />
+              <span>
+                <strong>Zeitpunkt</strong>: Vor dem Schreiben der Regelung
+              </span>
+            </p>
+            <p>
+              Zu Beginn Ihres Regelungsvorhabens identifizieren Sie Digitalbezug
+              und Interoperabilitätsanforderungen für Ihr Vorhaben.
+            </p>
+            <WizardStartActions
+              wizardId="vorpruefung"
+              href={assistent_vorpruefung.path}
+            >
+              <Fragment slot="startLabel">Zu diesem Schritt</Fragment>
+              <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
+              <Fragment slot="restartLabel">Neue Vorprüfung beginnen</Fragment>
+              <Fragment slot="modalBody">
+                Mit einer neuen Vorprüfung werden die Daten der begonnenen
+                Vorprüfung gelöscht. Diese können nicht wiederhergestellt
+                werden.
+              </Fragment>
+            </WizardStartActions>
+          </div>
+        </li>
+        {/* No line next to the condition, as in the design */}
+        <li class="timeline-plain-item pt-8 text-(length:--kern-typography-font-size-large-static) leading-(--kern-typography-line-height-large-static) font-medium after:hidden">
+          Falls Digitalbezug besteht:
+        </li>
+        <li>
+          <div class="flex max-w-776 flex-col gap-16 rounded-sm bg-kern-darkblue-025 px-16 py-32 sm:px-64">
+            <p class="text-kern-layout-text-muted text-(length:--kern-typography-font-size-small-static) italic">
+              Schritt 2
+            </p>
+            <h2 class="m-0">Erarbeitung</h2>
+            <p class="flex items-center gap-8">
+              <IconTimer
+                class="size-24 shrink-0 text-kern-darkblue-850"
+                aria-hidden="true"
+              />
+              <span>
+                <strong>Dauer</strong>: Punktuell über die gesamte Zeit der
+                Regelungsausarbeitung
+              </span>
+            </p>
+            <p class="flex items-center gap-8">
+              <IconQueryBuilder
+                class="size-24 shrink-0 text-kern-darkblue-850"
+                aria-hidden="true"
+              />
+              <span>
+                <strong>Zeitpunkt</strong>: Beim Schreiben der Regelung
+              </span>
+            </p>
+            <p>
+              Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und
+              Methoden an, die die Digitaltauglichkeit Ihres Vorhabens
+              sicherstellen.
+            </p>
+            <div>
+              <LinkButton
+                href={assistent_erarbeitung.path}
+                iconRight="kern-icon--arrow-forward"
+              >
+                Zu diesem Schritt
+              </LinkButton>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="flex max-w-776 flex-col gap-16 rounded-sm bg-kern-darkblue-025 px-16 py-32 sm:px-64">
+            <p class="text-kern-layout-text-muted text-(length:--kern-typography-font-size-small-static) italic">
+              Schritt 3
+            </p>
+            <h2 class="m-0">Dokumentation</h2>
+            <p class="flex items-center gap-8">
+              <IconTimer
+                class="size-24 shrink-0 text-kern-darkblue-850"
+                aria-hidden="true"
+              />
+              <span>
+                <strong>Dauer</strong>: Ein bis zwei Stunden
+              </span>
+            </p>
+            <p class="flex items-center gap-8">
+              <IconQueryBuilder
+                class="size-24 shrink-0 text-kern-darkblue-850"
+                aria-hidden="true"
+              />
+              <span>
+                <strong>Zeitpunkt</strong>: Parallel zum Erarbeiten der Regelung
+              </span>
+            </p>
+            <p>
+              Sie dokumentieren, wie Sie Digitaltauglichkeit in Ihrer Regelung
+              sichergestellt haben.
+            </p>
+            <WizardStartActions
+              wizardId="dokumentation"
+              href={assistent_dokumentation.path}
+            >
+              <Fragment slot="startLabel">Zu diesem Schritt</Fragment>
+              <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>
+              <Fragment slot="restartLabel">
+                Neue Dokumentation beginnen
+              </Fragment>
+              <Fragment slot="modalBody">
+                <p>
+                  Mit einer neuen Dokumentation werden die Daten der begonnenen
+                  Dokumentation gelöscht. Diese können nicht wiederhergestellt
+                  werden.
+                </p>
+                <WordDownloadButton
+                  client:load
+                  prinzipien={prinzipien}
+                  label="Zwischenstand herunterladen"
+                  look="tertiary"
+                />
+              </Fragment>
+            </WizardStartActions>
+          </div>
+        </li>
+      </TimelineList>
+    </div>
+  </main>
+</Layout>

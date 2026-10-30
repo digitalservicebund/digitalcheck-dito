@@ -12,6 +12,278 @@ export type Route = {
   readonly navEyebrow?: string;
 };
 
+export const assistent = {
+  key: "assistent",
+  path: "/assistent",
+  title: "Drei Schritte zur Digitaltauglichkeit",
+  parent: null,
+  sitemap: false,
+  isStagingOnly: false,
+  navLabel: "Übersicht",
+} as const;
+
+export const assistent_dokumentation = {
+  key: "assistent_dokumentation",
+  path: "/assistent/dokumentation",
+  title: "Dokumentation",
+  parent: assistent,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 3,
+  navEyebrow: "Schritt 3",
+} as const;
+
+export const assistent_dokumentation_abschliessen = {
+  key: "assistent_dokumentation_abschliessen",
+  path: "/assistent/dokumentation/abschliessen",
+  title: "Abschließen",
+  parent: assistent_dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 10,
+} as const;
+
+export const assistent_dokumentation_beteiligungsformate = {
+  key: "assistent_dokumentation_beteiligungsformate",
+  path: "/assistent/dokumentation/beteiligungsformate",
+  title: "Beteiligungsformate",
+  parent: assistent_dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet = {
+  key: "assistent_dokumentation_euInteroperabilitaet",
+  path: "/assistent/dokumentation/eu-interoperabilitaet",
+  title: "EU-Interoperabilität",
+  parent: assistent_dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 8,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet_organisatorisch = {
+  key: "assistent_dokumentation_euInteroperabilitaet_organisatorisch",
+  path: "/assistent/dokumentation/eu-interoperabilitaet/organisatorisch",
+  title: "Organisatorische Interoperabilität",
+  parent: assistent_dokumentation_euInteroperabilitaet,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet_rechtlich = {
+  key: "assistent_dokumentation_euInteroperabilitaet_rechtlich",
+  path: "/assistent/dokumentation/eu-interoperabilitaet/rechtlich",
+  title: "Rechtliche Interoperabilität",
+  parent: assistent_dokumentation_euInteroperabilitaet,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet_semantisch = {
+  key: "assistent_dokumentation_euInteroperabilitaet_semantisch",
+  path: "/assistent/dokumentation/eu-interoperabilitaet/semantisch",
+  title: "Semantische Interoperabilität",
+  parent: assistent_dokumentation_euInteroperabilitaet,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet_technisch = {
+  key: "assistent_dokumentation_euInteroperabilitaet_technisch",
+  path: "/assistent/dokumentation/eu-interoperabilitaet/technisch",
+  title: "Technische Interoperabilität",
+  parent: assistent_dokumentation_euInteroperabilitaet,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet_verbindlicheAnforderungen = {
+  key: "assistent_dokumentation_euInteroperabilitaet_verbindlicheAnforderungen",
+  path: "/assistent/dokumentation/eu-interoperabilitaet/verbindliche-anforderungen",
+  title: "Verbindliche Anforderungen",
+  parent: assistent_dokumentation_euInteroperabilitaet,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+} as const;
+
+export const assistent_dokumentation_euInteroperabilitaet_veroeffentlichung = {
+  key: "assistent_dokumentation_euInteroperabilitaet_veroeffentlichung",
+  path: "/assistent/dokumentation/eu-interoperabilitaet/veroeffentlichung",
+  title: "Veröffentlichung",
+  parent: assistent_dokumentation_euInteroperabilitaet,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 6,
+} as const;
+
+export const assistent_dokumentation_regelungsvorhaben = {
+  key: "assistent_dokumentation_regelungsvorhaben",
+  path: "/assistent/dokumentation/regelungsvorhaben",
+  title: "Regelungsvorhaben",
+  parent: assistent_dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+} as const;
+
+export const assistent_dokumentation_zusammenfassung = {
+  key: "assistent_dokumentation_zusammenfassung",
+  path: "/assistent/dokumentation/zusammenfassung",
+  title: "Zusammenfassung",
+  parent: assistent_dokumentation,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 9,
+} as const;
+
+export const assistent_erarbeitung = {
+  key: "assistent_erarbeitung",
+  path: "/assistent/erarbeitung",
+  title: "Erarbeitung",
+  parent: assistent,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 2,
+  navEyebrow: "Schritt 2",
+} as const;
+
+export const assistent_erarbeitung_ablaufVerstehen = {
+  key: "assistent_erarbeitung_ablaufVerstehen",
+  path: "/assistent/erarbeitung/ablauf-verstehen",
+  title: "Ablauf verstehen",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+} as const;
+
+export const assistent_erarbeitung_betroffeneEinbeziehen = {
+  key: "assistent_erarbeitung_betroffeneEinbeziehen",
+  path: "/assistent/erarbeitung/betroffene-einbeziehen",
+  title: "Betroffene einbeziehen",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+} as const;
+
+export const assistent_erarbeitung_euInteroperabilitaetPruefen = {
+  key: "assistent_erarbeitung_euInteroperabilitaetPruefen",
+  path: "/assistent/erarbeitung/eu-interoperabilitaet-pruefen",
+  title: "EU-Interoperabilität prüfen",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+} as const;
+
+export const assistent_erarbeitung_prinzipienAnwenden = {
+  key: "assistent_erarbeitung_prinzipienAnwenden",
+  path: "/assistent/erarbeitung/prinzipien-anwenden",
+  title: "Prinzipien anwenden",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+} as const;
+
+export const assistent_erarbeitung_ueberlegungenDokumentieren = {
+  key: "assistent_erarbeitung_ueberlegungenDokumentieren",
+  path: "/assistent/erarbeitung/ueberlegungen-dokumentieren",
+  title: "Überlegungen dokumentieren",
+  parent: assistent_erarbeitung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+} as const;
+
+export const assistent_vorpruefung = {
+  key: "assistent_vorpruefung",
+  path: "/assistent/vorpruefung",
+  title: "Vorprüfung",
+  parent: assistent,
+  sitemap: true,
+  isStagingOnly: false,
+  navOrder: 1,
+  navEyebrow: "Schritt 1",
+} as const;
+
+export const assistent_vorpruefung_automatisierung = {
+  key: "assistent_vorpruefung_automatisierung",
+  path: "/assistent/vorpruefung/automatisierung",
+  title: "Automatisierung",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 5,
+} as const;
+
+export const assistent_vorpruefung_datenaustausch = {
+  key: "assistent_vorpruefung_datenaustausch",
+  path: "/assistent/vorpruefung/datenaustausch",
+  title: "Datenaustausch",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 3,
+} as const;
+
+export const assistent_vorpruefung_ergebnis = {
+  key: "assistent_vorpruefung_ergebnis",
+  path: "/assistent/vorpruefung/ergebnis",
+  title: "Ergebnis",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+} as const;
+
+export const assistent_vorpruefung_euBezug = {
+  key: "assistent_vorpruefung_euBezug",
+  path: "/assistent/vorpruefung/eu-bezug",
+  title: "EU-Bezug",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 6,
+} as const;
+
+export const assistent_vorpruefung_itSystem = {
+  key: "assistent_vorpruefung_itSystem",
+  path: "/assistent/vorpruefung/it-system",
+  title: "IT-System",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 1,
+} as const;
+
+export const assistent_vorpruefung_kommunikation = {
+  key: "assistent_vorpruefung_kommunikation",
+  path: "/assistent/vorpruefung/kommunikation",
+  title: "Digitale Kommunikation",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 4,
+} as const;
+
+export const assistent_vorpruefung_verpflichtungenFuerBeteiligte = {
+  key: "assistent_vorpruefung_verpflichtungenFuerBeteiligte",
+  path: "/assistent/vorpruefung/verpflichtungen-fuer-beteiligte",
+  title: "Verpflichtungen für Beteiligte",
+  parent: assistent_vorpruefung,
+  sitemap: false,
+  isStagingOnly: false,
+  navOrder: 2,
+} as const;
+
 export const barrierefreiheit = {
   key: "barrierefreiheit",
   path: "/barrierefreiheit",
@@ -283,15 +555,6 @@ export const kontakt = {
   isStagingOnly: false,
 } as const;
 
-export const methoden = {
-  key: "methoden",
-  path: "/methoden",
-  title: "Regelung erarbeiten",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-} as const;
-
 export const normenkontrollrat = {
   key: "normenkontrollrat",
   path: "/normenkontrollrat",
@@ -320,34 +583,34 @@ export const sitemap = {
   isStagingOnly: false,
 } as const;
 
-export const vorpruefung = {
-  key: "vorpruefung",
-  path: "/vorpruefung",
-  title: "Digitalbezug einschätzen",
-  parent: null,
-  sitemap: true,
-  isStagingOnly: false,
-} as const;
-
-export const vorpruefung_ergebnis = {
-  key: "vorpruefung_ergebnis",
-  path: "/vorpruefung/ergebnis",
-  title: "Ergebnis",
-  parent: vorpruefung,
-  sitemap: false,
-  isStagingOnly: false,
-} as const;
-
-export const vorpruefung_hinweise = {
-  key: "vorpruefung_hinweise",
-  path: "/vorpruefung/hinweise",
-  title: "Allgemeine Hinweise",
-  parent: vorpruefung,
-  sitemap: false,
-  isStagingOnly: false,
-} as const;
-
 export const allRoutes = [
+  assistent,
+  assistent_dokumentation,
+  assistent_dokumentation_abschliessen,
+  assistent_dokumentation_beteiligungsformate,
+  assistent_dokumentation_euInteroperabilitaet,
+  assistent_dokumentation_euInteroperabilitaet_organisatorisch,
+  assistent_dokumentation_euInteroperabilitaet_rechtlich,
+  assistent_dokumentation_euInteroperabilitaet_semantisch,
+  assistent_dokumentation_euInteroperabilitaet_technisch,
+  assistent_dokumentation_euInteroperabilitaet_verbindlicheAnforderungen,
+  assistent_dokumentation_euInteroperabilitaet_veroeffentlichung,
+  assistent_dokumentation_regelungsvorhaben,
+  assistent_dokumentation_zusammenfassung,
+  assistent_erarbeitung,
+  assistent_erarbeitung_ablaufVerstehen,
+  assistent_erarbeitung_betroffeneEinbeziehen,
+  assistent_erarbeitung_euInteroperabilitaetPruefen,
+  assistent_erarbeitung_prinzipienAnwenden,
+  assistent_erarbeitung_ueberlegungenDokumentieren,
+  assistent_vorpruefung,
+  assistent_vorpruefung_automatisierung,
+  assistent_vorpruefung_datenaustausch,
+  assistent_vorpruefung_ergebnis,
+  assistent_vorpruefung_euBezug,
+  assistent_vorpruefung_itSystem,
+  assistent_vorpruefung_kommunikation,
+  assistent_vorpruefung_verpflichtungenFuerBeteiligte,
   barrierefreiheit,
   bundeslaender,
   bundeslaender_hessen,
@@ -378,11 +641,7 @@ export const allRoutes = [
   interoperabel_loesungen_dcatAp,
   interoperabel_nationaleKontaktstelle,
   kontakt,
-  methoden,
   normenkontrollrat,
   prinzipien,
   sitemap,
-  vorpruefung,
-  vorpruefung_ergebnis,
-  vorpruefung_hinweise,
 ] as const;

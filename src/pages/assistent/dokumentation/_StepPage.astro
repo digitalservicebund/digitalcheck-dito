@@ -1,0 +1,93 @@
+---
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
+import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
+import { assistent_dokumentation } from "@/config/routes";
+import WizardLayout from "@/layouts/WizardLayout.astro";
+import { getSectionProgress } from "@/wizard/dokumentationFlow";
+import { getWizardSession } from "@/wizard/session";
+import { getCollection } from "astro:content";
+import WordDownloadButton from "./_WordDownloadButton";
+
+interface Props {
+  /** Short page title, used in the document title */
+  title: string;
+  /** Lets the user change the Prüfbereich, e.g. on the final page */
+  canEditPruefbereich?: boolean;
+  isWide?: boolean;
+  /** See WizardButtonBar */
+  finalNext?: { href: string; label: string };
+}
+
+const { title, canEditPruefbereich = false, isWide, finalNext } = Astro.props;
+
+const session = getWizardSession("dokumentation", Astro.url.pathname);
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
+---
+
+<!--
+  Shell shared by all Dokumentation steps, the content differs per step.
+  Fields are plain markup (e.g. <RadioField />), wired to the store by bindStepForm.
+  Answers are only required for Abschließen (see dokumentationFlow), so "Weiter"
+  links to the next page otherwise.
+  Slots:
+  - default: step content (heading, text, fields)
+  - help: <HelpSection />s shown in the help panel
+-->
+<WizardLayout
+  title={`Dokumentation: ${title}`}
+  progress={getSectionProgress(Astro.url.pathname)}
+  isWide={isWide}
+>
+  {session.pageSchema ? (
+    <form
+      class="space-y-kern-xl"
+      novalidate
+      data-wizard-step-form="dokumentation"
+    >
+      <slot />
+    </form>
+  ) : (
+    <slot />
+  )}
+  <PruefbereichBreadcrumb
+    slot="context"
+    wizardId="dokumentation"
+    canEdit={canEditPruefbereich}
+  />
+  <slot name="help" slot="help" />
+  <WizardButtonBar
+    slot="button-bar"
+    wizardId="dokumentation"
+    fallbackBackHref={assistent_dokumentation.path}
+    finalNext={finalNext}
+  >
+    {!finalNext && (
+      <WordDownloadButton
+        client:load
+        prinzipien={prinzipien}
+        label="Zwischenstand herunterladen"
+        look="tertiary"
+      />
+    )}
+  </WizardButtonBar>
+</WizardLayout>
+
+<script>
+  import { bindMultiSelects } from "@/components/wizard/multiSelect";
+  import { bindStepForm } from "@/wizard/bindStepForm";
+  import { wizardFields, type WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  // Here instead of in the components, see MultiSelectField.astro. Before
+  // bindStepForm, which updates the shown selection while prefilling.
+  bindMultiSelects();
+  document
+    .querySelectorAll<HTMLFormElement>("form[data-wizard-step-form]")
+    .forEach((form) => {
+      const wizardId = form.dataset.wizardStepForm as WizardId;
+      bindStepForm(form, wizardStores[wizardId], wizardFields[wizardId]);
+    });
+</script>

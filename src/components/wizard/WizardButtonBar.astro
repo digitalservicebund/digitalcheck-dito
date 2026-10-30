@@ -1,0 +1,150 @@
+---
+import WizardLockedModal from "@/components/wizard/WizardLockedModal.astro";
+import { removeTrailingSlash } from "@/utils/path";
+import { getWizardSession, wizardFlows, type WizardId } from "@/wizard/session";
+import IconPublishedWithChanges from "~icons/ic/baseline-published-with-changes";
+
+interface Props {
+  wizardId: WizardId;
+  /**
+   * id of the step form that "Weiter" submits (the button sits outside the form).
+   * Without it, "Weiter" links to the next page, so a step can be skipped.
+   */
+  formId?: string;
+  /** Used for "Zurück" on the first step, which has no previous page in the flow */
+  fallbackBackHref?: string;
+  showAutosaveHint?: boolean;
+  /** "Weiter" on the last page, which has no next page in the flow, e.g. to the next wizard */
+  finalNext?: { href: string; label: string };
+}
+
+const {
+  wizardId,
+  formId,
+  fallbackBackHref,
+  showAutosaveHint = true,
+  finalNext,
+} = Astro.props;
+
+// Without user data at build time; the script below recalculates the
+// links in the browser with the stored answers.
+const session = getWizardSession(wizardId, Astro.url.pathname);
+const backHref = session.prevPath ?? fallbackBackHref;
+const nextHref = session.nextPath();
+// The last page has no "Weiter". On other pages it opens a modal while a guard
+// blocks the next page, e.g. the result until all questions are answered.
+// Without user data at build time, such guards block, so only these pages
+// get the modal.
+const isFinal = wizardFlows[wizardId].isFinal(
+  removeTrailingSlash(Astro.url.pathname),
+);
+const lockedModalId = `${wizardId}-next-locked-modal`;
+---
+
+<!-- At the end of the page content, see WizardLayout.astro -->
+<div
+  data-wizard-button-bar={wizardId}
+  data-fallback-back-href={fallbackBackHref}
+  class="flex flex-col gap-kern-sm print:hidden"
+>
+  {/* On mobile: "Zurück" and "Weiter" share the first row, the additional actions go below */}
+  <div class="flex flex-wrap items-center justify-end gap-kern-md *:flex-1 sm:*:flex-none">
+    {Astro.slots.has("default") && (
+      <div class="order-last w-full sm:order-0 sm:mr-auto sm:w-auto">
+        {/* additional actions, e.g. "Zwischenstand herunterladen" */}
+        <slot />
+      </div>
+    )}
+    <a
+      data-wizard-back
+      href={backHref}
+      hidden={!backHref}
+      class="kern-btn kern-btn--secondary link-unstyled"
+    >
+      <span class="kern-label">Zurück</span>
+    </a>
+    {formId ? (
+      <button type="submit" form={formId} class="kern-btn kern-btn--primary">
+        <span class="kern-label">Weiter</span>
+      </button>
+    ) : !isFinal ? (
+      <>
+        <a
+          data-wizard-next
+          href={nextHref}
+          hidden={!nextHref}
+          class="kern-btn kern-btn--primary link-unstyled"
+        >
+          <span class="kern-label">Weiter</span>
+        </a>
+        {!nextHref && (
+          <>
+            <button
+              type="button"
+              data-wizard-next-locked
+              popovertarget={lockedModalId}
+              class="kern-btn kern-btn--primary"
+            >
+              <span class="kern-label">Weiter</span>
+            </button>
+            <WizardLockedModal id={lockedModalId} wizardId={wizardId} />
+          </>
+        )}
+      </>
+    ) : (
+      finalNext && (
+        <a
+          href={finalNext.href}
+          class="kern-btn kern-btn--primary link-unstyled"
+        >
+          <span class="kern-label">{finalNext.label}</span>
+        </a>
+      )
+    )}
+  </div>
+  {showAutosaveHint && (
+    <p class="kern-body kern-body--small flex items-center gap-kern-sm text-kern-layout-text-muted my-0">
+      <IconPublishedWithChanges class="size-22 shrink-0" aria-hidden="true" />
+      Angaben werden gespeichert. Sie können die Seite jederzeit schließen und
+      später fortfahren.
+    </p>
+  )}
+</div>
+
+<script>
+  import type { WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  const setLink = (link: HTMLAnchorElement | null, path?: string) => {
+    if (!link) return;
+    link.hidden = !path;
+    if (path) link.href = path;
+    else link.removeAttribute("href");
+  };
+
+  // While there is no next page, the button opening the modal replaces the link
+  const setNextLink = (bar: HTMLElement, path?: string) => {
+    setLink(bar.querySelector("[data-wizard-next]"), path);
+    const lockedButton = bar.querySelector<HTMLElement>(
+      "[data-wizard-next-locked]",
+    );
+    if (lockedButton) lockedButton.hidden = !!path;
+  };
+
+  document
+    .querySelectorAll<HTMLElement>("[data-wizard-button-bar]")
+    .forEach((bar) => {
+      const wizardId = bar.dataset.wizardButtonBar as WizardId;
+
+      // Updates the links with the stored data, also when it changes later
+      // (e.g. an answer saved by the form island or in another tab)
+      wizardStores[wizardId].$session.subscribe((session) => {
+        if (!session) return;
+        setLink(
+          bar.querySelector("[data-wizard-back]"),
+          session.prevPath ?? bar.dataset.fallbackBackHref,
+        );
+        setNextLink(bar, session.nextPath());
+      });
+    });
+</script>

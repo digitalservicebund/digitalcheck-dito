@@ -1,4 +1,4 @@
-import { vorpruefung_ergebnis } from "@/config/routes";
+import { assistent_vorpruefung_ergebnis } from "@/config/routes";
 import { preCheck } from "@/resources/content/vorpruefung";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
@@ -27,15 +27,15 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
       await page.waitForURL(question.path);
       await waitForHydration(page);
       await page.getByLabel("Ja").click();
-      await page.getByRole("button", { name: "Übernehmen" }).click();
+      await page.getByRole("button", { name: "Weiter", exact: true }).click();
     }
   });
 
   test.beforeEach("go to result page", async () => {
-    if (page.url() !== vorpruefung_ergebnis.path) {
-      await page.goto(vorpruefung_ergebnis.path);
+    if (page.url() !== assistent_vorpruefung_ergebnis.path) {
+      await page.goto(assistent_vorpruefung_ergebnis.path);
     }
-    await page.waitForURL(vorpruefung_ergebnis.path);
+    await page.waitForURL(assistent_vorpruefung_ergebnis.path);
     await waitForHydration(page);
   });
 
