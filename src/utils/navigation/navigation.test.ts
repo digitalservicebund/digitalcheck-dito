@@ -81,7 +81,7 @@ afterEach(() => {
 });
 
 describe("navigation helpers", () => {
-  it("opens the current nested sidebar level in the mobile menu", async () => {
+  it("only renders the header routes and their direct children in the mobile menu", async () => {
     const werkzeuge = createRoute({
       key: "werkzeuge",
       path: "/werkzeuge",
@@ -97,12 +97,58 @@ describe("navigation helpers", () => {
       ueber,
     ]);
 
-    expect(mobileMenu.activePanel.id).toBe("ueber_checklist");
+    expect(mobileMenu.activePanel.id).toBe("ueber");
     expect(mobileMenu.panels.map(({ id, depth }) => ({ id, depth }))).toEqual([
       { id: "root", depth: 0 },
       { id: "ueber", depth: 1 },
-      { id: "ueber_checklist", depth: 2 },
     ]);
+    expect(
+      mobileMenu.panels
+        .find((panel) => panel.id === "ueber")
+        ?.items.map(({ path, panelId }) => ({ path, panelId })),
+    ).toEqual([
+      { path: "/ueber/checklist", panelId: null },
+      { path: "/ueber/summary", panelId: null },
+    ]);
+  });
+
+  it("finds the children of header routes that override their navLabel", async () => {
+    const { ueber, allRoutes } = createUeberBranch();
+    const { getMobileMenuNavigation } = await loadNavigationHelpers(allRoutes);
+    const mobileMenu = getMobileMenuNavigation("/ueber/checklist", [
+      { ...ueber, navLabel: "Über uns" },
+    ]);
+
+    expect(mobileMenu.panels[0]?.items[0]).toMatchObject({
+      label: "Über uns",
+      panelId: "ueber",
+    });
+    expect(mobileMenu.activePanel.id).toBe("ueber");
+  });
+
+  it("adds the eyebrow to mobile menu entries", async () => {
+    const ueber = createRoute({
+      key: "ueber",
+      path: "/ueber",
+      title: "Über das ZfL",
+    });
+    const ueberStep = createRoute({
+      key: "ueber_step",
+      path: "/ueber/step",
+      title: "Step",
+      navEyebrow: "Schritt 1",
+      parent: ueber,
+    });
+    const { getMobileMenuNavigation } = await loadNavigationHelpers([
+      ueber,
+      ueberStep,
+    ]);
+    const mobileMenu = getMobileMenuNavigation("/ueber", [ueber]);
+
+    expect(
+      mobileMenu.panels.find((panel) => panel.id === "ueber")?.items[0]
+        ?.eyebrow,
+    ).toBe("Schritt 1");
   });
 
   it("filters invisible child routes from the mobile menu", async () => {
