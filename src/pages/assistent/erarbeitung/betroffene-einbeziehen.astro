@@ -1,0 +1,46 @@
+---
+import {
+  ZFL_BASE_URL,
+  ZFL_PATH_INTERVIEW_LEITFADEN,
+  ZFL_PATH_VISUALISIERUNGEN,
+} from "@/resources/constants";
+import StepPage from "./_StepPage.astro";
+
+export const frontmatter = {
+  title: "Betroffene einbeziehen",
+  sitemap: false,
+  navOrder: 2,
+};
+---
+
+<StepPage
+  title={frontmatter.title}
+  subline="Probleme aus der Praxis früh erkennen."
+  steps={[
+    "Klären Sie, wer die Regelung später umsetzt – Behörden, IT, Vollzug.",
+    "Sprechen Sie während der Ausarbeitung mit diesen Akteuren.",
+    "Übertragen Sie die Erkenntnisse in die Regelung.",
+  ]}
+  result="Praxisprobleme sind bekannt, bevor die Regelung steht."
+  tools={[
+    {
+      preline: "Leitfaden",
+      title: "Interviewleitfaden mit Akteuren",
+      href: ZFL_BASE_URL + ZFL_PATH_INTERVIEW_LEITFADEN,
+    },
+    {
+      preline: "Beispiele",
+      title: "Visualisierungen aus der Praxis",
+      href: ZFL_BASE_URL + ZFL_PATH_VISUALISIERUNGEN,
+    },
+  ]}
+  support={{
+    text: "Regelungsbegleitung – wir begleiten Sie beim Einbeziehen der Akteure.",
+    links: [
+      {
+        label: "Zur Regelungsbegleitung",
+        href: `${ZFL_BASE_URL}/begleitungen`,
+      },
+    ],
+  }}
+/>

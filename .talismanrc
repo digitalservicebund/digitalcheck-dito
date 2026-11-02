@@ -27,9 +27,6 @@ fileignoreconfig:
   - filename: src/pages/dokumentation/_react/DocumentationDataProvider.spec.tsx
     allowed_patterns:
       - STORAGE_KEY
-  - filename: src/pages/vorpruefung/_react/preCheckDataService.ts
-    allowed_patterns:
-      - STORAGE_KEY
   - filename: src/resources/content/das-ist-neu.ts
     ignore_detectors: [filecontent]
   - filename: src/resources/content/vorpruefung.ts # German text content misidentified as secret pattern
@@ -81,6 +78,7 @@ allowed_patterns:
   - CacheKey
   - passen
   - Anpassungen
+  - passiert
   - Pass\s # Allow "Pass " followed by a space
   - \@[a-z0-9]{40} # Allow fixing action hashes
   - "secrets: inherit"
@@ -96,6 +94,12 @@ allowed_patterns:
   - firstKey
   - tabKey
   - btnKey
+  - STORAGE_KEY
+  - getNodeKeyFromPath
+  - nodeKey
+  - storageKey
+  - wizardStorageKeys
+  - pruefbereichStorageKey
 
 scopeconfig:
   - scope: node # ignores files such as package-lock.json

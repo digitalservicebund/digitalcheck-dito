@@ -1,4 +1,8 @@
-import { dokumentation, methoden, vorpruefung } from "@/config/routes";
+import {
+  assistent_dokumentation,
+  assistent_erarbeitung,
+  assistent_vorpruefung,
+} from "@/config/routes";
 import type { Step } from "@/utils/contentTypes.ts";
 
 const stepPruefstelle: Step = {
@@ -18,7 +22,7 @@ export const steps = {
       "Finden Sie heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte der digitalen Umsetzung und EU-Anforderungen an Interoperabilität beachten müssen. Danach entscheidet sich, ob die weiteren Schritte für Sie relevant sind.",
     link: {
       text: "Digitalbezug einschätzen",
-      to: vorpruefung.path,
+      to: assistent_vorpruefung.path,
     },
     finished: {
       headline: {
@@ -35,7 +39,7 @@ export const steps = {
       "Nutzen Sie passende Methoden und Werkzeuge, um Digitaltauglichkeit und Interoperabilität in Ihrer Regelung sicherzustellen. Das Digitalcheck-Team steht Ihnen bei der Erarbeitung zur Verfügung.",
     link: {
       text: "Zu „Erarbeiten“",
-      to: methoden.path,
+      to: assistent_erarbeitung.path,
     },
     isDisabled: false,
     finished: {
@@ -53,7 +57,7 @@ export const steps = {
       "Dokumentieren Sie in einem Fragebogen, auf welche Aspekte der Digitaltauglichkeit Sie besonders geachtet haben. Beschreiben Sie, wie Sie diese in das Regelungsvorhaben einfließen lassen. Die Erkenntnisse der vorigen Schritte helfen Ihnen beim Ausfüllen.",
     link: {
       text: "Zu „Dokumentieren“",
-      to: dokumentation.path,
+      to: assistent_dokumentation.path,
     },
     isDisabled: false,
     finished: {

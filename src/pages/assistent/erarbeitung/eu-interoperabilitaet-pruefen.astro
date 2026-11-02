@@ -1,0 +1,54 @@
+---
+import {
+  interoperabel,
+  interoperabel_angrenzendesEuRecht,
+  interoperabel_loesungen,
+} from "@/config/routes";
+import { contact } from "@/resources/content/shared/contact";
+import StepPage from "./_StepPage.astro";
+
+export const frontmatter = {
+  title: "EU-Interoperabilität prüfen",
+  sitemap: false,
+  navOrder: 4,
+};
+---
+
+<StepPage
+  title={frontmatter.title}
+  preline="Nur bei Interoperabilitätsbezug"
+  subline="Grenzüberschreitende Anforderungen rechtzeitig berücksichtigen."
+  steps={[
+    "Prüfen Sie im Ergebnis der Vorprüfung, ob ein Interoperabilitätsbezug besteht.",
+    "Klären Sie, was die Verordnung (EU) 2024/903 für Ihr Vorhaben bedeutet.",
+    "Prüfen Sie, welche interoperablen Lösungen Sie nutzen können.",
+  ]}
+  result="Klarheit über die Anforderungen aus der Interoperabilitäts-Verordnung."
+  tools={[
+    {
+      preline: "Überblick",
+      title: "EU-Interoperabilität",
+      href: interoperabel.path,
+    },
+    {
+      preline: "Lösungen",
+      title: "Interoperable Lösungen",
+      href: interoperabel_loesungen.path,
+    },
+    {
+      preline: "Recht",
+      title: "Angrenzendes EU-Recht",
+      href: interoperabel_angrenzendesEuRecht.path,
+    },
+  ]}
+  support={{
+    text: "Nationale Kontaktstelle – kostenlos und vertraulich.",
+    links: [
+      {
+        label: contact.interoperabilityEmail,
+        href: `mailto:${contact.interoperabilityEmail}`,
+      },
+      { label: contact.phoneDisplay, href: contact.phone },
+    ],
+  }}
+/>

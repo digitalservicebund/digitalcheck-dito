@@ -1,0 +1,66 @@
+---
+import RadioStepForm from "@/components/wizard/RadioStepForm";
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
+import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
+import WizardLayout from "@/layouts/WizardLayout.astro";
+import { assistent_vorpruefung } from "@/config/routes";
+import { answerOptions } from "@/wizard/vorpruefungSchema";
+import { getWizardSession } from "@/wizard/session";
+import HelpButton from "@/components/HelpButton";
+
+interface Props {
+  /** Short page title, used in the document title */
+  title: string;
+  questionId: string;
+  /** Heading of the page, labels the radio group */
+  question: string;
+}
+
+const { title, questionId, question } = Astro.props;
+
+const { steps } = getWizardSession("vorpruefung", Astro.url.pathname).progress;
+// The flow counts the terminal Ergebnis page as a step, but it's not a question.
+const totalPages = steps.total - 1;
+
+const formId = "step-form";
+const labelId = "question-label";
+---
+
+<!--
+  Slots:
+  - default: text below the question, e.g. "Praxisbeispiel"
+  - help: <HelpSection id={questionId} /> shown in the help panel
+-->
+<WizardLayout
+  title={`Vorprüfung: ${title}`}
+  progress={{ current: steps.current, total: totalPages }}
+>
+  <div class="space-y-32">
+    <div class="space-y-16">
+      <h1 id={labelId} class="kern-heading-medium">
+        {question}
+        {Astro.slots.has("help") && (
+          <HelpButton client:load sectionId={questionId} />
+        )}
+      </h1>
+      <p class="kern-body kern-body--small">
+        <slot />
+      </p>
+    </div>
+    <RadioStepForm
+      client:load
+      formId={formId}
+      labelledBy={labelId}
+      options={answerOptions}
+      wizardId="vorpruefung"
+      name={questionId}
+    />
+  </div>
+  <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" />
+  <slot name="help" slot="help" />
+  <WizardButtonBar
+    slot="button-bar"
+    wizardId="vorpruefung"
+    fallbackBackHref={assistent_vorpruefung.path}
+  />
+</WizardLayout>

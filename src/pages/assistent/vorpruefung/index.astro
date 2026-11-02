@@ -1,0 +1,169 @@
+---
+import Hero from "@/components/Hero.astro";
+import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
+import Layout from "@/layouts/Layout.astro";
+import { vorpruefungFlow } from "@/wizard/vorpruefungFlow";
+import SupportSection from "../_SupportSection.astro";
+
+export const frontmatter = {
+  title: "Vorprüfung",
+  navOrder: 1,
+  navEyebrow: "Schritt 1",
+};
+
+const faqItems = [
+  {
+    question: "Muss ich die Vorprüfung für jedes Vorhaben machen?",
+    answer:
+      "Es empfiehlt sich, die Vorprüfung für jedes Vorhaben zu machen. Falls Sie mehrere Regelungen haben, füllen Sie eine gemeinsame Vorprüfung für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich.",
+  },
+  {
+    question:
+      "Ich arbeite in einer Landesverwaltung – gilt die Vorprüfung für mich?",
+    answer: "Ja, die Vorprüfung gilt auch für Länder.",
+  },
+  {
+    question: "Was passiert mit dem Ergebnis?",
+    answer: [
+      "Für die Bundesebene: Das Ergebnis schicken Sie idealerweise als E-Mail an den Normenkontrollrat. Dafür stellen wir eine Vorlage bereit. Der NKR unterstützt Sie in Ihrem Regelungsvorhaben.",
+      "Für die Länder: Das Ergebnis können Sie herunterladen und für Ihren Unterlagen verakten.",
+    ],
+  },
+  {
+    question: "Kann ich Antworten später ändern?",
+    answer:
+      "Sie können die Vorprüfung jederzeit beginnen und abbrechen – die Antworten werden automatisch gespeichert. Auch wenn Sie bereits ein Ergebnis erhalten haben, können Sie eine neue Vorprüfung starten.",
+  },
+];
+---
+
+<Layout title={frontmatter.title} noFooter>
+  <main class="breakout-grid">
+    <Hero class="space-y-24" largeText={false}>
+      <p class="kern-preline">Digitalbezug einschätzen</p>
+      <h1>Vorprüfung</h1>
+      <p>
+        Finden Sie in 6 Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte
+        der digitalen Umsetzung und EU-Anforderungen an Interoperabilität
+        beachten müssen.
+      </p>
+      <div class="space-y-8">
+        <p>
+          <b>Das brauchen Sie:</b>
+        </p>
+        <ul>
+          <li>
+            Eine grobe Vorstellung Ihre Regelvorhabens. Die Regelung sollte noch
+            nicht geschrieben sein.
+          </li>
+          <li>Es werden keine weiteren Dokumente benötigt.</li>
+        </ul>
+      </div>
+      <div class="space-y-8">
+        <p>
+          <b>Ergebnis:</b>
+        </p>
+        <ul>
+          <li>Individueller Digital- und Interoperabilitätsbezug</li>
+          <li>
+            Ergebnis als E-Mail an Prüfstelle schicken oder als Dokumentation
+            zur Selbstprüfung nutzen
+          </li>
+          <li>
+            Chancen und Hindernisse der digitalen Umsetzung identifizieren
+          </li>
+        </ul>
+      </div>
+      <noscript>
+        <div class="kern-alert kern-alert--warning" role="alert">
+          <div class="kern-alert__header">
+            <span
+              class="kern-icon kern-icon--warning"
+              aria-hidden="true"
+            ></span>
+            <h2 class="kern-title">Erlauben Sie die Nutzung von JavaScript</h2>
+          </div>
+          <div class="kern-alert__body">
+            <p class="kern-body">
+              Um die Vorprüfung zu starten, müssen Sie Ihrem Browser die Nutzung
+              von JavaScript erlauben. Das ist nötig, damit die Seite Ihre Daten
+              zwischenspeichern kann.
+            </p>
+            <p>
+              <b>So geht es:</b> Suchen Sie in den Einstellungen Ihres Browsers
+              nach JavaScript und erlauben Sie die Nutzung.
+            </p>
+          </div>
+        </div>
+      </noscript>
+
+      <WizardStartActions
+        wizardId="vorpruefung"
+        href={vorpruefungFlow.initialPath}
+        showAutosaveHint
+        showPruefbereich
+      >
+        <Fragment slot="startLabel">Vorprüfung starten</Fragment>
+        <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
+        <Fragment slot="restartLabel">Neue Vorprüfung beginnen</Fragment>
+        <Fragment slot="modalBody">
+          Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung
+          gelöscht. Diese können nicht wiederhergestellt werden.
+        </Fragment>
+      </WizardStartActions>
+    </Hero>
+
+    <section class="space-y-16">
+      <h2>Warum ist die Vorprüfung relevant für mein Vorhaben?</h2>
+      <ul>
+        <li>
+          Sie erkennen Digitalisierungsbezug früh – bevor die Regelung
+          geschrieben ist.
+        </li>
+        <li>Sie identifizieren EU-Anforderungen an Interoperabilität.</li>
+      </ul>
+      <p>
+        Rechtliche Grundlage: § 4 Abs. 3 NKRG und die EU-Verordnung 2024/903
+      </p>
+    </section>
+
+    <section class="space-y-16">
+      <h2>Häufige Fragen</h2>
+      <div>
+        {faqItems.map((item) => (
+          <details class="kern-accordion">
+            <summary class="kern-accordion__header">
+              <span class="kern-title">{item.question}</span>
+            </summary>
+            <div class="kern-accordion__body space-y-16">
+              {(Array.isArray(item.answer) ? item.answer : [item.answer]).map(
+                (paragraph) => (
+                  <p class="kern-body">{paragraph}</p>
+                ),
+              )}
+            </div>
+          </details>
+        ))}
+        <details class="kern-accordion">
+          <summary class="kern-accordion__header">
+            <span class="kern-title">Werden meine Angaben gespeichert?</span>
+          </summary>
+          <div class="kern-accordion__body">
+            <p class="kern-body">
+              Ihre eingegebenen Daten werden unbegrenzt lange in der Sitzung
+              gespeichert, bis
+            </p>
+            <ol class="kern-body list-[lower-alpha]">
+              <li>Sie eine neue Vorprüfung starten, oder</li>
+              <li>
+                Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen
+                voreingestellt ist)
+              </li>
+            </ol>
+          </div>
+        </details>
+      </div>
+    </section>
+    <SupportSection />
+  </main>
+</Layout>

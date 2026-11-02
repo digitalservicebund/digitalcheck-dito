@@ -20,9 +20,15 @@ interface Props {
   title?: string;
   description?: string;
   noMenu?: boolean;
+  noFooter?: boolean;
 }
 
-const { title, description = siteMeta.description, noMenu } = Astro.props;
+const {
+  title,
+  description = siteMeta.description,
+  noMenu,
+  noFooter = false,
+} = Astro.props;
 
 const noIndex = isNoIndexPath(Astro.url.pathname);
 
@@ -111,7 +117,7 @@ const showSectionSidebar =
   <body class="flex min-h-screen flex-col">
     <PageHeader />
     {showSectionSidebar ? (
-      <div class="flex-1 min-[900px]:grid min-[900px]:grid-cols-[296px_minmax(0,1fr)]">
+      <div class="flex-1 min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
         <SectionSidebar />
         <div>
           <slot />
@@ -120,7 +126,7 @@ const showSectionSidebar =
     ) : (
       <slot />
     )}
-    <Footer />
+    {!noFooter && <Footer />}
     {isProduction && <Posthog />}
   </body>
 </html>

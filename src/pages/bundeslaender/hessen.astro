@@ -3,9 +3,9 @@ import LaenderLayout from "@/layouts/LaenderLayout.astro";
 import { Image } from "astro:assets";
 import hessenLogo from "./_assets/HESSEN_Logo_stacked.png";
 import {
-  dokumentation,
-  methoden,
-  vorpruefung,
+  assistent_dokumentation,
+  assistent_vorpruefung,
+  assistent_erarbeitung,
   prinzipien,
 } from "@/config/routes";
 
@@ -54,10 +54,10 @@ export const frontmatter = {
       </p>
       <h3>Vorprüfung</h3>
       <p>
-        <a href={vorpruefung.path}>Prüfen</a> Sie zunächst, ob Ihr Vorhaben
-        einen Digitalbezug hat oder Anforderungen an die EU‑Interoperabilität
-        bestehen. Falls keiner der beiden Punkte gegeben ist, halten Sie dies im
-        Gesetzesvorblatt fest.
+        <a href={assistent_vorpruefung.path}>Prüfen</a> Sie zunächst, ob Ihr
+        Vorhaben einen Digitalbezug hat oder Anforderungen an die
+        EU‑Interoperabilität bestehen. Falls keiner der beiden Punkte gegeben
+        ist, halten Sie dies im Gesetzesvorblatt fest.
       </p>
     </div>
     <div class="space-y-16">
@@ -66,10 +66,12 @@ export const frontmatter = {
       </p>
       <h3>Ausarbeitung</h3>
       <p>
-        <a href={methoden.path}>Entwickeln</a> Sie ein Zielbild, indem Sie den
-        Vollzug Ihrer Norm frühzeitig durchdenken und den{" "}
-        <a href="https://zfl.bund.de/werkzeuge/">Ablaufprozess skizzieren</a>.
-        Nutzen Sie dazu die unten aufgeführten allgemeinen und
+        <a href={assistent_erarbeitung.path}>Entwickeln</a> Sie ein Zielbild,
+        indem Sie den Vollzug Ihrer Norm frühzeitig durchdenken und den{" "}
+        <a href="https://zfl.bund.de/werkzeuge/" target="_blank">
+          Ablaufprozess skizzieren
+        </a>
+        . Nutzen Sie dazu die unten aufgeführten allgemeinen und
         Hessen-spezifischen Hilfestellungen. Formulieren Sie anschließend den
         Normtext und berücksichtigen Sie dabei die{" "}
         <a href={prinzipien.path}>Anforderungen der Digitaltauglichkeit</a>.
@@ -81,12 +83,12 @@ export const frontmatter = {
       </p>
       <h3>Dokumentation</h3>
       <p>
-        <a href={dokumentation.path}>Dokumentieren</a> Sie, welche Aspekte Sie
-        berücksichtigt und ins Regelungsvorhaben integriert haben, wie dadurch
-        Digitaltauglichkeit und EU‑Interoperabilität sichergestellt werden, und
-        welche digitalen Kriterien Sie adressiert haben; laden Sie die
-        Ergebnisse herunter oder nutzen Sie die Word‑Vorlage. Das Ergebnis der
-        Dokumentation kann als Anlage dem Gesetzesvorhaben beigefügt werden.
+        <a href={assistent_dokumentation.path}>Dokumentieren</a> Sie, welche
+        Aspekte Sie berücksichtigt und ins Regelungsvorhaben integriert haben,
+        wie dadurch Digitaltauglichkeit und EU‑Interoperabilität sichergestellt
+        werden, und welche digitalen Kriterien Sie adressiert haben; laden Sie
+        die Ergebnisse herunter oder nutzen Sie die Word‑Vorlage. Das Ergebnis
+        der Dokumentation kann als Anlage dem Gesetzesvorhaben beigefügt werden.
       </p>
     </div>
   </section>
