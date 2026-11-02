@@ -5,11 +5,14 @@ interface Props extends HTMLAttributes<"ol"> {
   look?: "dc" | "zfl";
   /** `changelog`: room for year badges, more spacing between and indentation of the items */
   variant?: "default" | "changelog";
+  /** Hides markers and line below the `sm` breakpoint and drops the indentation of the items */
+  hideLineOnMobile?: boolean;
 }
 
 const {
   look = "dc",
   variant = "default",
+  hideLineOnMobile = false,
   class: className,
   ...attrs
 } = Astro.props;
@@ -28,6 +31,7 @@ const {
     "timeline list-unstyled",
     `timeline--${look}`,
     `timeline--${variant}`,
+    { "timeline--hide-line-mobile": hideLineOnMobile },
     className,
   ]}
   {...attrs}
@@ -101,6 +105,16 @@ const {
       }
       & > li.timeline-year-item > .timeline-year-badge {
         @apply relative left-8 -translate-x-1/2;
+      }
+
+      &.timeline--hide-line-mobile > li {
+        @apply max-sm:pl-0;
+      }
+      &.timeline--hide-line-mobile > li::before,
+      &.timeline--hide-line-mobile > li::after {
+        @variant max-sm {
+          content: none;
+        }
       }
     }
   }
