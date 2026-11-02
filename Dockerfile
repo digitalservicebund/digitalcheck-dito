@@ -27,7 +27,7 @@ COPY public/ public/
 RUN PUBLIC_STAGE=production pnpm run build --outDir dist_production
 RUN PUBLIC_STAGE=staging    pnpm run build --outDir dist_staging
 
-FROM nginx:1.31.0-alpine AS runtime
+FROM nginx:1.31.8-alpine AS runtime
 COPY ./nginx.template.conf /etc/nginx/nginx.template.conf
 COPY --from=build /src/dist_production /usr/share/nginx/production
 COPY --from=build /src/dist_staging /usr/share/nginx/staging
