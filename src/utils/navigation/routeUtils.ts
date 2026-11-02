@@ -37,7 +37,7 @@ export const isRouteVisible = (route: Route) =>
 
 export const getVisibleChildren = (route: Route) =>
   navigationRoutes
-    .filter((r) => r.parent === route)
+    .filter((r) => r.parent?.key === route.key)
     .filter(isRouteVisible)
     .toSorted(orderRoutesForNavigation);
 
