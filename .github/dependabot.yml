@@ -54,5 +54,7 @@ updates:
       interval: "weekly"
   - package-ecosystem: "pip"
     directory: "scripts"
+    schedule:
+      interval: "daily"
     exclude-paths:
       - "scripts/nkr-data" # these are run one-off with trusted data, to be updated manually
