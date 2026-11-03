@@ -52,37 +52,47 @@ export const answerLabels = Object.fromEntries(
 ) as Record<Answer, string>;
 
 // Title and path come from the question page, the explanation summarizes the
-// question and is the same for every answer.
+// question and is the same for every answer. The summary states the aspect as a
+// fact and is used in the e-mail.
 export const resultRows = {
   "it-system": {
     route: assistent_vorpruefung_itSystem,
     explanation: "Muss ein IT-System angepasst oder neu entwickelt werden?",
+    summary: "Ein IT-System muss angepasst oder neu entwickelt werden.",
   },
   "verpflichtungen-fuer-beteiligte": {
     route: assistent_vorpruefung_verpflichtungenFuerBeteiligte,
     explanation: "Entstehen durch die Regelung Mitwirkungspflichten?",
+    summary:
+      "Es entstehen Mitwirkungspflichten für Adressatinnen und Adressaten.",
   },
   datenaustausch: {
     route: assistent_vorpruefung_datenaustausch,
     explanation: "Soll ein Datenaustausch stattfinden?",
+    summary: "Es findet ein Datenaustausch statt.",
   },
   kommunikation: {
     route: assistent_vorpruefung_kommunikation,
     explanation:
       "Kommt es zu einer Interaktion zwischen Adressatinnen und Adressaten?",
+    summary:
+      "Es kommt zu einer Interaktion zwischen Adressatinnen und Adressaten.",
   },
   automatisierung: {
     route: assistent_vorpruefung_automatisierung,
     explanation: "Können Schritte automatisiert werden?",
+    summary:
+      "Eine Automatisierung von Schritten kann die Umsetzbarkeit der Regelung verbessern.",
   },
   "eu-bezug": {
     route: assistent_vorpruefung_euBezug,
     explanation:
       "Sollen Daten zwischen EU-Mitgliedstaaten ausgetauscht werden?",
+    summary: "Es sollen Daten zwischen EU-Mitgliedstaaten ausgetauscht werden.",
   },
 } as const satisfies Record<
   VorpruefungQuestion,
-  { route: Route; explanation: string }
+  { route: Route; explanation: string; summary: string }
 >;
 
 // Same order as the questions in the flow
