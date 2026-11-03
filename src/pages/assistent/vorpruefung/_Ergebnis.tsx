@@ -4,12 +4,12 @@ import { mailto } from "@/utils/mailtoHelper";
 import type { Pruefbereich } from "@/wizard/pruefbereichSchema";
 import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import {
-  answerLabels,
   getVorpruefungResult,
   questionNames,
   resultRows,
   type VorpruefungResult,
 } from "@/wizard/vorpruefungResult";
+import type { Answer } from "@/wizard/vorpruefungSchema";
 import { useStore } from "@nanostores/react";
 import { useId, useState, type ReactNode } from "react";
 import ResultTable from "./_ResultTable";
@@ -28,25 +28,29 @@ const meanings: Record<ClearResult, string> = {
     "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitaltauglichkeit und EU-Anforderungen an Interoperabilität in Ihrem Regelungsvorhaben sicherzustellen.",
 };
 
-// Completed by the subject, e.g. "Ihr Vorhaben" on the page, "Das Vorhaben" in the e-mail
+// Completed by subject and verb, e.g. "Ihr Vorhaben hat" on the page, "Das Vorhaben hat" in the e-mail
 const statements = (result: ClearResult) => {
   const hasDigitalbezug = result !== "negative";
   const hasInteroperability = result === "digitalAndInteroperability";
   return [
     {
       isMet: hasDigitalbezug,
-      verb: "hat",
       object: hasDigitalbezug ? "einen Digitalbezug" : "keinen Digitalbezug",
     },
     {
       isMet: hasInteroperability,
-      verb: "enthält",
       object: hasInteroperability
-        ? "Anforderungen der Interoperabilität"
-        : "keine eindeutigen Anforderungen der Interoperabilität",
+        ? "einen Bezug zur EU-Interoperabilität."
+        : "keinen Bezug zur EU-Interoperabilität.",
     },
   ];
 };
+
+const answerSections: { answer: Answer; heading: string }[] = [
+  { answer: "yes", heading: "Zutreffende Aspekte" },
+  { answer: "no", heading: "Nicht zutreffende Aspekte" },
+  { answer: "unsure", heading: "Noch zu prüfende Aspekte" },
+];
 
 const emailBody = (
   result: ClearResult,
@@ -56,26 +60,26 @@ const emailBody = (
 ) =>
   [
     "Guten Tag,",
-    "hiermit sende ich Ihnen das Ergebnis der Vorprüfung des Digitalchecks.",
-    [title && `Vorhaben: ${title}`, `Vorprüfung für: ${pruefbereich}`]
-      .filter(Boolean)
-      .join("\n"),
+    `hiermit erhalten Sie das Vorprüfungsergebnis für das Regelungsvorhaben mit dem Arbeitstitel ${title}.`,
     [
-      "Ergebnis:",
+      "Einschätzung des Vorhabens:",
       ...statements(result).map(
-        ({ verb, object }) => `- Das Vorhaben ${verb} ${object}.`,
+        ({ object }) => `- Das Vorhaben hat ${object}.`,
       ),
     ].join("\n"),
-    [
-      "So kommt das Ergebnis zustande:",
-      ...questionNames.map((name) => {
-        const answer = data[name];
-        const { route, explanation } = resultRows[name];
-        return `- ${route.title} (${explanation}): ${answer ? answerLabels[answer] : "–"}`;
-      }),
-    ].join("\n"),
+    ...answerSections.map(({ answer, heading }) => {
+      const aspects = questionNames.filter((name) => data[name] === answer);
+      if (aspects.length === 0) return "";
+      return [
+        `${heading}:`,
+        ...aspects.map((name) => `- ${resultRows[name].summary}`),
+      ].join("\n");
+    }),
     "Mit freundlichen Grüßen",
-  ].join("\n\n");
+    "*Diese E-Mail wurde automatisch erstellt.*",
+  ]
+    .filter(Boolean)
+    .join("\n\n");
 
 function SupportContact() {
   return (
@@ -114,14 +118,14 @@ function ResultAlert({ result }: { result: ClearResult }) {
       </div>
       <div className="kern-alert__body space-y-16">
         <ul className="list-unstyled space-y-8">
-          {statements(result).map(({ isMet, verb, object }) => (
-            <li key={verb} className="kern-body flex items-center gap-8">
+          {statements(result).map(({ isMet, object }) => (
+            <li key={object} className="kern-body flex items-center gap-8">
               <span
                 className={`kern-icon bg-kern-feedback-info ${isMet ? "kern-icon--success" : "kern-icon--close"}`}
                 aria-hidden="true"
               />
               <span>
-                Ihr Vorhaben {verb} <b>{object}</b>.
+                Ihr Vorhaben hat <b>{object}</b>.
               </span>
             </li>
           ))}
