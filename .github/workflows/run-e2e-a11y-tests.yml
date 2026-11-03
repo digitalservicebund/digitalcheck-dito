@@ -48,13 +48,22 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
 
+      # Browser builds are OS-specific, so the cache must not be shared across runner images
+      - name: Get runner OS version
+        id: runner-os
+        run: |
+          . /etc/os-release
+          echo "version=${ID}-${VERSION_ID}" >> "$GITHUB_OUTPUT"
+
       - name: Cache Playwright dependencies
         id: cache-playwright-deps
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: ${{ runner.os }}-playwright-
+          key:
+            ${{ runner.os }}-${{ steps.runner-os.outputs.version }}-playwright-${{
+            hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: ${{ runner.os }}-${{ steps.runner-os.outputs.version }}-playwright-
 
       - name: Install E2E & A11y test dependencies
         if:
