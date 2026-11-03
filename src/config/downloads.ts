@@ -72,6 +72,10 @@ export const templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx:
   path: "/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit_Interoperabilitaet.docx",
 } as const;
 
+export const templateDokumentationDerDigitaltauglichkeitInteroperabilitaetLaender_docx: DownloadRoute = {
+  path: "/documents/TEMPLATE_Dokumentation_der_Digitaltauglichkeit_Interoperabilitaet-laender.docx",
+} as const;
+
 export const vorlageEinfacheablaeufeundaufgabenerfassen_xlsx: DownloadRoute = {
   path: "/documents/Vorlage - Einfache Abläufe und Aufgaben erfassen.xlsx",
 } as const;
