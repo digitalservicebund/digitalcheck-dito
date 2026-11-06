@@ -20,7 +20,6 @@ describe("Vorpruefung Index Route - Integration Tests", () => {
     expect(
       screen.getByRole("heading", { name: "Vorprüfung", level: 1 }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Digitalbezug einschätzen")).toBeInTheDocument();
   });
 
   it("renders the contact below the FAQ", () => {

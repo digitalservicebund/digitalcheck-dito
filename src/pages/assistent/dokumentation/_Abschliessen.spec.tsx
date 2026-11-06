@@ -30,7 +30,7 @@ describe("Abschliessen", () => {
     ]);
     expect(screen.getByText("Schritt 3")).toBeVisible();
     expect(
-      screen.getByText(/Digitalcheck und die Interoperabilitäts-Bewertung/),
+      screen.getByText(/Digitalcheck und die Interoperabilitätsbewertung/),
     ).toBeVisible();
   });
 
@@ -45,7 +45,9 @@ describe("Abschliessen", () => {
     ]);
     expect(screen.getByText(/an den NKR weiter/)).toBeVisible();
     expect(
-      screen.getByText("Damit ist der Digitalcheck für Sie beendet."),
+      screen.getByText(
+        "Damit haben Sie den Digitalcheck erfolgreich abgeschlossen.",
+      ),
     ).toBeVisible();
   });
 

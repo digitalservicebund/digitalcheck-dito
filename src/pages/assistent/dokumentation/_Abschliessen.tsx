@@ -24,8 +24,9 @@ export default function Abschliessen({
       content: (
         <>
           <p>
-            Laden Sie die ausgefüllte Dokumentation herunter, um sie zu verakten
-            {isBund && " und an den NKR zu senden"}.
+            {isBund
+              ? "Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter. Sie können diese vorab intern abstimmen und anschließend an den NKR weiterleiten."
+              : "Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter, um sie zu verakten."}
           </p>
           <div className="pt-16">
             <WordDownloadButton
@@ -43,16 +44,17 @@ export default function Abschliessen({
       content: (
         <ul>
           <li>
-            Senden Sie die Dokumentation <strong>als PDF per E-Mail</strong> an
-            folgende Adresse:{" "}
-            <a href={`mailto:${contact.nkrEmail}`}>{contact.nkrEmail}</a>. Der
-            NKR prüft die methodische und inhaltliche Nachvollziehbarkeit. Bei
-            Fragen wird der NKR auf Sie zukommen. Das Ziel ist eine digital- und
-            praxistaugliche Umsetzung.
+            Senden Sie die finale Dokumentation{" "}
+            <strong>als PDF per E-Mail</strong> an{" "}
+            <a href={`mailto:${contact.nkrEmail}`}>{contact.nkrEmail}</a>.
           </li>
           <li>
-            Der NKR empfiehlt, <strong>Visualisierungen</strong> und Skizzen als
-            ergänzende Dokumente beizufügen – formlos als PDF oder Screenshot.
+            <strong>Visualisierungen</strong> können Sie als separate Anlage (z.
+            B. als PDF oder Bilddatei) beifügen.
+          </li>
+          <li>
+            Der NKR prüft Ihren Entwurf auf Digital- und Praxistauglichkeit und
+            kommt bei Rückfragen direkt auf Sie zu.
           </li>
         </ul>
       ),
@@ -62,25 +64,25 @@ export default function Abschliessen({
       content: (
         <ul>
           <li>
-            Schicken Sie die ausgefüllte Dokumentation an die{" "}
-            <strong>Nationale Kontaktstelle</strong>. Die
-            Interoperabilitäts-Bewertung wird auf dem Portal{" "}
+            Senden Sie die ausgefüllte Dokumentation{" "}
+            <strong>als PDF per E-Mail</strong> an{" "}
+            <a href={`mailto:${contact.interoperabilityEmail}`}>
+              {contact.interoperabilityEmail}
+            </a>
+            .
+          </li>
+          <li>
+            Die Interoperabilitätsbewertung wird auf dem Portal „
             <a
               href="https://interoperable-europe.ec.europa.eu/collection/assessments"
               target="_blank"
               rel="noreferrer"
             >
-              „Interoperable Europe“
-            </a>{" "}
-            veröffentlicht, sofern der Referentenentwurf bereits öffentlich ist.
-            Falls die Veröffentlichung noch aussteht, wird sich die Nationale
-            Kontaktstelle zum von Ihnen angegebenen Zeitpunkt bei Ihnen melden.
-          </li>
-          <li>
-            <strong>E-Mail der nationalen Kontaktstelle</strong>:{" "}
-            <a href={`mailto:${contact.interoperabilityEmail}`}>
-              {contact.interoperabilityEmail}
+              Interoperable Europe
             </a>
+            “ publiziert, sobald Ihr Referentenentwurf veröffentlicht wurde.
+            Sollte dies noch nicht der Fall sein, meldet sich die Nationale
+            Kontaktstelle zum angegebenen Zeitpunkt bei Ihnen.
           </li>
         </ul>
       ),
@@ -91,13 +93,6 @@ export default function Abschliessen({
     <div className="space-y-48 sm:space-y-64">
       <div className="space-y-16">
         <h1 className="kern-heading-medium">Dokumentation abschließen</h1>
-        {isBund && (
-          <p>
-            Laden Sie die ausgefüllte Dokumentation herunter und leiten Sie
-            diese an den NKR weiter. Optional können Sie das Dokument vorab zur
-            Abstimmung versenden.
-          </p>
-        )}
       </div>
       <div className="space-y-32">
         {steps.map(({ heading, content }, index) => (
@@ -119,8 +114,8 @@ export default function Abschliessen({
             <h2 className="kern-title">
               {/* The design mentions the Bewertung only for the Bund */}
               {isBund && hasEuBezug
-                ? "Damit ist der Digitalcheck und die Interoperabilitäts-Bewertung für Sie beendet."
-                : "Damit ist der Digitalcheck für Sie beendet."}
+                ? "Damit haben Sie den Digitalcheck und die Interoperabilitätsbewertung erfolgreich abgeschlossen."
+                : "Damit haben Sie den Digitalcheck erfolgreich abgeschlossen."}
             </h2>
           </div>
           <div className="kern-alert__body">
