@@ -15,7 +15,7 @@ export type Route = {
 export const assistent = {
   key: "assistent",
   path: "/assistent",
-  title: "Drei Schritte zur Digitaltauglichkeit",
+  title: "In drei Schritten zur Digitaltauglichkeit",
   parent: null,
   sitemap: false,
   isStagingOnly: false,
@@ -157,7 +157,7 @@ export const assistent_erarbeitung = {
 export const assistent_erarbeitung_ablaufVerstehen = {
   key: "assistent_erarbeitung_ablaufVerstehen",
   path: "/assistent/erarbeitung/ablauf-verstehen",
-  title: "Ablauf verstehen",
+  title: "Prozesse verstehen",
   parent: assistent_erarbeitung,
   sitemap: false,
   isStagingOnly: false,

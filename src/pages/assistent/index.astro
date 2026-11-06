@@ -15,7 +15,7 @@ import { getCollection } from "astro:content";
 import WordDownloadButton from "./dokumentation/_WordDownloadButton";
 
 export const frontmatter = {
-  title: "Drei Schritte zur Digitaltauglichkeit",
+  title: "In drei Schritten zur Digitaltauglichkeit",
   navLabel: "Übersicht",
   sitemap: false,
 };
@@ -30,8 +30,8 @@ const prinzipien = (await getCollection("prinzipien"))
     <Hero variant="plain">
       <h1>{frontmatter.title}</h1>
       <p>
-        Mit diesem Tool durchlaufen Sie die relevanten Schritte, um
-        Digitaltauglichkeit in Ihrem Regelungsvorhaben sicherzustellen.
+        Folgen Sie diesen Schritten, um die Digitaltauglichkeit Ihres
+        Regelungsvorhabens sicherzustellen.
       </p>
     </Hero>
     <div class="pb-32">
@@ -70,7 +70,7 @@ const prinzipien = (await getCollection("prinzipien"))
             >
               <Fragment slot="startLabel">Zu diesem Schritt</Fragment>
               <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
-              <Fragment slot="restartLabel">Neue Vorprüfung beginnen</Fragment>
+              <Fragment slot="restartLabel">Neue Vorprüfung starten</Fragment>
               <Fragment slot="modalBody">
                 Mit einer neuen Vorprüfung werden die Daten der begonnenen
                 Vorprüfung gelöscht. Diese können nicht wiederhergestellt
@@ -109,9 +109,8 @@ const prinzipien = (await getCollection("prinzipien"))
               </span>
             </p>
             <p>
-              Bei einer positiven Vorprüfung wenden Sie die Werkzeuge und
-              Methoden an, die die Digitaltauglichkeit Ihres Vorhabens
-              sicherstellen.
+              Um Ihr Vorhaben digitaltauglich zu gestalten, stehen Ihnen
+              verschiedene Werkzeuge und Methoden zur Verfügung.
             </p>
             <div>
               <LinkButton

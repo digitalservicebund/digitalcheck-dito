@@ -39,7 +39,7 @@ describe("Ergebnis", () => {
     ).toBeVisible();
     expect(
       screen.getByRole("heading", {
-        name: "Ergebnis an den Normenkontrollrat senden",
+        name: "Ergebnis an den NKR senden",
       }),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).toMatch(
@@ -81,7 +81,7 @@ describe("Ergebnis", () => {
     expect(screen.getByText("keinen Digitalbezug")).toBeVisible();
     expect(
       screen.getByRole("heading", {
-        name: "Vorprüfungsergebnis herunterladen",
+        name: "Ergebnis herunterladen",
       }),
     ).toBeVisible();
     expect(screen.queryByText("Schritt 1")).not.toBeInTheDocument();
@@ -94,10 +94,9 @@ describe("Ergebnis", () => {
     store.save(withInteroperability);
     render(<Ergebnis />);
 
-    fireEvent.change(
-      screen.getByLabelText("Vorläufiger Arbeitstitel des Vorhabens"),
-      { target: { value: "Mein Gesetz" } },
-    );
+    fireEvent.change(screen.getByLabelText("Arbeitstitel des Vorhabens"), {
+      target: { value: "Mein Gesetz" },
+    });
 
     expect(decodeURIComponent(emailLink().getAttribute("href")!)).toContain(
       "Vorhaben: Mein Gesetz",
@@ -111,9 +110,11 @@ describe("Ergebnis", () => {
     expect(
       screen.getByRole("heading", { name: /mit „Ich bin unsicher“/ }),
     ).toBeVisible();
-    expect(screen.queryByText("Ihr Ergebnis")).not.toBeInTheDocument();
     expect(
-      screen.queryByText("Vorprüfungsergebnis herunterladen"),
+      screen.queryByText("Ergebnis Ihrer Vorprüfung"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Ergebnis herunterladen"),
     ).not.toBeInTheDocument();
   });
 
@@ -122,13 +123,17 @@ describe("Ergebnis", () => {
     render(<Ergebnis />);
 
     expect(
-      screen.getByRole("heading", { name: "Widerspruch in Ihren Angaben" }),
+      screen.getByRole("heading", {
+        name: "Widersprüchliche Angaben – bitte prüfen",
+      }),
     ).toBeVisible();
     expect(
       screen.getByRole("link", {
         name: "Frage 3 zum Datenaustausch überprüfen",
       }),
     ).toHaveAttribute("href", "/assistent/vorpruefung/datenaustausch");
-    expect(screen.queryByText("Ihr Ergebnis")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Ergebnis Ihrer Vorprüfung"),
+    ).not.toBeInTheDocument();
   });
 });

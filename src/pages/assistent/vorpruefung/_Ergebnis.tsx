@@ -21,11 +21,11 @@ type ClearResult = Exclude<VorpruefungResult, "contradiction" | "unsure">;
 
 const meanings: Record<ClearResult, string> = {
   negative:
-    "Das bedeutet, dass Sie nichts weiter unternehmen müssen. Der Digitalcheck ist für Sie beendet.",
+    "Sie haben den Digitalcheck erfolgreich abgeschlossen. Es sind keine weiteren Schritte erforderlich.",
   digital:
     "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitaltauglichkeit in Ihrem Regelungsvorhaben sicherzustellen. Zur EU-Interoperabilität müssen Sie jedoch nichts weiter tun.",
   digitalAndInteroperability:
-    "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitaltauglichkeit und EU-Anforderungen an Interoperabilität in Ihrem Regelungsvorhaben sicherzustellen.",
+    "Sie müssen beim Erarbeiten Ihrer Regelung die Digitaltauglichkeit sowie EU-Anforderungen an Interoperabilität sicherstellen.",
 };
 
 // Completed by subject and verb, e.g. "Ihr Vorhaben hat" on the page, "Das Vorhaben hat" in the e-mail
@@ -40,8 +40,8 @@ const statements = (result: ClearResult) => {
     {
       isMet: hasInteroperability,
       object: hasInteroperability
-        ? "einen Bezug zur EU-Interoperabilität."
-        : "keinen Bezug zur EU-Interoperabilität.",
+        ? "einen Bezug zur EU-Interoperabilität"
+        : "keinen eindeutigen Bezug zur EU-Interoperabilität",
     },
   ];
 };
@@ -84,7 +84,7 @@ const emailBody = (
 function SupportContact() {
   return (
     <>
-      <a href={contact.phone}>{contact.phoneDisplay}</a> oder{" "}
+      <a href={contact.phone}>{contact.phoneDisplay}</a> oder per E-Mail an{" "}
       <a href={mailto(contact.email, "Supportanfrage: digitalcheck.bund.de")}>
         {contact.email}
       </a>
@@ -114,7 +114,7 @@ function ResultAlert({ result }: { result: ClearResult }) {
   return (
     <div className="kern-alert kern-alert--info max-w-736">
       <div className="kern-alert__header">
-        <h2 className="kern-title">Ihr Ergebnis</h2>
+        <h2 className="kern-title">Ergebnis Ihrer Vorprüfung</h2>
       </div>
       <div className="kern-alert__body space-y-16">
         <ul className="list-unstyled space-y-8">
@@ -164,7 +164,7 @@ function EmailForm({
         <div className="space-y-32">
           <div className="kern-form-input">
             <label htmlFor={`${id}-title`} className="kern-label">
-              Vorläufiger Arbeitstitel des Vorhabens
+              Arbeitstitel des Vorhabens
             </label>
             <input
               type="text"
@@ -196,7 +196,7 @@ function EmailForm({
                 className={`kern-icon ${isPreviewOpen ? "kern-icon--arrow-up" : "kern-icon--arrow-down"}`}
                 aria-hidden="true"
               />
-              <span className="kern-label">E-Mail-Text vorab ansehen</span>
+              <span className="kern-label">E-Mail-Text anzeigen</span>
             </button>
           </div>
         </div>
@@ -210,8 +210,8 @@ function EmailForm({
                 <i>Kopie</i>: {cc}
               </p>
               <p className="text-kern-layout-text-muted">
-                Die Kopie an das Digitalcheck-Team ist bei
-                Interoperabilitätsbezug automatisch enthalten.
+                Bei Interoperabilitätsbezug erhält das Digitalcheck-Team
+                automatisch eine Kopie.
               </p>
             </>
           )}
@@ -243,13 +243,15 @@ function Steps({
   const body = (title: string) => emailBody(result, data, pruefbereich, title);
   const sendNote = (
     <p>
-      Eine vorbereitete E-Mail wird geöffnet – Sie prüfen und senden selbst.
+      Wenn Sie auf „E-Mail-Programm öffnen“ klicken, öffnet sich eine
+      vorausgefüllte E-Mail in Ihrem Programm. Sie prüfen und versenden die
+      Nachricht anschließend selbst.
     </p>
   );
 
   const steps = [
     {
-      heading: "Vorprüfungsergebnis herunterladen",
+      heading: "Ergebnis herunterladen",
       content: (
         <>
           <p>Laden Sie Ihr Vorprüfungsergebnis herunter, um es zu verakten.</p>
@@ -273,13 +275,12 @@ function Steps({
     // The NKR only checks Regelungsvorhaben of the Bund, the Digitalcheck
     // team gets a copy with Interoperabilität
     isBund && {
-      heading: "Ergebnis an den Normenkontrollrat senden",
+      heading: "Ergebnis an den NKR senden",
       content: (
         <>
           <p>
-            Der NKR steht Ihnen bei Fragen zur Seite und berät Sie gerne zu
-            Ihrem Vorhaben, auch wenn es sich noch in einer frühen Phase
-            befindet.
+            Der Normenkontrollrat berät und unterstützt Sie bereits in der
+            frühen Phase Ihres Vorhabens.
           </p>
           {sendNote}
           <EmailForm
@@ -296,11 +297,9 @@ function Steps({
         content: (
           <>
             <p>
-              Da Ihr Regelungsvorhaben Anforderungen an Interoperabilität
-              beinhaltet, unterstützt das Digitalcheck Team Sie dabei, diese
-              optimal umzusetzen. Nach dem Erhalt der E-Mail setzt sich das Team
-              mit Ihnen in Verbindung, um gemeinsam die weiteren Schritte zu
-              planen.
+              Ihr Vorhaben enthält EU-Anforderungen an Interoperabilität. Das
+              Team des Digitalcheck Bund unterstützt Sie gerne dabei, diese
+              optimal umzusetzen.
             </p>
             {sendNote}
             <EmailForm to={contact.interoperabilityEmail} body={body} />
@@ -332,18 +331,18 @@ function Faq({ hasEmail }: { hasEmail: boolean }) {
     hasEmail && {
       question: "Was passiert, wenn ich auf „E-Mail-Programm öffnen“ klicke?",
       answer:
-        "In Ihrem E-Mail-Programm öffnet sich eine neue E-Mail. Diese enthält das Vorprüfungs-Ergebnis in Textform mit Ergebnissen zum Digitalbezug und zur EU-Interoperabilität. Sie haben die Möglichkeit, den Text und Empfänger individuell anzupassen und zusätzliche Dokumente anzufügen. Den Zeitpunkt des Versands wählen Sie selbst.",
+        "In Ihrem E-Mail-Programm öffnet sich eine neue E-Mail. Diese enthält das Ergebnis der Vorprüfung zum Digitalbezug und zur EU-Interoperabilität in Textform. Sie können den Text und Empfänger anpassen und weitere Unterlagen hinzufügen. Anschließend versenden Sie die E-Mail selbst.",
     },
     {
       question: "Was ist, wenn ich mehrere Regelungen habe?",
       answer:
-        "Füllen Sie eine gemeinsame Vorprüfung für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich.",
+        "Wenn Ihr Vorhaben mehrere Regelungen umfasst, die inhaltlich zusammenhängen, reicht eine gemeinsame Vorprüfung aus.",
     },
   ].filter((item) => item !== false);
 
   return (
     <div className="space-y-16 print:hidden">
-      <h2 className="kern-heading-medium">Häufige Fragen zum Ergebnis</h2>
+      <h2 className="kern-heading-medium">Häufige Fragen</h2>
       <div>
         {items.map(({ question, answer }) => (
           <details key={question} className="kern-accordion">
@@ -375,26 +374,25 @@ export default function Ergebnis() {
   return (
     <div className="breakout space-y-48 sm:space-y-64 print:[&_.kern-icon]:[print-color-adjust:exact]">
       {result === "contradiction" && (
-        <WarningAlert title="Widerspruch in Ihren Angaben">
-          <p className="kern-body">
-            Sie haben gewählt, dass Ihr Vorhaben keinen Digitalbezug hat,
-            gleichzeitig aber, dass ein Datenaustausch auf EU-Ebene stattfindet.{" "}
-            <b>
-              Dies ist ein Widerspruch, da ein Datenaustausch auf EU-Ebene einen
-              Digitalbezug (digitale Systeme) voraussetzt.
-            </b>
-          </p>
-          <p className="kern-body">
-            <b>Beachten Sie in diesem Kontext</b>: Interoperabilität ist die
-            Fähigkeit digitaler Systeme, miteinander zu kommunizieren und Daten
-            auszutauschen.{" "}
-            <b>
-              Das heißt, ohne Digitalbezug ist Interoperabilität nicht möglich.
-            </b>
-          </p>
-          <p className="kern-body">
-            Haben Sie Fragen? Kontaktieren Sie uns unter <SupportContact />.
-          </p>
+        <WarningAlert title="Widersprüchliche Angaben – bitte prüfen">
+          <ul className="kern-body space-y-8">
+            <li>
+              Ihre Angabe in Frage 3 (Datenaustausch):
+              <ul>
+                <li>
+                  Datenaustausch <b>findet nicht statt</b>
+                </li>
+              </ul>
+            </li>
+            <li>
+              Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
+              <ul>
+                <li>
+                  Datenaustausch <b>findet statt</b>
+                </li>
+              </ul>
+            </li>
+          </ul>
           <a
             href={assistent_vorpruefung_datenaustausch.path}
             className="kern-link"
@@ -408,11 +406,10 @@ export default function Ergebnis() {
         </WarningAlert>
       )}
       {result === "unsure" && (
-        <WarningAlert title="Sie haben mehrere Aussagen mit „Ich bin unsicher“ beantwortet.">
+        <WarningAlert title="Sie haben mehrere Fragen mit „Ich bin unsicher“ beantwortet">
           <p className="kern-body">
-            Bitte kontaktieren Sie den Digitalcheck-Support unter:{" "}
-            <SupportContact /> mit Ihren Fragen. Wir helfen Ihnen, die
-            Vorprüfung auszufüllen.
+            Bitte kontaktieren Sie das Digitalcheck-Team unter{" "}
+            <SupportContact />. Wir helfen Ihnen, die Vorprüfung abzuschließen.
           </p>
         </WarningAlert>
       )}

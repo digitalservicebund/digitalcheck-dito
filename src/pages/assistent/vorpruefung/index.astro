@@ -1,6 +1,7 @@
 ---
 import Hero from "@/components/Hero.astro";
 import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
+import { interoperabel } from "@/config/routes";
 import Layout from "@/layouts/Layout.astro";
 import { vorpruefungFlow } from "@/wizard/vorpruefungFlow";
 import SupportSection from "../_SupportSection.astro";
@@ -11,28 +12,43 @@ export const frontmatter = {
   navEyebrow: "Schritt 1",
 };
 
-const faqItems = [
+// Paragraphs with a label start with it in bold
+const faqItems: {
+  question: string;
+  answer: string | { label?: string; text: string }[];
+}[] = [
   {
     question: "Muss ich die Vorprüfung für jedes Vorhaben machen?",
     answer:
-      "Es empfiehlt sich, die Vorprüfung für jedes Vorhaben zu machen. Falls Sie mehrere Regelungen haben, füllen Sie eine gemeinsame Vorprüfung für alle inhaltlich zusammenhängenden Regelungen eines Vorhabens aus. So viele wie nötig, so wenige wie möglich.",
+      "Es wird empfohlen, jedes Vorhaben vorab zu prüfen. Wenn Ihr Vorhaben mehrere Regelungen umfasst, reicht eine gemeinsame Vorprüfung aus.",
   },
   {
     question:
-      "Ich arbeite in einer Landesverwaltung – gilt die Vorprüfung für mich?",
+      "Ich arbeite in einer Landesverwaltung. Gilt die Vorprüfung auch für mich?",
     answer: "Ja, die Vorprüfung gilt auch für Länder.",
   },
   {
-    question: "Was passiert mit dem Ergebnis?",
+    question: "Was mache ich mit dem Ergebnis?",
     answer: [
-      "Für die Bundesebene: Das Ergebnis schicken Sie idealerweise als E-Mail an den Normenkontrollrat. Dafür stellen wir eine Vorlage bereit. Der NKR unterstützt Sie in Ihrem Regelungsvorhaben.",
-      "Für die Länder: Das Ergebnis können Sie herunterladen und für Ihren Unterlagen verakten.",
+      {
+        label: "Auf Bundesebene",
+        text: ": Sie können das Ergebnis direkt per E-Mail an den Normenkontrollrat senden. Dafür stellen wir Ihnen eine Vorlage bereit. Der NKR kann Sie dann frühzeitig bei Ihrem Regelungsvorhaben unterstützen.",
+      },
+      {
+        label: "Auf Landesebene",
+        text: ": Sie können das Ergebnis herunterladen und verakten.",
+      },
     ],
   },
   {
-    question: "Kann ich Antworten später ändern?",
+    question: "Kann ich meine Angaben später ändern?",
     answer:
-      "Sie können die Vorprüfung jederzeit beginnen und abbrechen – die Antworten werden automatisch gespeichert. Auch wenn Sie bereits ein Ergebnis erhalten haben, können Sie eine neue Vorprüfung starten.",
+      "Ja, Sie können Ihre Angaben in der Vorprüfung anpassen oder eine neue Vorprüfung starten.",
+  },
+  {
+    question: "Werden meine Angaben gespeichert?",
+    answer:
+      "Ihre Angaben werden automatisch in Ihrem Browser gespeichert. Sie bleiben so lange erhalten, bis Sie eine neue Vorprüfung starten oder die Daten durch die Einstellungen Ihres SINA-Rechners gelöscht werden.",
   },
 ];
 ---
@@ -40,11 +56,10 @@ const faqItems = [
 <Layout title={frontmatter.title} noFooter>
   <main class="breakout-grid">
     <Hero class="space-y-24" largeText={false}>
-      <p class="kern-preline">Digitalbezug einschätzen</p>
       <h1>Vorprüfung</h1>
       <p>
         Finden Sie in 6 Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte
-        der digitalen Umsetzung und EU-Anforderungen an Interoperabilität
+        der digitalen Umsetzung und Anforderungen an EU-Interoperabilität
         beachten müssen.
       </p>
       <div class="space-y-8">
@@ -53,10 +68,9 @@ const faqItems = [
         </p>
         <ul>
           <li>
-            Eine grobe Vorstellung Ihre Regelvorhabens. Die Regelung sollte noch
-            nicht geschrieben sein.
+            Eine grobe Vorstellung Ihres Vorhabens. Ein fertiger Regelungstext
+            ist nicht erforderlich.
           </li>
-          <li>Es werden keine weiteren Dokumente benötigt.</li>
         </ul>
       </div>
       <div class="space-y-8">
@@ -64,13 +78,9 @@ const faqItems = [
           <b>Ergebnis:</b>
         </p>
         <ul>
-          <li>Individueller Digital- und Interoperabilitätsbezug</li>
           <li>
-            Ergebnis als E-Mail an Prüfstelle schicken oder als Dokumentation
-            zur Selbstprüfung nutzen
-          </li>
-          <li>
-            Chancen und Hindernisse der digitalen Umsetzung identifizieren
+            Eine Einschätzung zum Digital- und Interoperabilitätsbezug für die
+            Prüfstelle oder zur Veraktung.
           </li>
         </ul>
       </div>
@@ -81,17 +91,17 @@ const faqItems = [
               class="kern-icon kern-icon--warning"
               aria-hidden="true"
             ></span>
-            <h2 class="kern-title">Erlauben Sie die Nutzung von JavaScript</h2>
+            <h2 class="kern-title">JavaScript erforderlich</h2>
           </div>
           <div class="kern-alert__body">
             <p class="kern-body">
-              Um die Vorprüfung zu starten, müssen Sie Ihrem Browser die Nutzung
-              von JavaScript erlauben. Das ist nötig, damit die Seite Ihre Daten
-              zwischenspeichern kann.
+              Um die Vorprüfung zu starten, muss JavaScript aktiviert sein.
+              Dadurch können Ihre Angaben lokal im Browser zwischengespeichert
+              werden.
             </p>
             <p>
-              <b>So geht es:</b> Suchen Sie in den Einstellungen Ihres Browsers
-              nach JavaScript und erlauben Sie die Nutzung.
+              <b>So geht es:</b> Suchen Sie in Ihren Browser-Einstellungen nach
+              JavaScript und erlauben Sie die Nutzung.
             </p>
           </div>
         </div>
@@ -105,7 +115,7 @@ const faqItems = [
       >
         <Fragment slot="startLabel">Vorprüfung starten</Fragment>
         <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
-        <Fragment slot="restartLabel">Neue Vorprüfung beginnen</Fragment>
+        <Fragment slot="restartLabel">Neue Vorprüfung starten</Fragment>
         <Fragment slot="modalBody">
           Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung
           gelöscht. Diese können nicht wiederhergestellt werden.
@@ -117,14 +127,26 @@ const faqItems = [
       <h2>Warum ist die Vorprüfung relevant für mein Vorhaben?</h2>
       <ul>
         <li>
-          Sie erkennen Digitalisierungsbezug früh – bevor die Regelung
-          geschrieben ist.
+          Sie erkennen, ob ein Digitalbezug vorliegt, und können die
+          Digitaltauglichkeit Ihrer Regelung bereits beim Erarbeiten
+          sicherstellen.
         </li>
-        <li>Sie identifizieren EU-Anforderungen an Interoperabilität.</li>
+        <li>
+          Sie identifizieren mögliche EU-Anforderungen an{" "}
+          <a href={interoperabel.path}>Interoperabilität</a> frühzeitig.
+        </li>
+        <li>
+          Sie berücksichtigen die Vorgaben aus{" "}
+          <a href="https://www.gesetze-im-internet.de/nkrg/__4.html">
+            § 4 Abs. 3 NKRG
+          </a>{" "}
+          und der{" "}
+          <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903">
+            EU-Verordnung 2024/903
+          </a>{" "}
+          in Ihrem Vorhaben.
+        </li>
       </ul>
-      <p>
-        Rechtliche Grundlage: § 4 Abs. 3 NKRG und die EU-Verordnung 2024/903
-      </p>
     </section>
 
     <section class="space-y-16">
@@ -136,32 +158,18 @@ const faqItems = [
               <span class="kern-title">{item.question}</span>
             </summary>
             <div class="kern-accordion__body space-y-16">
-              {(Array.isArray(item.answer) ? item.answer : [item.answer]).map(
-                (paragraph) => (
-                  <p class="kern-body">{paragraph}</p>
-                ),
-              )}
+              {(Array.isArray(item.answer)
+                ? item.answer
+                : [{ text: item.answer }]
+              ).map(({ label, text }) => (
+                <p class="kern-body">
+                  {label && <b>{label}</b>}
+                  {text}
+                </p>
+              ))}
             </div>
           </details>
         ))}
-        <details class="kern-accordion">
-          <summary class="kern-accordion__header">
-            <span class="kern-title">Werden meine Angaben gespeichert?</span>
-          </summary>
-          <div class="kern-accordion__body">
-            <p class="kern-body">
-              Ihre eingegebenen Daten werden unbegrenzt lange in der Sitzung
-              gespeichert, bis
-            </p>
-            <ol class="kern-body list-[lower-alpha]">
-              <li>Sie eine neue Vorprüfung starten, oder</li>
-              <li>
-                Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen
-                voreingestellt ist)
-              </li>
-            </ol>
-          </div>
-        </details>
       </div>
     </section>
     <SupportSection />

@@ -22,17 +22,19 @@ const faqItems = [
     question:
       "Kann ich mehrere Regelungen in einer Dokumentation zusammenfassen?",
     answer:
-      "Inhaltlich zusammengehörige Regelungen können Sie in einer Dokumentation zusammenfassen.",
+      "Ja, für inhaltlich zusammengehörige Regelungen können Sie eine gemeinsame Dokumentation ausfüllen.",
   },
   {
     question: "Kann ich Zwischenstände mit Kolleginnen und Kollegen teilen?",
-    answer:
-      "Zur externen Weiterbearbeitung, internen Abstimmung oder für Änderungen können Sie den aktuellen Stand Ihrer Angaben als Word-Dokument exportieren und lokal speichern. Für die Bundesebene: Die finale Datei können Sie zu jedem Zeitpunkt per E-Mail an den NKR versenden.",
+    answer: [
+      "Ja, Sie können den aktuellen Stand jederzeit als Word-Datei (.docx) herunterladen, um die Dokumentation intern im Referat abzustimmen oder gemeinsam zu bearbeiten.",
+      "Für die Bundesebene: Die finale Datei senden Sie per E-Mail an den NKR.",
+    ],
   },
   {
     question: "Wie binde ich meine Visualisierung ein?",
     answer:
-      "Nutzen Sie Ihre bereits selbst erstellten Visualisierungen (auf Basis der fünf Prinzipien) als Grundlage und senden Sie diese am Ende an den NKR. Dies müssen Sie separat zur Dokumentation tun.",
+      "Sie können Ihre Visualisierung als separate Anlage zusammen mit der Dokumentation an den NKR senden.",
   },
 ];
 ---
@@ -40,12 +42,11 @@ const faqItems = [
 <Layout title={frontmatter.title} noFooter>
   <main class="breakout-grid">
     <Hero class="space-y-24" largeText={false}>
-      <p class="kern-preline">Digitaltauglichkeit dokumentieren</p>
       <h1>Dokumentation</h1>
       <p>
-        Sie dokumentieren entlang der fünf Prinzipien, wie Digitaltauglichkeit
-        in Ihre Regelung eingeflossen ist und bewerten ggf. die
-        EU-Interoperabilität.
+        In diesem Schritt dokumentieren Sie die Digitaltauglichkeit Ihrer
+        Regelung und bewerten die EU-Interoperabilität, sofern ein Bezug
+        besteht.
       </p>
       <div class="space-y-8">
         <p>
@@ -53,10 +54,9 @@ const faqItems = [
         </p>
         <ul>
           <li>
-            Am besten halten Sie Ihre Überlegungen schon während der Erarbeitung
-            fest – so ist die Dokumentation zur Ressortabstimmung fertig
+            Ihren aktuellen Regelungsentwurf. Sie können die Dokumentation
+            bereits während der Erarbeitung beginnen und fortlaufend ergänzen.
           </li>
-          <li>Ihren Regelungstext</li>
         </ul>
       </div>
       <div class="space-y-8">
@@ -65,10 +65,8 @@ const faqItems = [
         </p>
         <ul>
           <li>
-            Abgeschlossene Dokumentation der Digitaltauglichkeit Ihres Vorhabens
-          </li>
-          <li>
-            Als Word-Datei exportierbar und an die zuständige Prüfstelle sendbar
+            Eine vollständige Dokumentation der Digitaltauglichkeit Ihres
+            Vorhabens (als Word-Datei exportierbar).
           </li>
         </ul>
       </div>
@@ -79,17 +77,17 @@ const faqItems = [
               class="kern-icon kern-icon--warning"
               aria-hidden="true"
             ></span>
-            <h2 class="kern-title">Erlauben Sie die Nutzung von JavaScript</h2>
+            <h2 class="kern-title">JavaScript erforderlich</h2>
           </div>
           <div class="kern-alert__body">
             <p class="kern-body">
-              Um die Dokumentation zu starten, müssen Sie Ihrem Browser die
-              Nutzung von JavaScript erlauben. Das ist nötig, damit die Seite
-              Ihre Daten zwischenspeichern kann.
+              Um die Dokumentation zu starten, muss JavaScript aktiviert sein.
+              Dadurch können Ihre Angaben lokal im Browser zwischengespeichert
+              werden.
             </p>
             <p>
-              <b>So geht es:</b> Suchen Sie in den Einstellungen Ihres Browsers
-              nach JavaScript und erlauben Sie die Nutzung.
+              <b>So geht es:</b> Suchen Sie in Ihren Browser-Einstellungen nach
+              JavaScript und erlauben Sie die Nutzung.
             </p>
           </div>
         </div>
@@ -121,12 +119,11 @@ const faqItems = [
 
     <section>
       <div class="bg-kern-layout-layer-surface space-y-16 rounded-sm px-16 py-32 md:px-64">
-        <h2>Alternativ: Mit der Word-Vorlage arbeiten</h2>
+        <h2>Alternativ: Word-Vorlage nutzen</h2>
         <p class="max-w-688">
-          Laden Sie die Vorlage herunter und füllen Sie sie in Ihrem eigenen
-          Arbeitsumfeld aus – zum Beispiel wenn Sie offline oder gemeinsam im
-          Dokument arbeiten. Inhaltlich gibt es keine Unterschiede zur
-          Online-Dokumentation.
+          Nutzen Sie die Word-Vorlage, wenn Sie offline arbeiten oder die
+          Dokumentation gemeinsam im Referat ausfüllen möchten. Sie ist
+          inhaltlich identisch mit der Online-Version.
         </p>
         <WordDownloadButton
           client:visible
@@ -167,7 +164,7 @@ const faqItems = [
               Sitzung gespeichert, bis
             </p>
             <ol class="kern-body list-[lower-alpha]">
-              <li>Sie eine neue Dokumentation starten, oder</li>
+              <li>Sie eine neue Dokumentation starten oder</li>
               <li>
                 Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen
                 voreingestellt ist)
