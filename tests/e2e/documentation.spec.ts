@@ -223,6 +223,7 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
     // Fill reasoning
     await page.getByLabel("Erklärung").fill(testData.lastPrincipleReasoning);
     await page.getByRole("button", { name: "Weiter" }).click();
+    await page.waitForURL((url) => !url.pathname.endsWith("/erlaeuterung"));
   });
 
   await test.step("navigate to summary", async () => {

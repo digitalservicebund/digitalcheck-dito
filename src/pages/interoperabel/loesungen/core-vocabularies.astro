@@ -169,7 +169,12 @@ const tableClasses = "kern-table [&_thead]:bg-kern-darkblue-100";
           </div>
         </details>
 
-        <div class="kern-table-responsive">
+        <div
+          class="kern-table-responsive"
+          tabindex="0"
+          role="region"
+          aria-label="Beispiel: Zuordnung von Registerfeldern über Core Business Vocabularies"
+        >
           <table
             class:list={[
               tableClasses,
@@ -299,7 +304,12 @@ const tableClasses = "kern-table [&_thead]:bg-kern-darkblue-100";
                   zu verknüpfen. Im Folgenden ein Beispiel:
                 </p>
               </div>
-              <div class="kern-body kern-table-responsive">
+              <div
+                class="kern-body kern-table-responsive"
+                tabindex="0"
+                role="region"
+                aria-label="Beispiel: Verknüpfung von Datenfeldern mit Core Vocabularies"
+              >
                 <table
                   class:list={[
                     tableClasses,
