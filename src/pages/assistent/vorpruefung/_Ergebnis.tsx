@@ -1,3 +1,4 @@
+import InputError from "@/components/InputError";
 import { assistent_vorpruefung_datenaustausch } from "@/config/routes";
 import { contact } from "@/resources/content/shared/contact";
 import { mailto } from "@/utils/mailtoHelper";
@@ -11,7 +12,7 @@ import {
 } from "@/wizard/vorpruefungResult";
 import type { Answer } from "@/wizard/vorpruefungSchema";
 import { useStore } from "@nanostores/react";
-import { useId, useState, type ReactNode } from "react";
+import { useId, useRef, useState, type ReactNode } from "react";
 import ResultTable from "./_ResultTable";
 
 type VorpruefungData = ReturnType<typeof wizardStores.vorpruefung.$data.get>;
@@ -152,7 +153,10 @@ function EmailForm({
   body: (title: string) => string;
 }) {
   const id = useId();
+  const titleInput = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState("");
+  // Only validated on opening the e-mail, cleared again once a title is entered
+  const [hasError, setHasError] = useState(false);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   const subject = title
     ? `Digitalcheck Vorprüfung: „${title}“`
@@ -167,17 +171,35 @@ function EmailForm({
               Arbeitstitel des Vorhabens
             </label>
             <input
+              ref={titleInput}
               type="text"
               id={`${id}-title`}
-              className="kern-form-input__input bg-white"
+              className={`kern-form-input__input bg-white ${hasError ? "kern-form-input__input--error" : ""}`}
               value={title}
-              onChange={(event) => setTitle(event.target.value)}
+              aria-invalid={hasError || undefined}
+              aria-errormessage={hasError ? `${id}-title-error` : undefined}
+              onChange={(event) => {
+                setTitle(event.target.value);
+                if (event.target.value.trim()) setHasError(false);
+              }}
             />
+            {hasError && (
+              <InputError id={`${id}-title-error`}>
+                Bitte geben Sie den Arbeitstitel des Vorhabens an.
+              </InputError>
+            )}
           </div>
           <div className="flex flex-wrap gap-16">
             <a
               href={mailto(to, subject, body(title), cc)}
               className="kern-btn kern-btn--primary link-unstyled"
+              onClick={(event) => {
+                if (title.trim()) return;
+                // Without a title, the e-mail program isn't opened
+                event.preventDefault();
+                setHasError(true);
+                titleInput.current?.focus();
+              }}
             >
               <span
                 className="kern-icon kern-icon--open-in-new"

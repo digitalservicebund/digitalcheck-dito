@@ -103,6 +103,27 @@ describe("Ergebnis", () => {
     );
   });
 
+  it("requires the title before opening the e-mail", () => {
+    store.save(withInteroperability);
+    render(<Ergebnis />);
+    const input = screen.getByLabelText("Arbeitstitel des Vorhabens");
+
+    expect(fireEvent.click(emailLink())).toBe(false);
+    expect(input).toHaveAttribute("aria-invalid", "true");
+    expect(input).toHaveFocus();
+    expect(
+      screen.getByText("Bitte geben Sie den Arbeitstitel des Vorhabens an."),
+    ).toBeVisible();
+
+    fireEvent.change(input, { target: { value: "Mein Gesetz" } });
+
+    expect(input).not.toHaveAttribute("aria-invalid");
+    expect(
+      screen.queryByText("Bitte geben Sie den Arbeitstitel des Vorhabens an."),
+    ).not.toBeInTheDocument();
+    expect(fireEvent.click(emailLink())).toBe(true);
+  });
+
   it("asks to contact the support when unsure", () => {
     store.save({ ...allNo, kommunikation: "unsure" });
     render(<Ergebnis />);
