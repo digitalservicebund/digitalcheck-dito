@@ -23,7 +23,7 @@ const hasDescription = Astro.slots.has("description");
   class="kern-form-input space-y-8 has-[[aria-invalid=true]]:border-l-4 has-[[aria-invalid=true]]:border-l-kern-feedback-warning has-[[aria-invalid=true]]:pl-16"
   data-wizard-field={field.name}
 >
-  <label for={field.name} class="kern-label">
+  <label for={field.name} class="kern-label sr-only">
     <slot />
   </label>
   {hasDescription && (
