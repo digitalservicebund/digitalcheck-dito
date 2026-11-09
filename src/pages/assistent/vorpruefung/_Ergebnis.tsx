@@ -132,9 +132,7 @@ function ResultAlert({ result }: { result: ClearResult }) {
           ))}
         </ul>
         <div>
-          <p className="kern-body">
-            <b>Was bedeutet das für Ihr Vorhaben?</b>
-          </p>
+          <b>Was bedeutet das für Ihr Vorhaben?</b>
           <p className="kern-body">{meanings[result]}</p>
         </div>
       </div>
