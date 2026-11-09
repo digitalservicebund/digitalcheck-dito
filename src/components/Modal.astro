@@ -8,9 +8,15 @@
 interface Props {
   id: string;
   contentClass?: string;
+  /** Hides the close icon, e.g. when a footer button closes the modal */
+  hideCloseButton?: boolean;
 }
 
-const { id, contentClass = "max-w-a11y max-h-screen" } = Astro.props;
+const {
+  id,
+  contentClass = "max-w-a11y max-h-screen",
+  hideCloseButton = false,
+} = Astro.props;
 ---
 
 <dialog
@@ -27,10 +33,12 @@ const { id, contentClass = "max-w-a11y max-h-screen" } = Astro.props;
       class="kern-title kern-title--large"
       id="modal1_heading"
     />
-    <button class="kern-btn kern-btn--tertiary" popovertarget={id}>
-      <span class="kern-icon kern-icon--close" aria-hidden="true"></span>
-      <span class="kern-sr-only">Schließen</span>
-    </button>
+    {!hideCloseButton && (
+      <button class="kern-btn kern-btn--tertiary" popovertarget={id}>
+        <span class="kern-icon kern-icon--close" aria-hidden="true" />
+        <span class="kern-sr-only">Schließen</span>
+      </button>
+    )}
   </header>
   <section class="kern-dialog__body">
     <div class="kern-body">

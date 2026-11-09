@@ -14,38 +14,39 @@ interface Props {
 
 const { id, wizardId } = Astro.props;
 
-const bodies: Record<WizardId, string> = {
-  vorpruefung:
-    "Bevor Sie ein Ergebnis erhalten, müssen Sie zunächst alle Fragen der Vorprüfung beantworten.",
-  dokumentation:
-    "Bevor Sie die Dokumentation abschließen, müssen Sie zunächst alle Fragen der Dokumentation beantworten.",
+const content: Record<
+  WizardId,
+  { heading: string; body: string; button: string }
+> = {
+  vorpruefung: {
+    heading: "Vorprüfung unvollständig",
+    body: "Beantworten Sie bitte alle Fragen, um die Vorprüfung abzuschließen.",
+    button: "Zurück zur Vorprüfung",
+  },
+  dokumentation: {
+    heading: "Dokumentation unvollständig",
+    body: "Bearbeiten Sie bitte alle erforderlichen Schritte, um die Dokumentation abzuschließen.",
+    button: "Zurück zur Dokumentation",
+  },
 };
+const { heading, body, button } = content[wizardId];
 ---
 
-<Modal id={id} contentClass="max-w-600 max-h-screen">
+<Modal id={id} contentClass="max-w-600 max-h-screen" hideCloseButton>
   <h2 slot="heading" class="kern-title kern-title--large mt-8">
-    Bitte beantworten Sie alle Fragen
+    {heading}
   </h2>
   <p slot="body" class="kern-body kern-body--large">
-    {bodies[wizardId]}
+    {body}
   </p>
-  <button
-    type="button"
-    class="kern-btn kern-btn--secondary"
-    popovertarget={id}
-    popovertargetaction="hide"
-    slot="buttonLeft"
-  >
-    <span class="kern-label">Schließen</span>
-  </button>
   {/* The script below links the first unanswered question */}
   <a
     class="kern-btn kern-btn--primary link-unstyled"
     href={wizardFlows[wizardId].initialPath}
     data-wizard-resume-link={wizardId}
-    slot="buttonRight"
+    slot="buttonLeft"
   >
-    <span class="kern-label">Zur offenen Frage</span>
+    <span class="kern-label">{button}</span>
   </a>
 </Modal>
 
