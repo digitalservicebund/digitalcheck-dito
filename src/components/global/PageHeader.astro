@@ -10,6 +10,7 @@ import {
   kontakt,
   type Route,
 } from "@/config/routes";
+import { isProduction } from "@/config/stage";
 import { getMobileMenuNavigation } from "@/utils/navigation/drilldown";
 import { getRouteLabel, isRouteVisible } from "@/utils/navigation/routeUtils";
 import { removeTrailingSlash, withBase } from "@/utils/path";
@@ -49,20 +50,42 @@ function navItemStyle(active = false) {
   @keydown.escape.window="mobileMenuOpen = false"
 >
   <Kopfzeile />
-  <div class="flex h-72 justify-between px-kern-lg">
+  <div
+    class:list={[
+      "flex justify-between px-kern-lg",
+      isProduction ? "h-72" : "h-96",
+    ]}
+  >
     <!-- Logo and title -->
     <a href={home.path} class="link-unstyled flex items-center gap-24">
-      <img
-        src={withBase("/logo/bund-logo.png")}
-        alt="Logo des Bundes"
-        class="w-54 forced-colors:dark:hidden"
-      />
-      <img
-        src={withBase("/logo/bund-logo-white.svg")}
-        alt="Logo des Bundes"
-        class="hidden w-54 forced-colors:dark:block"
-      />
-      <p class="text-xl font-bold max-lg:hidden">Digitalcheck</p>
+      {isProduction ? (
+        <>
+          <img
+            src={withBase("/logo/bund-logo.png")}
+            alt="Logo des Bundes"
+            class="w-54 forced-colors:dark:hidden"
+          />
+          <img
+            src={withBase("/logo/bund-logo-white.svg")}
+            alt="Logo des Bundes"
+            class="hidden w-54 forced-colors:dark:block"
+          />
+          <p class="text-xl font-bold max-lg:hidden">Digitalcheck</p>
+        </>
+      ) : (
+        <>
+          <img
+            src={withBase("/logo/dachmarke-logo.png")}
+            alt="Digitalcheck – Logo des Bundes"
+            class="mt-18 h-72 self-start forced-colors:dark:hidden"
+          />
+          <img
+            src={withBase("/logo/dachmarke-logo-white.png")}
+            alt="Digitalcheck – Logo des Bundes"
+            class="mt-18 hidden h-72 self-start forced-colors:dark:block"
+          />
+        </>
+      )}
     </a>
 
     <!-- Desktop Navigation -->
