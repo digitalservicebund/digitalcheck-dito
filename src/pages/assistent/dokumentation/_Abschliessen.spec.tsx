@@ -67,6 +67,9 @@ describe("Abschliessen", () => {
       "An die Nationale Kontaktstelle senden",
     ]);
     expect(screen.queryByText(/an den NKR/)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(/Digitalcheck und die Interoperabilitätsbewertung/),
+    ).toBeVisible();
   });
 
   it("doesn't number the only step for a Land without EU-Bezug", () => {

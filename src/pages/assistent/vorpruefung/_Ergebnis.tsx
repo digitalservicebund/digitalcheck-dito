@@ -1,5 +1,4 @@
 import InputError from "@/components/InputError";
-import { assistent_vorpruefung_datenaustausch } from "@/config/routes";
 import { contact } from "@/resources/content/shared/contact";
 import { mailto } from "@/utils/mailtoHelper";
 import type { Pruefbereich } from "@/wizard/pruefbereichSchema";
@@ -12,7 +11,8 @@ import {
 } from "@/wizard/vorpruefungResult";
 import type { Answer } from "@/wizard/vorpruefungSchema";
 import { useStore } from "@nanostores/react";
-import { useId, useRef, useState, type ReactNode } from "react";
+import { useId, useRef, useState } from "react";
+import { ContradictionAlert, WarningAlert } from "./_ContradictionAlert";
 import ResultTable from "./_ResultTable";
 
 type VorpruefungData = ReturnType<typeof wizardStores.vorpruefung.$data.get>;
@@ -24,7 +24,7 @@ const meanings: Record<ClearResult, string> = {
   negative:
     "Sie haben den Digitalcheck erfolgreich abgeschlossen. Es sind keine weiteren Schritte erforderlich.",
   digital:
-    "Das bedeutet, dass Sie weitere Schritte unternehmen müssen, um Digitaltauglichkeit in Ihrem Regelungsvorhaben sicherzustellen. Zur EU-Interoperabilität müssen Sie jedoch nichts weiter tun.",
+    "Sie müssen beim Erarbeiten Ihrer Regelung die Digitaltauglichkeit sicherstellen. Auf das Thema EU-Interoperabilität müssen Sie nicht weiter eingehen.",
   digitalAndInteroperability:
     "Sie müssen beim Erarbeiten Ihrer Regelung die Digitaltauglichkeit sowie EU-Anforderungen an Interoperabilität sicherstellen.",
 };
@@ -90,24 +90,6 @@ function SupportContact() {
         {contact.email}
       </a>
     </>
-  );
-}
-
-function WarningAlert({
-  title,
-  children,
-}: {
-  title: string;
-  children: ReactNode;
-}) {
-  return (
-    <div className="kern-alert kern-alert--warning max-w-736">
-      <div className="kern-alert__header">
-        <span className="kern-icon kern-icon--warning" aria-hidden="true" />
-        <h2 className="kern-title">{title}</h2>
-      </div>
-      <div className="kern-alert__body space-y-16">{children}</div>
-    </div>
   );
 }
 
@@ -295,7 +277,7 @@ function Steps({
     // The NKR only checks Regelungsvorhaben of the Bund, the Digitalcheck
     // team gets a copy with Interoperabilität
     isBund && {
-      heading: "Ergebnis an den NKR senden",
+      heading: "Ergebnis per E-Mail an den NKR senden",
       content: (
         <>
           <p>
@@ -313,7 +295,7 @@ function Steps({
     },
     !isBund &&
       hasInteroperability && {
-        heading: "Ergebnis an das Digitalcheck Team senden",
+        heading: "Ergebnis per E-Mail an das Digitalcheck-Team senden",
         content: (
           <>
             <p>
@@ -393,38 +375,7 @@ export default function Ergebnis() {
 
   return (
     <div className="breakout space-y-48 sm:space-y-64 print:[&_.kern-icon]:[print-color-adjust:exact]">
-      {result === "contradiction" && (
-        <WarningAlert title="Widersprüchliche Angaben – bitte prüfen">
-          <ul className="kern-body space-y-8">
-            <li>
-              Ihre Angabe in Frage 3 (Datenaustausch):
-              <ul>
-                <li>
-                  Datenaustausch <b>findet nicht statt</b>
-                </li>
-              </ul>
-            </li>
-            <li>
-              Ihre Angabe in Frage 6 (Datenaustausch mit EU-Bezug):
-              <ul>
-                <li>
-                  Datenaustausch <b>findet statt</b>
-                </li>
-              </ul>
-            </li>
-          </ul>
-          <a
-            href={assistent_vorpruefung_datenaustausch.path}
-            className="kern-link"
-          >
-            <span
-              className="kern-icon kern-icon--arrow-forward"
-              aria-hidden="true"
-            />
-            Frage 3 zum Datenaustausch überprüfen
-          </a>
-        </WarningAlert>
-      )}
+      {result === "contradiction" && <ContradictionAlert />}
       {result === "unsure" && (
         <WarningAlert title="Sie haben mehrere Fragen mit „Ich bin unsicher“ beantwortet">
           <p className="kern-body">

@@ -39,7 +39,7 @@ describe("Ergebnis", () => {
     ).toBeVisible();
     expect(
       screen.getByRole("heading", {
-        name: "Ergebnis an den NKR senden",
+        name: "Ergebnis per E-Mail an den NKR senden",
       }),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).toMatch(
@@ -65,7 +65,7 @@ describe("Ergebnis", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: "Ergebnis an das Digitalcheck Team senden",
+        name: "Ergebnis per E-Mail an das Digitalcheck-Team senden",
       }),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).toMatch(

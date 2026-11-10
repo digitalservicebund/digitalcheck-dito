@@ -1,5 +1,6 @@
 ---
 import HelpSection from "@/components/HelpSection.astro";
+import ContradictionHint from "./_ContradictionAlert";
 import QuestionPage from "./_QuestionPage.astro";
 
 export const frontmatter = {
@@ -24,6 +25,7 @@ export const frontmatter = {
     Daten und harmonisierten Standards erforderlich, um deren Echtheit zu
     überprüfen.
   </Fragment>
+  <ContradictionHint slot="afterAnswers" client:load />
   <HelpSection
     slot="help"
     id="eu-bezug"

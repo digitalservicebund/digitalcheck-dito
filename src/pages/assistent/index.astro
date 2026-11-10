@@ -67,14 +67,13 @@ const prinzipien = (await getCollection("prinzipien"))
             <WizardStartActions
               wizardId="vorpruefung"
               href={assistent_vorpruefung.path}
+              restartLabel="Neue Vorprüfung starten"
             >
               <Fragment slot="startLabel">Zu diesem Schritt</Fragment>
               <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
-              <Fragment slot="restartLabel">Neue Vorprüfung starten</Fragment>
               <Fragment slot="modalBody">
-                Mit einer neuen Vorprüfung werden die Daten der begonnenen
-                Vorprüfung gelöscht. Diese können nicht wiederhergestellt
-                werden.
+                Wenn Sie die Vorprüfung neu starten, werden alle bisherigen
+                Angaben unwiderruflich gelöscht.
               </Fragment>
             </WizardStartActions>
           </div>
@@ -153,22 +152,19 @@ const prinzipien = (await getCollection("prinzipien"))
             <WizardStartActions
               wizardId="dokumentation"
               href={assistent_dokumentation.path}
+              restartLabel="Neue Dokumentation starten"
             >
               <Fragment slot="startLabel">Zu diesem Schritt</Fragment>
               <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>
-              <Fragment slot="restartLabel">
-                Neue Dokumentation beginnen
-              </Fragment>
               <Fragment slot="modalBody">
                 <p>
-                  Mit einer neuen Dokumentation werden die Daten der begonnenen
-                  Dokumentation gelöscht. Diese können nicht wiederhergestellt
-                  werden.
+                  Wenn Sie die Dokumentation neu starten, werden alle Daten, die
+                  Sie bereits eingetragen haben, unwiderruflich <b>gelöscht</b>.
                 </p>
                 <WordDownloadButton
                   client:load
                   prinzipien={prinzipien}
-                  label="Zwischenstand herunterladen"
+                  label="Zwischenstand herunterladen (.docx)"
                   look="tertiary"
                 />
               </Fragment>

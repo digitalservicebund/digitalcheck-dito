@@ -112,8 +112,7 @@ export default function Abschliessen({
           <div className="kern-alert__header">
             <span className="kern-icon kern-icon--success" aria-hidden="true" />
             <h2 className="kern-title">
-              {/* The design mentions the Bewertung only for the Bund */}
-              {isBund && hasEuBezug
+              {hasEuBezug
                 ? "Damit haben Sie den Digitalcheck und die Interoperabilitätsbewertung erfolgreich abgeschlossen."
                 : "Damit haben Sie den Digitalcheck erfolgreich abgeschlossen."}
             </h2>

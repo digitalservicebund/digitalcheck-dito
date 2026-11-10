@@ -364,7 +364,7 @@ test.describe("with partial documentation started", () => {
   test("can start over", async ({ page }, testInfo) => {
     await waitForHydration(page);
     const startOverButton = page.getByRole("button", {
-      name: "Neue Dokumentation beginnen",
+      name: "Neue Dokumentation starten",
     });
 
     async function openDialog() {
@@ -403,7 +403,9 @@ test.describe("with partial documentation started", () => {
 
     await test.step("confirm start over", async () => {
       const dialog = page.getByRole("dialog");
-      await dialog.getByRole("button", { name: "Neu beginnen" }).click();
+      await dialog
+        .getByRole("link", { name: "Neue Dokumentation starten" })
+        .click();
 
       await expectAndSkipNotice(page);
 

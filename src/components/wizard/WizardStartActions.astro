@@ -7,13 +7,14 @@ import IconPublishedWithChanges from "~icons/ic/outline-published-with-changes";
 
 // Slots:
 // - startLabel / continueLabel: label of the start link, depending on whether answers are stored
-// - restartLabel: label of the restart button, also used as the modal heading
 // - modalBody: body of the restart modal
 
 interface Props {
   wizardId: WizardId;
-  /** Target of the start link. The continue link goes to the first unanswered question, "Neu beginnen" to the first question instead. */
+  /** Target of the start link. The continue link goes to the first unanswered question, the restart to the first question instead. */
   href: string;
+  /** Label of the restart button, also used as the modal heading (as question) and its confirm button */
+  restartLabel: string;
   /** Shows the autosave hint while no answers are stored */
   showAutosaveHint?: boolean;
   /** Shows the select of the Prüfbereich above, which is stored when the wizard is started. Once stored (also by the other wizard), it's changed via the breadcrumb instead. */
@@ -23,6 +24,7 @@ interface Props {
 const {
   wizardId,
   href,
+  restartLabel,
   showAutosaveHint = false,
   showPruefbereich = false,
 } = Astro.props;
@@ -84,9 +86,7 @@ const modalId = `${wizardId}-start-over-modal`;
       popovertarget={modalId}
       hidden
     >
-      <span class="kern-label">
-        <slot name="restartLabel" />
-      </span>
+      <span class="kern-label">{restartLabel}</span>
       <span
         class="kern-icon kern-icon--autorenew kern-icon--default"
         aria-hidden="true"
@@ -94,7 +94,7 @@ const modalId = `${wizardId}-start-over-modal`;
     </button>
     <Modal id={modalId} contentClass="max-w-600 max-h-screen">
       <h2 slot="heading" class="kern-title kern-title--large mt-8">
-        <slot name="restartLabel" />
+        {restartLabel}?
       </h2>
       <div slot="body" class="space-y-16">
         <slot name="modalBody" />
@@ -114,7 +114,7 @@ const modalId = `${wizardId}-start-over-modal`;
         data-reset-wizard
         slot="buttonRight"
       >
-        <span class="kern-label">Neu beginnen</span>
+        <span class="kern-label">{restartLabel}</span>
       </a>
     </Modal>
     {showAutosaveHint && (

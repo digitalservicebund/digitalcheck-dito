@@ -7,8 +7,8 @@
   "Nummer": 1,
   "URLBezeichnung": "digitale-angebote-fuer-alle-nutzbar-gestalten",
   "Kurzbeschreibung": "Eine Regelung gilt als erfolgreich digitalisiert, wenn Bürgerinnen, Bürger und Unternehmen Anträge intuitiv online stellen können, Behörden die Daten systemübergreifend ohne manuelle Nacherfassung verarbeiten und Digitaltauglichkeit von Anfang an mitgedacht wurde.",
-  "Hilfetext": "Eine Regelung ist dann erfolgreich digitalisiert, wenn sie ohne Medienbrüche und unnötige Behördengänge funktioniert. Konkret bedeutet das: Bürgerinnen, Bürger und Unternehmen können Anträge intuitiv online stellen, während Behörden die Daten ohne manuelle Nacherfassung systemübergreifend verarbeiten. Dies erfordert, dass Digitaltauglichkeit von Anfang an mitgedacht wird.",
-  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung ein z.B.: „Online-Beratung wird ermöglicht, siehe § 1a“.",
+  "Hilfetext": "Eine Regelung ist dann erfolgreich digitalisiert, wenn sie ohne Medienbrüche und unnötige Behördengänge funktioniert. Konkret bedeutet das: Bürgerinnen, Bürger und Unternehmen können Anträge intuitiv online stellen, während Behörden die Daten ohne manuelle Nacherfassung systemübergreifend verarbeiten.",
+  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung ein z. B. „Online-Beratung wird ermöglicht, siehe § 1a“.",
   "Aspekte":
     [
       {
@@ -72,7 +72,7 @@
       {
         "Titel": "Stellen Sie eine nutzerfreundliche Umsetzung sicher",
         "Kurzbezeichnung": "Nutzerfreundlichkeit",
-        "Text": "Barrierearme Angebote sind oft auch nutzerfreundlicher. Darüber hinaus macht eine nutzerzentrierte Entwicklung, die z. B. in kleinen Schritten agiert und Texte in einfacher Sprache oder mehrsprachig gestaltet, ihr Angebot zugänglicher.",
+        "Text": "Barrierearme Angebote sind oft auch nutzerfreundlicher. Darüber hinaus macht eine nutzerzentrierte Entwicklung, die z. B. in kleinen Schritten agiert und Texte in einfacher Sprache oder mehrsprachig gestaltet, Ihr Angebot zugänglicher.",
         "Anwendung": [],
       },
     ],

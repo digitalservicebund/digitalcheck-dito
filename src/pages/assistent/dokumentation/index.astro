@@ -89,6 +89,10 @@ const faqItems = [
               <b>So geht es:</b> Suchen Sie in Ihren Browser-Einstellungen nach
               JavaScript und erlauben Sie die Nutzung.
             </p>
+            <p>
+              Alternativ können Sie die Dokumentation als Word-Vorlage
+              bearbeiten.
+            </p>
           </div>
         </div>
       </noscript>
@@ -96,21 +100,21 @@ const faqItems = [
       <WizardStartActions
         wizardId="dokumentation"
         href={dokumentationFlow.initialPath}
+        restartLabel="Neue Dokumentation starten"
         showAutosaveHint
         showPruefbereich
       >
         <Fragment slot="startLabel">Dokumentation starten</Fragment>
         <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>
-        <Fragment slot="restartLabel">Neue Dokumentation beginnen</Fragment>
         <Fragment slot="modalBody">
           <p>
-            Mit einer neuen Dokumentation werden die Daten der begonnenen
-            Dokumentation gelöscht. Diese können nicht wiederhergestellt werden.
+            Wenn Sie die Dokumentation neu starten, werden alle Daten, die Sie
+            bereits eingetragen haben, unwiderruflich <b>gelöscht</b>.
           </p>
           <WordDownloadButton
             client:load
             prinzipien={prinzipien}
-            label="Zwischenstand herunterladen"
+            label="Zwischenstand herunterladen (.docx)"
             look="tertiary"
           />
         </Fragment>
@@ -166,7 +170,7 @@ const faqItems = [
             <ol class="kern-body list-[lower-alpha]">
               <li>Sie eine neue Dokumentation starten oder</li>
               <li>
-                Ihr SINA-Rechner die Daten löscht (falls das bei Ihnen
+                Ihr SINA-Rechner die Browserdaten löscht (falls das bei Ihnen
                 voreingestellt ist)
               </li>
             </ol>

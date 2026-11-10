@@ -195,8 +195,14 @@ export default function Zusammenfassung({
           title={assistent_dokumentation_beteiligungsformate.title}
           path={assistent_dokumentation_beteiligungsformate.path}
           entries={[
-            ["Erklärung", filled(data["beteiligungsformate-erklaerung"])],
-            ["Erkenntnisse", filled(data["beteiligungsformate-erkenntnisse"])],
+            [
+              "Auswirkungen auf Betroffene",
+              filled(data["beteiligungsformate-erklaerung"]),
+            ],
+            [
+              "Auswirkungen auf die Umsetzung",
+              filled(data["beteiligungsformate-erkenntnisse"]),
+            ],
           ]}
         />
         {prinzipien.map(({ order, name, path, schwerpunkte }) => {

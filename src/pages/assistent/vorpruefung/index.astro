@@ -110,15 +110,15 @@ const faqItems: {
       <WizardStartActions
         wizardId="vorpruefung"
         href={vorpruefungFlow.initialPath}
+        restartLabel="Neue Vorprüfung starten"
         showAutosaveHint
         showPruefbereich
       >
         <Fragment slot="startLabel">Vorprüfung starten</Fragment>
         <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
-        <Fragment slot="restartLabel">Neue Vorprüfung starten</Fragment>
         <Fragment slot="modalBody">
-          Mit einer neuen Vorprüfung werden die Daten der begonnenen Vorprüfung
-          gelöscht. Diese können nicht wiederhergestellt werden.
+          Wenn Sie die Vorprüfung neu starten, werden alle bisherigen Angaben
+          unwiderruflich gelöscht.
         </Fragment>
       </WizardStartActions>
     </Hero>
