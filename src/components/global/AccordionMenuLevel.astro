@@ -191,9 +191,8 @@ const items = entries.map((entry) => ({
         aria-current={currentPath === entry.path ? "page" : undefined}
       >
         {/* Placed in the left padding, so the label doesn't shift when the
-            script reveals an icon after loading the stored answers.
-            Not on the current page, which would warn as soon as one types. */}
-        {getWizardIdForPath(entry.path) && currentPath !== entry.path && (
+            script reveals an icon after loading the stored answers. */}
+        {getWizardIdForPath(entry.path) && (
           <>
             <span
               data-wizard-status="answered"
@@ -249,14 +248,25 @@ const items = entries.map((entry) => ({
       const wizardId = link.dataset.wizardLink as WizardId;
       const path = link.dataset.path ?? "";
 
-      // Also update when the answers change later, e.g. in another tab
-      wizardStores[wizardId].$answerStatus.subscribe((answerStatus) => {
+      const { $answerStatus } = wizardStores[wizardId];
+      const showStatus = (
+        answerStatus: ReturnType<typeof $answerStatus.get>,
+      ) => {
         link
           .querySelectorAll<HTMLElement>("[data-wizard-status]")
           .forEach((mark) => {
             mark.hidden = mark.dataset.wizardStatus !== answerStatus(path);
           });
-      });
+      };
+
+      // The current page keeps its status from loading, so it doesn't warn as
+      // soon as one types. Others also update when the answers change later,
+      // e.g. in another tab.
+      if (link.getAttribute("aria-current") === "page") {
+        showStatus($answerStatus.get());
+      } else {
+        $answerStatus.subscribe(showStatus);
+      }
 
       // A locked final page has a button opening the modal, which replaces the link
       const lockedButton = document.querySelector<HTMLElement>(
