@@ -60,18 +60,8 @@ fileignoreconfig:
     checksum: 42eef9612194e5bf28135106f58550a8be414fac545974d5e3e19aaf30e72960
   - filename: src/pages/bundeslaender/_assets/online-schulung.jpg
     checksum: 525cfda0c835c633ecb5560c74ea447ee07536edc22320dea71b5d618676a5ce
-  - filename: src/assets/images/startseite-bundeslaender.png
-    checksum: 8503a55d03d47d18d968a2243d3d85d015e584cdd6496c515e80033047f6dfa6
-  - filename: src/pages/bundeslaender/_assets/angebot.png
-    checksum: bdeda92c331ce4f129dea089d2853f1b100367ad86639e9dec1d2fc646e43237
-  - filename: public/images/prozess-nationale-kontaktstelle.png
-    checksum: 16edd1014115e3cdd0824566a1a9470dbd1e006d2b9774b8fb759337913ccedd
-  - filename: src/assets/images/regelungsbegleitung.png
-    checksum: 27bd925f90d37e2319f107d5f89c39da159281d6ac750b575a00044d165383e4
-  - filename: src/assets/images/europa-karte.png
-    checksum: 50db3636fffb722578351d3a4143955566e2ed90b8735907d64d67e260ae2014
-  - filename: src/pages/bundeslaender/_assets/HESSEN_Logo_stacked.png
-    checksum: 177695ec813e3e103b23acfbd978205178c3ff6c227859b7f8a623257c2257ba
+  - filename: "**/*.png" # binary image data misidentified as secret pattern
+    ignore_detectors: [filecontent]
 
 allowed_patterns:
   - key
