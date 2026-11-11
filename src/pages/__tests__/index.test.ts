@@ -36,7 +36,7 @@ describe("Index Route - Integration Tests", () => {
     ).toBeInTheDocument();
 
     expect(
-      main.getByRole("link", { name: "Digitalcheck starten" }),
+      main.getByRole("link", { name: "Digitalcheck durchführen" }),
     ).toHaveAttribute("href", "/assistent");
     expect(
       main.getByRole("link", { name: "Was ist Digitaltauglichkeit?" }),

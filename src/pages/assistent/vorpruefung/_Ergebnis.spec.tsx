@@ -35,7 +35,7 @@ describe("Ergebnis", () => {
     render(<Ergebnis />);
 
     expect(
-      screen.getByText("Anforderungen der Interoperabilität"),
+      screen.getByText("einen Bezug zur EU-Interoperabilität"),
     ).toBeVisible();
     expect(
       screen.getByRole("heading", {
@@ -52,7 +52,7 @@ describe("Ergebnis", () => {
     render(<Ergebnis />);
 
     expect(
-      screen.getByText("keine eindeutigen Anforderungen der Interoperabilität"),
+      screen.getByText("keinen eindeutigen Bezug zur EU-Interoperabilität"),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).not.toContain("cc=");
     expect(screen.queryByText(/Kopie/)).not.toBeInTheDocument();
@@ -99,7 +99,7 @@ describe("Ergebnis", () => {
     });
 
     expect(decodeURIComponent(emailLink().getAttribute("href")!)).toContain(
-      "Vorhaben: Mein Gesetz",
+      "Digitalcheck Vorprüfung: „Mein Gesetz“",
     );
   });
 

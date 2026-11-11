@@ -11,7 +11,7 @@ import {
   assistent_dokumentation_euInteroperabilitaet_veroeffentlichung,
   assistent_dokumentation_regelungsvorhaben,
 } from "@/config/routes";
-import { getPrinzipienStaticPaths } from "@/content.config";
+import type { Prinzip as PrinzipData } from "@/content.config";
 import Prinzip from "@/pages/assistent/dokumentation/[principleId].astro";
 import Beteiligungsformate from "@/pages/assistent/dokumentation/beteiligungsformate.astro";
 import EuInteroperabilitaet from "@/pages/assistent/dokumentation/eu-interoperabilitaet/index.astro";
@@ -99,13 +99,42 @@ describe("Dokumentation step Beteiligungsformate", () => {
 });
 
 describe("Dokumentation step Prinzip", () => {
-  it.each(dokumentationPrinzipienRoutes)(
-    "renders the answer of $title as a radio group labelled by the question",
-    async ({ path }) => {
-      const staticPaths = await getPrinzipienStaticPaths();
-      const { prinzip } = staticPaths.find((staticPath) =>
-        path.endsWith(`/${staticPath.params.principleId}`),
-      )!.props;
+  // Fixture instead of the content collection, which is only available after a build
+  const createPrinzip = (order: number): PrinzipData => ({
+    documentId: `testprinzip-${order}`,
+    Name: `Testprinzip ${order}`,
+    Kurzbezeichnung: `Test ${order}`,
+    Kurzbeschreibung: "Kurzbeschreibung des Testprinzips.",
+    Hilfetext: "Hilfetext des Testprinzips.",
+    Erklaerungshilfe: "Erklärungshilfe des Testprinzips.",
+    order,
+    Nummer: order,
+    URLBezeichnung: `testprinzip-${order}`,
+    Aspekte: [
+      {
+        Titel: "Erster Schwerpunkt",
+        Kurzbezeichnung: "Erster Schwerpunkt",
+        Text: "Text des ersten Schwerpunkts.",
+        Anwendung: [],
+      },
+      {
+        Titel: "Zweiter Schwerpunkt",
+        Kurzbezeichnung: "Zweiter Schwerpunkt",
+        Text: "Text des zweiten Schwerpunkts.",
+        Anwendung: [],
+      },
+    ],
+  });
+
+  // The routes are ordered like the Prinzipien, their fields are numbered by it
+  const prinzipSteps = dokumentationPrinzipienRoutes.map(({ path }, index) => ({
+    path,
+    prinzip: createPrinzip(index + 1),
+  }));
+
+  it.each(prinzipSteps)(
+    "renders the answer of Prinzip $prinzip.order as a radio group labelled by the question",
+    async ({ path, prinzip }) => {
       const { screen, names } = await renderStep(Prinzip, path, { prinzip });
 
       const order = toPrinzipOrder(prinzip.order);
@@ -125,13 +154,8 @@ describe("Dokumentation step Prinzip", () => {
   );
 
   const renderFirstPrinzip = async () => {
-    const [{ props }] = await getPrinzipienStaticPaths();
-    const { prinzip } = props;
-    const rendered = await renderStep(
-      Prinzip,
-      dokumentationPrinzipienRoutes[0].path,
-      { prinzip },
-    );
+    const [{ path, prinzip }] = prinzipSteps;
+    const rendered = await renderStep(Prinzip, path, { prinzip });
     return { prinzip, ...rendered };
   };
 

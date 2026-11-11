@@ -22,23 +22,21 @@ describe("ResultTable", () => {
     expect(itSystem.getByText("Ja")).toBeVisible();
     expect(
       itSystem.getByText(
-        "Neues oder angepasstes IT-System – direkter Digitalbezug.",
+        "Muss ein IT-System angepasst oder neu entwickelt werden?",
       ),
     ).toBeVisible();
 
     const automatisierung = within(getRow("Automatisierung"));
     expect(automatisierung.getByText("Nein")).toBeVisible();
     expect(
-      automatisierung.getByText("Kein Digitalbezug aus dieser Frage."),
+      automatisierung.getByText("Können Schritte automatisiert werden?"),
     ).toBeVisible();
   });
 
   it("marks unanswered questions", () => {
     render(<ResultTable />);
 
-    expect(
-      within(getRow("EU-Bezug")).getByText("Noch nicht beantwortet."),
-    ).toBeVisible();
+    expect(within(getRow("EU-Bezug")).getByText("–")).toBeVisible();
   });
 
   it("links every answer to its question page", () => {
