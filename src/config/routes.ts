@@ -19,7 +19,6 @@ export const assistent = {
   parent: null,
   sitemap: false,
   isStagingOnly: false,
-  navOrder: null,
   navLabel: "Übersicht",
 } as const;
 
@@ -31,7 +30,6 @@ export const assistent_dokumentation = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_abschliessen = {
@@ -42,7 +40,6 @@ export const assistent_dokumentation_abschliessen = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 10,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_beteiligungsformate = {
@@ -53,7 +50,6 @@ export const assistent_dokumentation_beteiligungsformate = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet = {
@@ -64,7 +60,6 @@ export const assistent_dokumentation_euInteroperabilitaet = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 8,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet_organisatorisch = {
@@ -75,7 +70,6 @@ export const assistent_dokumentation_euInteroperabilitaet_organisatorisch = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 3,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet_rechtlich = {
@@ -86,7 +80,6 @@ export const assistent_dokumentation_euInteroperabilitaet_rechtlich = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 2,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet_semantisch = {
@@ -97,7 +90,6 @@ export const assistent_dokumentation_euInteroperabilitaet_semantisch = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 4,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet_technisch = {
@@ -108,7 +100,6 @@ export const assistent_dokumentation_euInteroperabilitaet_technisch = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 5,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet_verbindlicheAnforderungen = {
@@ -119,7 +110,6 @@ export const assistent_dokumentation_euInteroperabilitaet_verbindlicheAnforderun
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_euInteroperabilitaet_veroeffentlichung = {
@@ -130,7 +120,6 @@ export const assistent_dokumentation_euInteroperabilitaet_veroeffentlichung = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 6,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_regelungsvorhaben = {
@@ -141,7 +130,6 @@ export const assistent_dokumentation_regelungsvorhaben = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
 export const assistent_dokumentation_zusammenfassung = {
@@ -152,7 +140,6 @@ export const assistent_dokumentation_zusammenfassung = {
   sitemap: false,
   isStagingOnly: false,
   navOrder: 9,
-  navLabel: null,
 } as const;
 
 export const assistent_vorpruefung = {
@@ -163,7 +150,6 @@ export const assistent_vorpruefung = {
   sitemap: true,
   isStagingOnly: false,
   navOrder: 1,
-  navLabel: null,
 } as const;
 
 export const assistent_vorpruefung_automatisierung = {
