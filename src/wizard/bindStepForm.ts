@@ -257,7 +257,7 @@ export const bindStepForm = (
     const items = (readValue(new FormData(form), name) ?? []) as Item[];
     const itemElements = Array.from(itemsOf(list).children);
     let focusIndex: number;
-    if (button.hasAttribute("data-wizard-list-add")) {
+    if (button.dataset.wizardListAdd !== undefined) {
       const itemShape = itemShapeOf(shape[name])!;
       const empty = Object.fromEntries(
         Object.entries(itemShape).map(([key, schema]) => [
