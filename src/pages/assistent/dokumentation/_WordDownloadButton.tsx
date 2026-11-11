@@ -16,7 +16,7 @@ export default function WordDownloadButton({
   label,
   look,
   templateOnly = false,
-}: Props) {
+}: Readonly<Props>) {
   const download = async () => {
     // Loaded on click, as docx is large
     const [{ downloadWordDocumentation }, { toDocumentationData }] =

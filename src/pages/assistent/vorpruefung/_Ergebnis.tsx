@@ -93,7 +93,7 @@ function SupportContact() {
   );
 }
 
-function ResultAlert({ result }: { result: ClearResult }) {
+function ResultAlert({ result }: Readonly<{ result: ClearResult }>) {
   return (
     <div className="kern-alert kern-alert--info max-w-736">
       <div className="kern-alert__header">
@@ -127,11 +127,11 @@ function EmailForm({
   to,
   cc,
   body,
-}: {
+}: Readonly<{
   to: string;
   cc?: string;
   body: (title: string) => string;
-}) {
+}>) {
   const id = useId();
   const titleInput = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState("");
@@ -235,11 +235,11 @@ function Steps({
   result,
   data,
   pruefbereich,
-}: {
+}: Readonly<{
   result: ClearResult;
   data: VorpruefungData;
   pruefbereich: Pruefbereich;
-}) {
+}>) {
   const isBund = pruefbereich === "Bund";
   const hasInteroperability = result === "digitalAndInteroperability";
   const body = (title: string) => emailBody(result, data, pruefbereich, title);
@@ -328,7 +328,7 @@ function Steps({
   );
 }
 
-function Faq({ hasEmail }: { hasEmail: boolean }) {
+function Faq({ hasEmail }: Readonly<{ hasEmail: boolean }>) {
   const items = [
     hasEmail && {
       question: "Was passiert, wenn ich auf „E-Mail-Programm öffnen“ klicke?",

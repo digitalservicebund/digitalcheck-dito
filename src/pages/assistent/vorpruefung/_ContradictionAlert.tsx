@@ -7,10 +7,10 @@ import type { ReactNode } from "react";
 export function WarningAlert({
   title,
   children,
-}: {
+}: Readonly<{
   title: string;
   children: ReactNode;
-}) {
+}>) {
   return (
     <div className="kern-alert kern-alert--warning max-w-736">
       <div className="kern-alert__header">

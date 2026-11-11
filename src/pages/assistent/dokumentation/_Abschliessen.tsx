@@ -7,10 +7,10 @@ import WordDownloadButton from "./_WordDownloadButton";
 /** What to do with the finished Dokumentation, depending on Prüfbereich and EU-Bezug */
 export default function Abschliessen({
   prinzipien,
-}: {
+}: Readonly<{
   /** For the Word file, see WordDownloadButton */
   prinzipien: Prinzip[];
-}) {
+}>) {
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)

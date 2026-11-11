@@ -73,7 +73,7 @@ const ebenen = [
 const filled = (value: string | undefined) =>
   value?.trim() ? value : undefined;
 
-function Missing({ children }: { children: ReactNode }) {
+function Missing({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <span className="kern-badge kern-badge--warning">
       <span className="kern-icon kern-icon--warning" aria-hidden="true" />
@@ -86,7 +86,7 @@ function Missing({ children }: { children: ReactNode }) {
 // isn't asked for the given answers (like <ShowIf> on the pages)
 type Entry = readonly [key: string, value: ReactNode] | false;
 
-function DescriptionList({ entries }: { entries: Entry[] }) {
+function DescriptionList({ entries }: Readonly<{ entries: Entry[] }>) {
   return (
     <dl className="kern-description-list">
       {entries
@@ -118,14 +118,14 @@ function Summary({
   path,
   entries = [],
   children,
-}: {
+}: Readonly<{
   number?: number;
   title: string;
   path: string;
   entries?: Entry[];
   /** Replaces the entries, e.g. for lists */
   children?: ReactNode;
-}) {
+}>) {
   const isStarted = entries.some((entry) => entry && entry[1] !== undefined);
   return (
     <div className="kern-summary">
@@ -156,9 +156,9 @@ function Summary({
 /** Lists all answers of the Dokumentation, per step with a link to change them */
 export default function Zusammenfassung({
   prinzipien,
-}: {
+}: Readonly<{
   prinzipien: PrinzipSummary[];
-}) {
+}>) {
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   const isReachable = useStore(wizardStores.dokumentation.$isReachable);
