@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime.CpoXNhZb.js";import{n as t}from"./bundle-mjs.DLhDsmnr.js";var n=e(),r=({id:e,children:r})=>(0,n.jsxs)(`p`,{className:`kern-error`,id:e,children:[(0,n.jsx)(`span`,{className:t(`kern-icon kern-icon--warning kern-icon--md`,`!bg-yellow-700`),"aria-hidden":`true`}),(0,n.jsx)(`span`,{className:`kern-body`,children:r})]});export{r as t};
