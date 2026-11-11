@@ -145,7 +145,9 @@ function Summary({
         <div className="kern-summary__actions print:hidden">
           <a href={path} className="kern-link">
             <span className="kern-icon kern-icon--edit" aria-hidden="true" />
-            Bearbeiten<span className="sr-only">: {title}</span>
+            <span>
+              Bearbeiten<span className="sr-only">: {title}</span>
+            </span>
           </a>
         </div>
       </div>

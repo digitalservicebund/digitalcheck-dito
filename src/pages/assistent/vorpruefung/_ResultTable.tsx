@@ -55,7 +55,9 @@ export default function ResultTable() {
                       className="kern-icon kern-icon--edit"
                       aria-hidden="true"
                     />
-                    Bearbeiten<span className="sr-only">: {route.title}</span>
+                    <span>
+                      Bearbeiten<span className="sr-only">: {route.title}</span>
+                    </span>
                   </a>
                 </td>
               </tr>

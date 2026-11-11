@@ -49,7 +49,7 @@ export function ContradictionAlert() {
           className="kern-icon kern-icon--arrow-forward"
           aria-hidden="true"
         />
-        Frage 3 zum Datenaustausch überprüfen
+        <span>Frage 3 zum Datenaustausch überprüfen</span>
       </a>
     </WarningAlert>
   );

@@ -72,7 +72,7 @@ export default function Abschliessen({
             .
           </li>
           <li>
-            Die Interoperabilitätsbewertung wird auf dem Portal „
+            Die Interoperabilitätsbewertung wird auf dem Portal {"„"}
             <a
               href="https://interoperable-europe.ec.europa.eu/collection/assessments"
               target="_blank"
@@ -80,7 +80,7 @@ export default function Abschliessen({
             >
               Interoperable Europe
             </a>
-            “ publiziert, sobald Ihr Referentenentwurf veröffentlicht wurde.
+            {"“"} publiziert, sobald Ihr Referentenentwurf veröffentlicht wurde.
             Sollte dies noch nicht der Fall sein, meldet sich die Nationale
             Kontaktstelle zum angegebenen Zeitpunkt bei Ihnen.
           </li>
