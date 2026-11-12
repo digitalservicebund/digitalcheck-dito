@@ -1,0 +1,39 @@
+---
+import { assistent } from "@/config/routes";
+import { getCollection } from "astro:content";
+import Abschliessen from "./_Abschliessen";
+import StepPage from "./_StepPage.astro";
+
+export const frontmatter = {
+  title: "Abschließen",
+  sitemap: false,
+  navOrder: 10,
+};
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
+---
+
+<StepPage
+  title={frontmatter.title}
+  isWide
+  canEditPruefbereich
+  finalNext={{ href: assistent.path, label: "Zurück zur Übersicht" }}
+>
+  {/* Depends on the stored Prüfbereich and EU-Bezug */}
+  <Abschliessen client:only="react" prinzipien={prinzipien} />
+</StepPage>
+
+<script>
+  import { assistent_dokumentation_abschliessen } from "@/config/routes";
+  import { wizardStores } from "@/wizard/stores";
+
+  // Only reachable once all pages are answered, e.g. not via a bookmark
+  const { $isReachable, $resumePath } = wizardStores.dokumentation;
+  $isReachable.subscribe((isReachable) => {
+    if (!isReachable(assistent_dokumentation_abschliessen.path)) {
+      globalThis.location.replace($resumePath.get());
+    }
+  });
+</script>

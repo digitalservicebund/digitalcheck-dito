@@ -1,0 +1,189 @@
+---
+import Hero from "@/components/Hero.astro";
+import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
+import Layout from "@/layouts/Layout.astro";
+import { dokumentationFlow } from "@/wizard/dokumentationFlow";
+import { getCollection } from "astro:content";
+import SupportSection from "../_SupportSection.astro";
+import WordDownloadButton from "./_WordDownloadButton";
+
+export const frontmatter = {
+  title: "Dokumentation",
+  navOrder: 3,
+  navEyebrow: "Schritt 3",
+};
+
+const prinzipien = (await getCollection("prinzipien"))
+  .map(({ data }) => data)
+  .toSorted((a, b) => a.order - b.order);
+
+const faqItems = [
+  {
+    question:
+      "Kann ich mehrere Regelungen in einer Dokumentation zusammenfassen?",
+    answer:
+      "Ja, für inhaltlich zusammengehörige Regelungen können Sie eine gemeinsame Dokumentation ausfüllen.",
+  },
+  {
+    question: "Kann ich Zwischenstände mit Kolleginnen und Kollegen teilen?",
+    answer: [
+      "Ja, Sie können den aktuellen Stand jederzeit als Word-Datei (.docx) herunterladen, um die Dokumentation intern im Referat abzustimmen oder gemeinsam zu bearbeiten.",
+      "Für die Bundesebene: Die finale Datei senden Sie per E-Mail an den NKR.",
+    ],
+  },
+  {
+    question: "Wie binde ich meine Visualisierung ein?",
+    answer:
+      "Sie können Ihre Visualisierung als separate Anlage zusammen mit der Dokumentation an den NKR senden.",
+  },
+];
+---
+
+<Layout title={frontmatter.title} noFooter>
+  <main class="breakout-grid">
+    <Hero class="space-y-24" largeText={false}>
+      <h1>Dokumentation</h1>
+      <p>
+        In diesem Schritt dokumentieren Sie die Digitaltauglichkeit Ihrer
+        Regelung und bewerten die EU-Interoperabilität, sofern ein Bezug
+        besteht.
+      </p>
+      <div class="space-y-8">
+        <p>
+          <b>Das brauchen Sie:</b>
+        </p>
+        <ul>
+          <li>
+            Ihren aktuellen Regelungsentwurf. Sie können die Dokumentation
+            bereits während der Erarbeitung beginnen und fortlaufend ergänzen.
+          </li>
+        </ul>
+      </div>
+      <div class="space-y-8">
+        <p>
+          <b>Ergebnis:</b>
+        </p>
+        <ul>
+          <li>
+            Eine vollständige Dokumentation der Digitaltauglichkeit Ihres
+            Vorhabens (als Word-Datei exportierbar).
+          </li>
+        </ul>
+      </div>
+      <noscript>
+        <div class="kern-alert kern-alert--warning" role="alert">
+          <div class="kern-alert__header">
+            <span
+              class="kern-icon kern-icon--warning"
+              aria-hidden="true"
+            ></span>
+            <h2 class="kern-title">JavaScript erforderlich</h2>
+          </div>
+          <div class="kern-alert__body">
+            <p class="kern-body">
+              Um die Dokumentation zu starten, muss JavaScript aktiviert sein.
+              Dadurch können Ihre Angaben lokal im Browser zwischengespeichert
+              werden.
+            </p>
+            <p>
+              <b>So geht es:</b> Suchen Sie in Ihren Browser-Einstellungen nach
+              JavaScript und erlauben Sie die Nutzung.
+            </p>
+            <p>
+              Alternativ können Sie die Dokumentation als Word-Vorlage
+              bearbeiten.
+            </p>
+          </div>
+        </div>
+      </noscript>
+
+      <WizardStartActions
+        wizardId="dokumentation"
+        href={dokumentationFlow.initialPath}
+        restartLabel="Neue Dokumentation starten"
+        showAutosaveHint
+        showPruefbereich
+      >
+        <Fragment slot="startLabel">Dokumentation starten</Fragment>
+        <Fragment slot="continueLabel">Dokumentation fortsetzen</Fragment>
+        <Fragment slot="modalBody">
+          <p>
+            Wenn Sie die Dokumentation neu starten, werden alle Daten, die Sie
+            bereits eingetragen haben, unwiderruflich <b>gelöscht</b>.
+          </p>
+          <WordDownloadButton
+            client:load
+            prinzipien={prinzipien}
+            label="Zwischenstand herunterladen (.docx)"
+            look="tertiary"
+          />
+        </Fragment>
+      </WizardStartActions>
+    </Hero>
+
+    <section>
+      <div class="bg-kern-layout-layer-surface space-y-16 rounded-sm px-16 py-32 md:px-64">
+        <h2>Alternativ: Word-Vorlage nutzen</h2>
+        <p class="max-w-688">
+          Nutzen Sie die Word-Vorlage, wenn Sie offline arbeiten oder die
+          Dokumentation gemeinsam im Referat ausfüllen möchten. Sie ist
+          inhaltlich identisch mit der Online-Version.
+        </p>
+        <WordDownloadButton
+          client:load
+          prinzipien={prinzipien}
+          label="Word-Vorlage herunterladen (.docx)"
+          look="secondary"
+          templateOnly
+        />
+      </div>
+    </section>
+
+    <section class="space-y-16">
+      <h2>Häufige Fragen</h2>
+      <div>
+        {faqItems.map((item) => (
+          <details class="kern-accordion">
+            <summary class="kern-accordion__header">
+              <span class="kern-title">{item.question}</span>
+            </summary>
+            <div class="kern-accordion__body space-y-16">
+              {(Array.isArray(item.answer) ? item.answer : [item.answer]).map(
+                (paragraph) => (
+                  <p class="kern-body">{paragraph}</p>
+                ),
+              )}
+            </div>
+          </details>
+        ))}
+        <details class="kern-accordion">
+          <summary class="kern-accordion__header">
+            <span class="kern-title">
+              Wie lange werden meine Eingaben gespeichert?
+            </span>
+          </summary>
+          <div class="kern-accordion__body">
+            <p class="kern-body">
+              Ihre eingegebenen Daten werden <b>unbegrenzt lange</b> in der
+              Sitzung gespeichert, bis
+            </p>
+            <ol class="kern-body list-[lower-alpha]">
+              <li>Sie eine neue Dokumentation starten oder</li>
+              <li>
+                Ihr SINA-Rechner die Browserdaten löscht (falls das bei Ihnen
+                voreingestellt ist)
+              </li>
+            </ol>
+            <p>
+              <b>Bitte beachten Sie:</b> Es ist jeweils nur die Bearbeitung
+              einer Dokumentation möglich. Sie können den Vorgang unterbrechen
+              und später fortsetzen. Der aktuelle Stand bleibt auch nach
+              Schließen des Fensters erhalten.
+            </p>
+          </div>
+        </details>
+      </div>
+    </section>
+    <SupportSection />
+  </main>
+</Layout>

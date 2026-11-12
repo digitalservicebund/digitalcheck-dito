@@ -1,18 +1,19 @@
 import "./mockDocx.ts"; // set up mocks first
 
 import type { Prinzip } from "@/content.config";
-import type { DocumentationData } from "@/pages/dokumentation/_react/documentationDataSchema";
 import { documentationDocument } from "@/resources/content/documentation-document";
-import { digitalDocumentation } from "@/resources/content/dokumentation";
+import {
+  principleAnswerOptions,
+  type DocumentationData,
+} from "@/service/wordDocumentationExport/documentationData.ts";
 import { PatchType } from "docx";
 import { describe, expect, it, vi } from "vitest";
 import { getTextFromTextRun } from "./testUtils.ts";
 import { buildPrinciplePatches } from "./wordDocumentation.ts";
 
 const { placeholderOptional } = documentationDocument;
-const { principlePages } = digitalDocumentation;
 const [POSITIVE_ANSWER, NEGATIVE_ANSWER, IRRELEVANT_ANSWER] =
-  principlePages.radioOptions;
+  principleAnswerOptions;
 
 const prinzips: Prinzip[] = [
   {
@@ -146,7 +147,7 @@ describe("wordDocumentationV2", () => {
 
       const p1answer = patches["PRINCIPLE_1_ANSWER"];
       expect(getTextFromTextRun(p1answer.children[0])).toBe(
-        principlePages.radioOptions.join(" | "),
+        principleAnswerOptions.join(" | "),
       );
 
       const p1reasoning = patches["PRINCIPLE_1_REASONING"];

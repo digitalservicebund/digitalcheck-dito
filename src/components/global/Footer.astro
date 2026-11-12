@@ -4,15 +4,15 @@ import {
   bundeslaender,
   dasIstNeu,
   datenschutz,
-  dokumentation,
+  assistent_dokumentation,
   home,
   impressum,
   interoperabel,
-  methoden,
+  assistent_erarbeitung,
   normenkontrollrat,
   prinzipien,
   sitemap,
-  vorpruefung,
+  assistent_vorpruefung,
 } from "@/config/routes";
 import { ZFL_BASE_URL } from "@/resources/constants";
 import { contact } from "@/resources/content/shared/contact";
@@ -25,9 +25,9 @@ const columns: { title: string; links: FooterLink[] }[] = [
     title: "Digitalcheck",
     links: [
       { text: "Übersicht", url: home.path },
-      { text: "Vorprüfung", url: vorpruefung.path },
-      { text: "Erarbeitung", url: methoden.path },
-      { text: "Dokumentation", url: dokumentation.path },
+      { text: "Vorprüfung", url: assistent_vorpruefung.path },
+      { text: "Erarbeitung", url: assistent_erarbeitung.path },
+      { text: "Dokumentation", url: assistent_dokumentation.path },
     ],
   },
   {

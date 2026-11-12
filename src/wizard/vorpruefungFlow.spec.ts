@@ -1,0 +1,116 @@
+import { preCheck } from "@/resources/content/vorpruefung";
+import { createFlowSession } from "form-graph-engine";
+import { vorpruefungFlow } from "./vorpruefungFlow";
+import { vorpruefungFields } from "./vorpruefungSchema";
+
+const questionPaths = preCheck.questions.map((question) => question.path);
+const allYes = Object.fromEntries(
+  preCheck.questions.map((question) => [question.id, "yes"]),
+);
+
+describe("vorpruefungFlow", () => {
+  it("matches the question order from the content, followed by the result page", () => {
+    const session = createFlowSession(vorpruefungFlow, allYes);
+
+    expect(session.path).toEqual([
+      ...questionPaths,
+      "/assistent/vorpruefung/ergebnis",
+    ]);
+    expect(session.isComplete).toBe(true);
+  });
+
+  it("makes the result page reachable once all questions are answered", () => {
+    const session = createFlowSession(vorpruefungFlow, allYes);
+
+    expect(session.isReachable("/assistent/vorpruefung/ergebnis")).toBe(true);
+  });
+
+  it.each(preCheck.questions.map((question) => question.id))(
+    "blocks the result page while %s is unanswered",
+    (questionId) => {
+      const { [questionId]: _, ...answers } = allYes;
+      const session = createFlowSession(vorpruefungFlow, answers);
+
+      expect(session.isReachable("/assistent/vorpruefung/ergebnis")).toBe(
+        false,
+      );
+      expect(session.isComplete).toBe(false);
+    },
+  );
+
+  it("leads from the last question to the result page with the new answer", () => {
+    const { "eu-bezug": _, ...answers } = allYes;
+    const session = createFlowSession(
+      vorpruefungFlow,
+      answers,
+      "/assistent/vorpruefung/eu-bezug",
+    );
+
+    expect(session.nextPath()).toBeUndefined();
+    expect(session.nextPath({ "eu-bezug": "no" })).toBe(
+      "/assistent/vorpruefung/ergebnis",
+    );
+  });
+
+  it("starts with the first question", () => {
+    const session = createFlowSession(vorpruefungFlow, {});
+
+    expect(session.initialPath).toBe("/assistent/vorpruefung/it-system");
+    expect(session.prevPath).toBeUndefined();
+  });
+
+  it("navigates to the next and previous question", () => {
+    const session = createFlowSession(
+      vorpruefungFlow,
+      { "it-system": "yes" },
+      "/assistent/vorpruefung/verpflichtungen-fuer-beteiligte",
+    );
+
+    expect(session.nextPath()).toBe("/assistent/vorpruefung/datenaustausch");
+    expect(session.prevPath).toBe("/assistent/vorpruefung/it-system");
+  });
+
+  it("points to the first unanswered question", () => {
+    const session = createFlowSession(vorpruefungFlow, {
+      "it-system": "no",
+      "verpflichtungen-fuer-beteiligte": "unsure",
+    });
+
+    expect(session.nextIncomplete()).toBe(
+      "/assistent/vorpruefung/datenaustausch",
+    );
+  });
+
+  it("only uses fields from vorpruefungFields, with their schemas", () => {
+    for (const path of questionPaths) {
+      const pageSchema = vorpruefungFlow.getSchema(path);
+      expect(pageSchema).toBeDefined();
+      for (const [name, fieldSchema] of Object.entries(pageSchema!.shape)) {
+        expect(fieldSchema).toBe(
+          vorpruefungFields[name as keyof typeof vorpruefungFields],
+        );
+      }
+    }
+  });
+
+  it("has a field for every question of the content", () => {
+    expect(Object.keys(vorpruefungFields)).toEqual(
+      preCheck.questions.map((question) => question.id),
+    );
+  });
+
+  it("only accepts the defined answer options", () => {
+    const session = createFlowSession(
+      vorpruefungFlow,
+      {},
+      "/assistent/vorpruefung/it-system",
+    );
+
+    expect(session.pageSchema.safeParse({ "it-system": "yes" }).success).toBe(
+      true,
+    );
+    expect(session.pageSchema.safeParse({ "it-system": "maybe" }).success).toBe(
+      false,
+    );
+  });
+});

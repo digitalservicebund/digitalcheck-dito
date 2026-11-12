@@ -1,0 +1,35 @@
+---
+import { LinkButton } from "@/components/Button";
+import Hero from "@/components/Hero.astro";
+import { assistent_erarbeitung_ablaufVerstehen } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+
+export const frontmatter = {
+  title: "Erarbeitung",
+  navOrder: 2,
+  navEyebrow: "Schritt 2",
+};
+---
+
+<Layout title={frontmatter.title} noFooter>
+  <!-- h-full stretches the Hero to the sidebar's height, as in the design -->
+  <main class="breakout-grid h-full">
+    <Hero class="content-start space-y-24" largeText={false}>
+      <h1>Erarbeitung</h1>
+      <p>
+        Dieser Schritt führt Sie durch die wichtigsten Phasen bei der
+        Erarbeitung digitaltauglicher Regelungen: von der Visualisierung der
+        Abläufe über die Einbindung der Zielgruppen und die Anwendung der fünf
+        Prinzipien bis hin zur Prüfung der EU-Interoperabilität.
+      </p>
+      <div>
+        <LinkButton
+          href={assistent_erarbeitung_ablaufVerstehen.path}
+          iconRight="kern-icon--arrow-forward"
+        >
+          Erarbeitung starten
+        </LinkButton>
+      </div>
+    </Hero>
+  </main>
+</Layout>

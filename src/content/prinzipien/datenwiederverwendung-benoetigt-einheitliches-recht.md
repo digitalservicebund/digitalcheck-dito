@@ -8,7 +8,7 @@
   "URLBezeichnung": "datenwiederverwendung-benoetigt-einheitliches-recht",
   "Kurzbeschreibung": "Das Once-Only-Prinzip spart Zeit und Kosten, indem Daten nur einmal angegeben und dann auf Basis harmonisierter Rechtsbegriffe, Datenschutz und technischer Standards wiederverwendet werden.",
   "Hilfetext": "Normadressatinnen und -adressaten sowie umsetzende Behörden sparen Kosten und Zeit, wenn das [Once-Only-Prinzip](https://www.digitale-verwaltung.de/Webs/DV/DE/registermodernisierung/registermodernisierung-node.html) konsequent angewendet wird – also wenn Daten nur einmal angegeben und dann wiederverwendet werden. Die Grundlage dafür sind harmonisierte Rechtsbegriffe, ein datenschutzkonformer Austausch und die Berücksichtigung etablierter technischer Standards.",
-  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung ein z. B.: „Datenstandard definiert (siehe § 3a), rechtliche Voraussetzung zum Datenaustausch geschaffen (siehe § 3b)“.",
+  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung ein, z. B. „Datenstandard definiert (siehe § 3a), rechtliche Voraussetzung zum Datenaustausch geschaffen (siehe § 3b)“.",
   "Aspekte":
     [
       {

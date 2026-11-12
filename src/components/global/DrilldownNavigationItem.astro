@@ -36,7 +36,14 @@ function itemStyle(active = false, hasChildren = false) {
       aria-controls={panelElementId}
       x-bind:aria-expanded={`currentPanel === "${item.panelId}"`}
     >
-      <span>{item.label}</span>
+      <span>
+        {item.eyebrow && (
+          <span class="block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+            {item.eyebrow}
+          </span>
+        )}
+        {item.label}
+      </span>
       <IconChevronRight class="size-20" aria-hidden="true" />
     </button>
   ) : (
@@ -45,7 +52,14 @@ function itemStyle(active = false, hasChildren = false) {
       class={itemStyle(isCurrent, false)}
       aria-current={isCurrent ? "page" : undefined}
     >
-      <span>{item.label}</span>
+      <span>
+        {item.eyebrow && (
+          <span class="block text-(length:--kern-typography-font-size-small-static) font-normal italic">
+            {item.eyebrow}
+          </span>
+        )}
+        {item.label}
+      </span>
     </a>
   )}
 </li>

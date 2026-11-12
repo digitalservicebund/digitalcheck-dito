@@ -1,5 +1,3 @@
-export const PRE_CHECK_START_BUTTON_ID = "preCheck-start-button";
-
 export const PRINCIPLE_COLORS = {
   1: { background: "bg-principle-1", border: "border-principle-1" },
   2: { background: "bg-principle-2", border: "border-principle-2" },

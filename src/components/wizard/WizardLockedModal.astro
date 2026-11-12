@@ -1,0 +1,66 @@
+---
+import Modal from "@/components/Modal.astro";
+import { type WizardId, wizardFlows } from "@/wizard/session";
+
+// Opened instead of the final page of a wizard (e.g. the Ergebnis) while it
+// isn't reachable, i.e. until all questions are answered.
+// Usage: <button popovertarget={id}>…</button>
+
+interface Props {
+  /** Unique per page, as the button bar and the sidebar each render one */
+  id: string;
+  wizardId: WizardId;
+}
+
+const { id, wizardId } = Astro.props;
+
+const content: Record<
+  WizardId,
+  { heading: string; body: string; button: string }
+> = {
+  vorpruefung: {
+    heading: "Vorprüfung unvollständig",
+    body: "Beantworten Sie bitte alle Fragen, um die Vorprüfung abzuschließen.",
+    button: "Zurück zur Vorprüfung",
+  },
+  dokumentation: {
+    heading: "Dokumentation unvollständig",
+    body: "Bearbeiten Sie bitte alle erforderlichen Schritte, um die Dokumentation abzuschließen.",
+    button: "Zurück zur Dokumentation",
+  },
+};
+const { heading, body, button } = content[wizardId];
+---
+
+<Modal id={id} contentClass="max-w-600 max-h-screen" hideCloseButton>
+  <h2 slot="heading" class="kern-title kern-title--large mt-8">
+    {heading}
+  </h2>
+  <p slot="body" class="kern-body kern-body--large">
+    {body}
+  </p>
+  {/* The script below links the first unanswered question */}
+  <a
+    class="kern-btn kern-btn--primary link-unstyled"
+    href={wizardFlows[wizardId].initialPath}
+    data-wizard-resume-link={wizardId}
+    slot="buttonLeft"
+  >
+    <span class="kern-label">{button}</span>
+  </a>
+</Modal>
+
+<script>
+  import type { WizardId } from "@/wizard/session";
+  import { wizardStores } from "@/wizard/stores";
+
+  document
+    .querySelectorAll<HTMLAnchorElement>("a[data-wizard-resume-link]")
+    .forEach((link) => {
+      const wizardId = link.dataset.wizardResumeLink as WizardId;
+      // Also updates when the answers change later, e.g. in another tab
+      wizardStores[wizardId].$resumePath.subscribe((resumePath) => {
+        link.href = resumePath;
+      });
+    });
+</script>

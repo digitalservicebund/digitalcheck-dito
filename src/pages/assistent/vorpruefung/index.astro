@@ -1,0 +1,177 @@
+---
+import Hero from "@/components/Hero.astro";
+import WizardStartActions from "@/components/wizard/WizardStartActions.astro";
+import { interoperabel } from "@/config/routes";
+import Layout from "@/layouts/Layout.astro";
+import { vorpruefungFlow } from "@/wizard/vorpruefungFlow";
+import SupportSection from "../_SupportSection.astro";
+
+export const frontmatter = {
+  title: "Vorprüfung",
+  navOrder: 1,
+  navEyebrow: "Schritt 1",
+};
+
+// Paragraphs with a label start with it in bold
+const faqItems: {
+  question: string;
+  answer: string | { label?: string; text: string }[];
+}[] = [
+  {
+    question: "Muss ich die Vorprüfung für jedes Vorhaben machen?",
+    answer:
+      "Es wird empfohlen, jedes Vorhaben vorab zu prüfen. Wenn Ihr Vorhaben mehrere Regelungen umfasst, reicht eine gemeinsame Vorprüfung aus.",
+  },
+  {
+    question:
+      "Ich arbeite in einer Landesverwaltung. Gilt die Vorprüfung auch für mich?",
+    answer: "Ja, die Vorprüfung gilt auch für Länder.",
+  },
+  {
+    question: "Was mache ich mit dem Ergebnis?",
+    answer: [
+      {
+        label: "Auf Bundesebene",
+        text: ": Sie können das Ergebnis direkt per E-Mail an den Normenkontrollrat senden. Dafür stellen wir Ihnen eine Vorlage bereit. Der NKR kann Sie dann frühzeitig bei Ihrem Regelungsvorhaben unterstützen.",
+      },
+      {
+        label: "Auf Landesebene",
+        text: ": Sie können das Ergebnis herunterladen und verakten.",
+      },
+    ],
+  },
+  {
+    question: "Kann ich meine Angaben später ändern?",
+    answer:
+      "Ja, Sie können Ihre Angaben in der Vorprüfung anpassen oder eine neue Vorprüfung starten.",
+  },
+  {
+    question: "Werden meine Angaben gespeichert?",
+    answer:
+      "Ihre Angaben werden automatisch in Ihrem Browser gespeichert. Sie bleiben so lange erhalten, bis Sie eine neue Vorprüfung starten oder die Daten durch die Einstellungen Ihres SINA-Rechners gelöscht werden.",
+  },
+];
+---
+
+<Layout title={frontmatter.title} noFooter>
+  <main class="breakout-grid">
+    <Hero class="space-y-24" largeText={false}>
+      <h1>Vorprüfung</h1>
+      <p>
+        Finden Sie in 6 Fragen heraus, ob Sie in Ihrem Regelungsvorhaben Aspekte
+        der digitalen Umsetzung und Anforderungen an EU-Interoperabilität
+        beachten müssen.
+      </p>
+      <div class="space-y-8">
+        <p>
+          <b>Das brauchen Sie:</b>
+        </p>
+        <ul>
+          <li>
+            Eine grobe Vorstellung Ihres Vorhabens. Ein fertiger Regelungstext
+            ist nicht erforderlich.
+          </li>
+        </ul>
+      </div>
+      <div class="space-y-8">
+        <p>
+          <b>Ergebnis:</b>
+        </p>
+        <ul>
+          <li>
+            Eine Einschätzung zum Digital- und Interoperabilitätsbezug für die
+            Prüfstelle oder zur Veraktung.
+          </li>
+        </ul>
+      </div>
+      <noscript>
+        <div class="kern-alert kern-alert--warning" role="alert">
+          <div class="kern-alert__header">
+            <span
+              class="kern-icon kern-icon--warning"
+              aria-hidden="true"
+            ></span>
+            <h2 class="kern-title">JavaScript erforderlich</h2>
+          </div>
+          <div class="kern-alert__body">
+            <p class="kern-body">
+              Um die Vorprüfung zu starten, muss JavaScript aktiviert sein.
+              Dadurch können Ihre Angaben lokal im Browser zwischengespeichert
+              werden.
+            </p>
+            <p>
+              <b>So geht es:</b> Suchen Sie in Ihren Browser-Einstellungen nach
+              JavaScript und erlauben Sie die Nutzung.
+            </p>
+          </div>
+        </div>
+      </noscript>
+
+      <WizardStartActions
+        wizardId="vorpruefung"
+        href={vorpruefungFlow.initialPath}
+        restartLabel="Neue Vorprüfung starten"
+        showAutosaveHint
+        showPruefbereich
+      >
+        <Fragment slot="startLabel">Vorprüfung starten</Fragment>
+        <Fragment slot="continueLabel">Vorprüfung fortsetzen</Fragment>
+        <Fragment slot="modalBody">
+          Wenn Sie die Vorprüfung neu starten, werden alle bisherigen Angaben
+          unwiderruflich gelöscht.
+        </Fragment>
+      </WizardStartActions>
+    </Hero>
+
+    <section class="space-y-16">
+      <h2>Warum ist die Vorprüfung relevant für mein Vorhaben?</h2>
+      <ul>
+        <li>
+          Sie erkennen, ob ein Digitalbezug vorliegt, und können die
+          Digitaltauglichkeit Ihrer Regelung bereits beim Erarbeiten
+          sicherstellen.
+        </li>
+        <li>
+          Sie identifizieren mögliche EU-Anforderungen an{" "}
+          <a href={interoperabel.path}>Interoperabilität</a> frühzeitig.
+        </li>
+        <li>
+          Sie berücksichtigen die Vorgaben aus{" "}
+          <a href="https://www.gesetze-im-internet.de/nkrg/__4.html">
+            § 4 Abs. 3 NKRG
+          </a>{" "}
+          und der{" "}
+          <a href="https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32024R0903">
+            EU-Verordnung 2024/903
+          </a>{" "}
+          in Ihrem Vorhaben.
+        </li>
+      </ul>
+    </section>
+
+    <section class="space-y-16">
+      <h2>Häufige Fragen</h2>
+      <div>
+        {faqItems.map((item) => (
+          <details class="kern-accordion">
+            <summary class="kern-accordion__header">
+              <span class="kern-title">{item.question}</span>
+            </summary>
+            <div class="kern-accordion__body space-y-16">
+              {(Array.isArray(item.answer)
+                ? item.answer
+                : [{ text: item.answer }]
+              ).map(({ label, text }) => (
+                <p class="kern-body">
+                  {label && <b>{label}</b>}
+                  {text}
+                </p>
+              ))}
+            </div>
+          </details>
+        ))}
+      </div>
+    </section>
+    <SupportSection />
+  </main>
+</Layout>

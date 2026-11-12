@@ -5,15 +5,25 @@ interface Props extends HTMLAttributes<"ol"> {
   look?: "dc" | "zfl";
   /** `changelog`: room for year badges, more spacing between and indentation of the items */
   variant?: "default" | "changelog";
+  /** Hides markers and line below the `sm` breakpoint and drops the indentation of the items */
+  hideLineOnMobile?: boolean;
 }
 
 const {
   look = "dc",
   variant = "default",
+  hideLineOnMobile = false,
   class: className,
   ...attrs
 } = Astro.props;
 ---
+
+{/* Optional preline: shown above the list, indented like the items, without marker or line */}
+{Astro.slots.has("preline") && (
+  <div class:list={["timeline-preline", `timeline-preline--${variant}`]}>
+    <slot name="preline" />
+  </div>
+)}
 
 {/* Items: plain <li> (bullet), li.timeline-plain-item (no marker), li.timeline-year-item (.timeline-year-badge centered on the line) */}
 <ol
@@ -21,6 +31,7 @@ const {
     "timeline list-unstyled",
     `timeline--${look}`,
     `timeline--${variant}`,
+    { "timeline--hide-line-mobile": hideLineOnMobile },
     className,
   ]}
   {...attrs}
@@ -41,6 +52,13 @@ const {
     }
     .timeline--zfl {
       --timeline-color: var(--color-cosmic-blue-base);
+    }
+
+    .timeline-preline {
+      @apply pb-24 pl-40;
+    }
+    .timeline-preline--changelog {
+      @apply ml-26 pl-48;
     }
 
     .timeline {
@@ -87,6 +105,16 @@ const {
       }
       & > li.timeline-year-item > .timeline-year-badge {
         @apply relative left-8 -translate-x-1/2;
+      }
+
+      &.timeline--hide-line-mobile > li {
+        @apply max-sm:pl-0;
+      }
+      &.timeline--hide-line-mobile > li::before,
+      &.timeline--hide-line-mobile > li::after {
+        @variant max-sm {
+          content: none;
+        }
       }
     }
   }

@@ -8,7 +8,7 @@
   "URLBezeichnung": "etablierte-technologien-ermoeglichen-effiziente-umsetzung",
   "Kurzbeschreibung": "Digitale Angebote lassen sich schneller, günstiger und sicherer bereitstellen, wenn sie auf bestehenden Technologien, offenen Schnittstellen und Open Source aufbauen – was zugleich die Interoperabilität fördert.",
   "Hilfetext": "Digitale Angebote können schneller bereitgestellt sowie günstiger entwickelt und betrieben werden, wenn sie auf bestehenden Technologien aufbauen. Offene, standardisierte Schnittstellen und Open Source erhöhen die [Sicherheit der Angebote](#datenschutz-und-informationssicherheit-schaffen-vertrauen) und fördern die Interoperabilität.",
-  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung ein z. B.: „Datenstandard definiert (siehe § 3a), rechtliche Voraussetzung zum Datenaustausch geschaffen (siehe § 3b)“.",
+  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung ein z. B. „Datenstandard definiert (siehe § 3a), rechtliche Voraussetzung zum Datenaustausch geschaffen (siehe § 3b)“.",
   "Aspekte":
     [
       {

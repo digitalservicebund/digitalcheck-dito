@@ -1,0 +1,41 @@
+---
+import PruefbereichBreadcrumb from "@/components/wizard/PruefbereichBreadcrumb.astro";
+import WizardButtonBar from "@/components/wizard/WizardButtonBar.astro";
+import { assistent_erarbeitung } from "@/config/routes";
+import WizardLayout from "@/layouts/WizardLayout.astro";
+import Ergebnis from "./_Ergebnis";
+
+export const frontmatter = {
+  title: "Ergebnis",
+  sitemap: false,
+};
+---
+
+<WizardLayout title={`Vorprüfung: ${frontmatter.title}`} isWide>
+  {/* The design starts with the result box, which differs per result */}
+  <h1 class="sr-only">{frontmatter.title}</h1>
+  {/* Depends on the stored answers and Prüfbereich */}
+  <Ergebnis client:only="react" />
+  <PruefbereichBreadcrumb slot="context" wizardId="vorpruefung" canEdit />
+  <WizardButtonBar
+    slot="button-bar"
+    wizardId="vorpruefung"
+    finalNext={{
+      href: assistent_erarbeitung.path,
+      label: "Weiter zur Erarbeitung",
+    }}
+  />
+</WizardLayout>
+
+<script>
+  import { assistent_vorpruefung_ergebnis } from "@/config/routes";
+  import { wizardStores } from "@/wizard/stores";
+
+  // Only reachable once all questions are answered, e.g. not via a bookmark
+  const { $isReachable, $resumePath } = wizardStores.vorpruefung;
+  $isReachable.subscribe((isReachable) => {
+    if (!isReachable(assistent_vorpruefung_ergebnis.path)) {
+      globalThis.location.replace($resumePath.get());
+    }
+  });
+</script>

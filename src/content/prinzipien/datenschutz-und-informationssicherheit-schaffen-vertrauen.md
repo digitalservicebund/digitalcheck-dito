@@ -8,7 +8,7 @@
   "URLBezeichnung": "datenschutz-und-informationssicherheit-schaffen-vertrauen",
   "Kurzbeschreibung": "Datenschutz nach DSGVO und Informationssicherheit schützen Menschen vor unbefugtem Zugriff, stärken das Vertrauen in den Staat und werden durch konsequente Datensparsamkeit erleichtert, die zugleich den Erfüllungsaufwand reduziert.",
   "Hilfetext": "Alle Menschen haben ein Recht darauf, dass ihre Daten vor unbefugten Zugriffen geschützt werden. Der Schutz personenbezogener Daten ist in der [DSGVO](https://eur-lex.europa.eu/eli/reg/2016/679/oj?locale=de) geregelt. Informationssicherheit umfasst alle Daten und wird je nach Bereich spezifiziert.\n\nEine datenschutzkonforme Regelung erhebt nur das Minimum an Daten. Datensparsamkeit ist einfach umzusetzen und verringert den Erfüllungsaufwand. Wenn weniger Daten vorliegen, müssen auch weniger Informationen geschützt werden.\n\nWenn Informationen den ihnen gebührenden Schutz erhalten, schafft das Vertrauen in den Staat. Die Gefahr von Missbrauch und negativen wirtschaftlichen oder sicherheitsrelevanten Konsequenzen wird verringert.",
-  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung stichpunktartig ein, z. B.: „Bedingungen für die Verwendung von Kontaktdaten (siehe § 1a Abs. 2)“.",
+  "Erklaerungshilfe": "Tragen Sie Ihre Erläuterung stichpunktartig ein, z. B. „Bedingungen für die Verwendung von Kontaktdaten (siehe § 1a Abs. 2)“.",
   "Aspekte":
     [
       {

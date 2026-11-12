@@ -11,6 +11,7 @@ import {
 export type DrilldownEntry = {
   path: string;
   label: string;
+  eyebrow?: string;
   isVisible: boolean;
   panelId: string | null;
 };
@@ -31,6 +32,8 @@ export type DrilldownNavigationData = {
 
 const MOBILE_ROOT_PANEL_ID = "root";
 const MOBILE_ROOT_PARENT = { id: MOBILE_ROOT_PANEL_ID, label: "Hauptmenü" };
+// Only the header routes and their direct children are shown, deeper routes are not drilled into
+const MAX_PANEL_DEPTH = 1;
 
 export function getMobileMenuNavigation(
   currentPath: string,
@@ -41,7 +44,7 @@ export function getMobileMenuNavigation(
     depth: 0,
     parent: null,
     sectionRoute: null,
-    items: headerRoutes.map(toDrilldownEntry),
+    items: headerRoutes.map((route) => toDrilldownEntry(route, 1)),
   };
 
   const childPanels = headerRoutes.flatMap((route) =>
@@ -62,6 +65,7 @@ function collectPanels(
   depth: number,
   syntheticParent: DrilldownPanel["parent"] = null,
 ): DrilldownPanel[] {
+  if (depth > MAX_PANEL_DEPTH) return [];
   const childRoutes = getVisibleChildren(route);
   if (childRoutes.length === 0) return [];
 
@@ -72,10 +76,10 @@ function collectPanels(
       ? { id: route.parent.key, label: getRouteLabel(route.parent) }
       : syntheticParent,
     sectionRoute: {
-      ...toDrilldownEntry(route),
+      ...toDrilldownEntry(route, depth),
       panelId: null,
     },
-    items: childRoutes.map(toDrilldownEntry),
+    items: childRoutes.map((child) => toDrilldownEntry(child, depth + 1)),
   };
 
   return [
@@ -90,16 +94,24 @@ function findActivePanel(
 ): DrilldownPanel | null {
   const currentRoute = getRouteByPath(currentPath);
   if (!currentRoute) return null;
-  const chain = getRouteChain(currentRoute);
-  const activePanelRoute = chain.toReversed().find(hasVisibleChildren);
-  return activePanelRoute
-    ? (panels.find((p) => p.id === activePanelRoute.key) ?? null)
-    : null;
+  const chain = getRouteChain(currentRoute).toReversed();
+  for (const route of chain) {
+    const panel = panels.find((p) => p.id === route.key);
+    if (panel) return panel;
+  }
+  return null;
 }
 
-const toDrilldownEntry = (route: Route): DrilldownEntry => ({
+const toDrilldownEntry = (
+  route: Route,
+  panelDepth: number,
+): DrilldownEntry => ({
   path: route.path,
   label: getRouteLabel(route),
+  eyebrow: route.navEyebrow,
   isVisible: isRouteVisible(route),
-  panelId: hasVisibleChildren(route) ? route.key : null,
+  panelId:
+    panelDepth <= MAX_PANEL_DEPTH && hasVisibleChildren(route)
+      ? route.key
+      : null,
 });

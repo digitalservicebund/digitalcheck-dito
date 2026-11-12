@@ -1,127 +1,113 @@
 import { documentationDocument } from "@/resources/content/documentation-document";
-import { digitalDocumentation } from "@/resources/content/dokumentation";
-import { test } from "@playwright/test";
+import { type Page, test } from "@playwright/test";
 
 import {
-  dokumentation,
-  dokumentation_absenden,
-  dokumentation_beteiligungsformate,
-  dokumentation_hinweise,
-  dokumentation_regelungsvorhabenTitel,
-  dokumentation_zusammenfassung,
+  assistent_dokumentation,
+  assistent_dokumentation_abschliessen,
+  assistent_dokumentation_beteiligungsformate,
+  assistent_dokumentation_euInteroperabilitaet,
+  assistent_dokumentation_regelungsvorhaben,
+  assistent_dokumentation_zusammenfassung,
 } from "@/config/routes";
 import {
+  clickNext,
   downloadDocumentAndGetText,
   expect,
-  expectAndSkipNotice,
   expectDocumentToNotContainTags,
-  skipUntil,
   waitForHydration,
 } from "./helpers";
 
 const testData = {
-  title: "E2E V2 Titel des Regelungsvorhabens",
+  title: "E2E Titel des Regelungsvorhabens",
   organization: "E2E Organisation",
-  participationFormats: "E2E V2 Formate Input",
-  participationResults: "E2E V2 Ergebnisse Input",
-  positiveReasoning: "E2E V2 Erklärung positiv",
-  negativeReasoning: "E2E V2 Erklärung negativ",
-  irrelevantReasoning: "E2E V2 Erklärung nicht relevant",
-  lastPrincipleReasoning: "E2E V2 Erklärung letztes Prinzip",
+  participationFormats: "E2E Formate Input",
+  participationResults: "E2E Ergebnisse Input",
+  positiveReasoning: "E2E Erklärung positiv",
+  negativeReasoning: "E2E Erklärung negativ",
+  irrelevantReasoning: "E2E Erklärung nicht relevant",
+  skippedPrincipleReasoning: "E2E Erklärung nachgetragen",
+  lastPrincipleReasoning: "E2E Erklärung letztes Prinzip",
 };
 
-test("documentation V2 flow happy path", async ({ page }, testInfo) => {
+const fileName = "Dokumentation_der_Digitaltauglichkeit.docx";
+
+async function expectPrinzipPage(page: Page, order: number) {
+  await expect(
+    page.getByText(`Prinzip ${order}`, { exact: true }),
+  ).toBeVisible();
+  await waitForHydration(page);
+}
+
+async function selectSchwerpunkte(page: Page, count: number) {
+  const group = page.getByRole("group", { name: "Schwerpunkte auswählen" });
+  for (let i = 0; i < count; i++) {
+    // the checkbox is visually hidden in its label, styled as a pill
+    await group.locator("label").nth(i).click();
+    await expect(group.getByRole("checkbox").nth(i)).toBeChecked();
+  }
+}
+
+async function gotoStartPage(page: Page) {
+  await page.goto(assistent_dokumentation.path);
+  await waitForHydration(page);
+}
+
+async function startDocumentation(page: Page) {
+  await gotoStartPage(page);
+  await page.getByRole("link", { name: "Dokumentation starten" }).click();
+  await page.waitForURL(assistent_dokumentation_regelungsvorhaben.path);
+  await waitForHydration(page);
+}
+
+test("old documentation landing page redirects to the new one", async ({
+  page,
+}) => {
+  await page.goto("/dokumentation");
+  await expect(page).toHaveURL(assistent_dokumentation.path);
+});
+
+test("documentation flow happy path", async ({ page }, testInfo) => {
   test.setTimeout(60_000);
 
   await test.step("start documentation flow from landing page", async () => {
-    await page.goto(dokumentation.path);
-    await expect(page).toHaveURL(dokumentation.path);
-    await waitForHydration(page);
-
-    await page.getByRole("link", { name: "Dokumentation starten" }).click();
+    await startDocumentation(page);
   });
 
-  await test.step("see the notice, confirm, and continue", async () => {
-    await expectAndSkipNotice(page);
-  });
-
-  await test.step("fill title page and navigate to participation", async () => {
-    await expect(page).toHaveURL(dokumentation_regelungsvorhabenTitel.path);
-    await waitForHydration(page);
-    await page
-      .getByLabel(digitalDocumentation.info.inputTitle.label)
-      .fill(testData.title);
+  await test.step("fill Regelungsvorhaben and navigate to Beteiligungsformate", async () => {
+    await page.getByLabel("Titel des Regelungsvorhabens").fill(testData.title);
     await page
       .getByLabel("Ministerium / Organisation")
       .fill(testData.organization);
-    await page.getByRole("button", { name: "Weiter" }).click();
-
-    await expect(page).toHaveURL(dokumentation_beteiligungsformate.path);
+    await clickNext(page);
+    await page.waitForURL(assistent_dokumentation_beteiligungsformate.path);
+    await waitForHydration(page);
   });
 
-  await test.step("fill participation page and navigate to first principle", async () => {
-    await waitForHydration(page);
-    await page.getByTestId("schritte").fill(testData.participationFormats);
-    await page.getByTestId("erkenntnisse").fill(testData.participationResults);
-    await page.getByRole("button", { name: "Weiter" }).click();
-
-    // Should be on the first principle page
-    await page
-      .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
-      .waitFor();
-    expect(page.url()).not.toContain(dokumentation_beteiligungsformate.path);
+  await test.step("fill Beteiligungsformate and navigate to first Prinzip", async () => {
+    await page.getByLabel("Erklärung").fill(testData.participationFormats);
+    await page.getByLabel("Erkenntnisse").fill(testData.participationResults);
+    await clickNext(page);
+    await expectPrinzipPage(page, 1);
   });
 
-  await test.step("positive principle answer page — select answer only", async () => {
-    await waitForHydration(page);
-    // V2: answer page only shows radio buttons, no aspects or reasoning
-    await page.getByLabel("Ja, gänzlich oder teilweise").check();
-
-    // Verify V2 simplification: no aspect-related inputs on answer page
+  await test.step("positive Prinzip — select Schwerpunkte and fill reasoning", async () => {
+    // Schwerpunkte and reasoning are only shown once answered
     await expect(page.getByText("Schwerpunkte auswählen")).toBeHidden();
     await expect(page.getByLabel("Erklärung")).toBeHidden();
 
-    await page.getByRole("button", { name: "Weiter" }).click();
-  });
-
-  await test.step("positive principle erläuterung page — select aspects and fill reasoning", async () => {
-    // Should be on the erlaeuterung sub-page
-    await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
-    await waitForHydration(page);
-
-    // Verify confirmation text for positive answer
-    await expect(
-      page.getByText(
-        "Sie haben angegeben, dass das Prinzip auf Ihr Vorhaben zutrifft.",
-      ),
-    ).toBeVisible();
-
-    // Verify "Angaben ändern" link
-    await expect(
-      page.getByRole("link", { name: "Angaben ändern" }),
-    ).toBeVisible();
-
-    // Verify aspect pills are visible
-    await expect(page.getByText("Schwerpunkte auswählen")).toBeVisible();
-
-    // Toggle some aspect pills (buttons with aria-pressed)
-    const aspectButtons = page.locator("button[aria-pressed]");
-    const firstAspect = aspectButtons.first();
-    await firstAspect.click();
-    await expect(firstAspect).toHaveAttribute("aria-pressed", "true");
-
-    // Fill reasoning textarea
+    await page.getByLabel("Ja, gänzlich oder teilweise").check();
+    await selectSchwerpunkte(page, 1);
     await page.getByLabel("Erklärung").fill(testData.positiveReasoning);
   });
 
-  await test.step("download draft documentation from erläuterung page", async () => {
+  await test.step("download draft documentation", async () => {
     const docText = await downloadDocumentAndGetText(
       page,
-      page.getByRole("button", { name: "Zwischenstand herunterladen (.docx)" }),
-      testInfo.outputPath("documentation-v2-draft.docx"),
-      "Dokumentation_der_Digitaltauglichkeit.docx",
+      page.getByRole("button", { name: "Zwischenstand herunterladen" }),
+      testInfo.outputPath("documentation-draft.docx"),
+      fileName,
     );
-    const expectedStrings = [
+    expect(docText).toHaveStringsOrdered([
       testData.title,
       testData.organization,
       testData.participationFormats,
@@ -129,138 +115,98 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       "Digitale Angebote",
       "Ja, gänzlich oder teilweise",
       testData.positiveReasoning,
-    ];
-    expect(docText).toHaveStringsOrdered(expectedStrings);
+    ]);
     expectDocumentToNotContainTags(docText);
 
-    await page.getByRole("button", { name: "Weiter" }).click();
+    await clickNext(page);
   });
 
-  await test.step("negative principle — answer and erläuterung", async () => {
-    // Wait for next principle answer page
-    await page
-      .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
-      .waitFor();
-    await waitForHydration(page);
-
+  await test.step("negative Prinzip — answer and reasoning without Schwerpunkte", async () => {
+    await expectPrinzipPage(page, 2);
     await page.getByRole("radio", { name: "Nein" }).check();
-    // Wait for navigation context to update after answer is saved
-    await page.getByRole("button", { name: "Weiter" }).click();
-    await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
-    await waitForHydration(page);
-
-    // Verify negative confirmation text
-    await expect(
-      page.getByText(
-        "Sie haben angegeben, dass das Prinzip nicht auf Ihr Vorhaben zutrifft.",
-      ),
-    ).toBeVisible();
-
-    // No aspect pills for negative answer
     await expect(page.getByText("Schwerpunkte auswählen")).toBeHidden();
-
-    // Fill reasoning
     await page.getByLabel("Erklärung").fill(testData.negativeReasoning);
-    await page.getByRole("button", { name: "Weiter" }).click();
+    await clickNext(page);
   });
 
-  await test.step("irrelevant principle — answer and erläuterung", async () => {
-    await page
-      .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
-      .waitFor();
-    await waitForHydration(page);
-
+  await test.step("irrelevant Prinzip — answer and reasoning without Schwerpunkte", async () => {
+    await expectPrinzipPage(page, 3);
     await page.getByLabel("Nicht relevant").check();
-    await page.getByRole("button", { name: "Weiter" }).click();
-    await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
-    await waitForHydration(page);
-
-    // Verify irrelevant confirmation text
-    await expect(
-      page.getByText(
-        "Sie haben angegeben, dass das Prinzip nicht relevant für Ihr Vorhaben ist.",
-      ),
-    ).toBeVisible();
-
-    // No aspect pills for irrelevant answer
     await expect(page.getByText("Schwerpunkte auswählen")).toBeHidden();
-
-    // Fill reasoning
     await page.getByLabel("Erklärung").fill(testData.irrelevantReasoning);
-    await page.getByRole("button", { name: "Weiter" }).click();
+    await clickNext(page);
   });
 
-  await test.step("skip principle without answering", async () => {
-    // V2 uses warningInsteadOfError, so Weiter navigates even without answer
-    await page
-      .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
-      .waitFor();
-    await waitForHydration(page);
-
-    await page.getByRole("button", { name: "Weiter" }).click();
+  await test.step("skip Prinzip without answering", async () => {
+    await expectPrinzipPage(page, 4);
+    await clickNext(page);
   });
 
-  await test.step("last principle — answer and erläuterung with aspects", async () => {
-    await page
-      .getByRole("heading", { level: 2, name: /Schafft das Regelungsvorhaben/ })
-      .waitFor();
-    await waitForHydration(page);
-
+  await test.step("last Prinzip — answer with several Schwerpunkte", async () => {
+    await expectPrinzipPage(page, 5);
     await page
       .getByRole("radio", { name: "Ja, gänzlich oder teilweise" })
       .check();
-    await page.getByRole("button", { name: "Weiter" }).click();
-    await page.waitForURL(/\/erlaeuterung$/, { timeout: 5000 });
-    await waitForHydration(page);
-
-    // Select multiple aspect pills
-    const aspectButtons = page.locator("button[aria-pressed]");
-    const count = await aspectButtons.count();
-    for (let i = 0; i < Math.min(count, 2); i++) {
-      await aspectButtons.nth(i).click();
-    }
-
-    // Fill reasoning
+    await selectSchwerpunkte(page, 2);
     await page.getByLabel("Erklärung").fill(testData.lastPrincipleReasoning);
-    await page.getByRole("button", { name: "Weiter" }).click();
-    await page.waitForURL((url) => !url.pathname.endsWith("/erlaeuterung"));
+    await clickNext(page);
   });
 
-  await test.step("navigate to summary", async () => {
-    await skipUntil(page, dokumentation_zusammenfassung.path, {
-      name: "Zusammenfassung",
-    });
-    await expect(page).toHaveURL(dokumentation_zusammenfassung.path);
+  await test.step("answer no EU-Bezug and navigate to Zusammenfassung", async () => {
+    await page.waitForURL(assistent_dokumentation_euInteroperabilitaet.path);
+    await waitForHydration(page);
+    await page
+      .getByRole("radio", { name: "Nein, es ist kein Bezug vorhanden." })
+      .check();
+    await clickNext(page);
+    await page.waitForURL(assistent_dokumentation_zusammenfassung.path);
+    await waitForHydration(page);
   });
 
-  await test.step("summary page shows entered data and navigate to absenden", async () => {
+  await test.step("Zusammenfassung shows entered data and stays locked while incomplete", async () => {
     const main = page.getByRole("main");
     await expect(main).toContainText(testData.title);
     await expect(main).toContainText(testData.positiveReasoning);
-    await expect(main).toContainText(testData.lastPrincipleReasoning);
     await expect(main).toContainText(testData.negativeReasoning);
     await expect(main).toContainText(testData.irrelevantReasoning);
-    // Skipped principle (no answer) still shows the "missing" warning
+    await expect(main).toContainText(testData.lastPrincipleReasoning);
+    // The skipped Prinzip is still missing
     await expect(main).toContainText(
       "Sie haben diesen Punkt noch nicht bearbeitet.",
     );
 
-    const weiterButton = page.getByRole("link", { name: "Weiter" });
-    await expect(weiterButton).toBeVisible({ timeout: 10000 });
-    await weiterButton.click();
-    await expect(page).toHaveURL(dokumentation_absenden.path);
+    // "Weiter" opens a modal while the Dokumentation is incomplete
+    await main.getByRole("button", { name: "Weiter", exact: true }).click();
+    const modal = page.getByRole("dialog");
+    await expect(modal).toContainText("Dokumentation unvollständig");
+    await modal
+      .getByRole("button", { name: "Zurück zur Dokumentation" })
+      .or(modal.getByRole("link", { name: "Zurück zur Dokumentation" }))
+      .click();
+    await expectPrinzipPage(page, 4);
   });
 
-  await test.step("download documentation from absenden page", async () => {
-    await expect(page).toHaveURL(dokumentation_absenden.path);
+  await test.step("complete the skipped Prinzip and return to Zusammenfassung", async () => {
+    await page.getByLabel("Nicht relevant").check();
+    await page.getByLabel("Erklärung").fill(testData.skippedPrincipleReasoning);
+    await page.goto(assistent_dokumentation_zusammenfassung.path);
+    await waitForHydration(page);
+    await expect(page.getByRole("main")).not.toContainText(
+      "Sie haben diesen Punkt noch nicht bearbeitet.",
+    );
+    await clickNext(page);
+    await expect(page).toHaveURL(assistent_dokumentation_abschliessen.path);
+    await waitForHydration(page);
+  });
 
+  await test.step("download documentation from Abschließen page", async () => {
     const docText = await downloadDocumentAndGetText(
       page,
       page.getByRole("button", { name: "Word-Datei herunterladen (.docx)" }),
-      testInfo.outputPath("documentation-v2-final.docx"),
-      "Dokumentation_der_Digitaltauglichkeit.docx",
+      testInfo.outputPath("documentation-final.docx"),
+      fileName,
     );
-    const expectedStrings = [
+    expect(docText).toHaveStringsOrdered([
       testData.title,
       testData.participationFormats,
       testData.participationResults,
@@ -271,24 +217,23 @@ test("documentation V2 flow happy path", async ({ page }, testInfo) => {
       testData.negativeReasoning,
       "Nicht relevant",
       testData.irrelevantReasoning,
+      testData.skippedPrincipleReasoning,
       testData.lastPrincipleReasoning,
-    ].filter((value): value is string => !!value);
-    expect(docText).toHaveStringsOrdered(expectedStrings);
+    ]);
     expectDocumentToNotContainTags(docText);
   });
 });
 
-test("go to landing page and download empty V2 document template", async ({
+test("go to landing page and download empty document template", async ({
   page,
 }, testInfo) => {
-  await page.goto(dokumentation.path);
-  await waitForHydration(page);
+  await gotoStartPage(page);
 
   const docText = await downloadDocumentAndGetText(
     page,
     page.getByRole("button", { name: "Word-Vorlage herunterladen (.docx)" }),
-    testInfo.outputPath("documentation-v2-template.docx"),
-    "Dokumentation_der_Digitaltauglichkeit.docx",
+    testInfo.outputPath("documentation-template.docx"),
+    fileName,
   );
   const expectedStrings = [
     "Titel Ihres Regelungsvorhabens",
@@ -311,40 +256,17 @@ test("go to landing page and download empty V2 document template", async ({
   expectDocumentToNotContainTags(docText);
 });
 
-test("redirects to answer page when navigating directly to erläuterung without an answer", async ({
-  page,
-}) => {
-  const principlePageUrl = `${dokumentation.path}/digitale-angebote-fuer-alle-nutzbar-gestalten`;
-
-  await page.goto(`${principlePageUrl}/erlaeuterung`);
-  await expect(page).toHaveURL(principlePageUrl);
-});
-
 test.describe("with partial documentation started", () => {
   test.beforeEach(async ({ page }) => {
-    await test.step("start documentation flow from landing page and skip the notice", async () => {
-      await page.goto(dokumentation.path);
-      await expect(page).toHaveURL(dokumentation.path);
-      await waitForHydration(page);
-
-      await page.getByRole("link", { name: "Dokumentation starten" }).click();
-
-      await expectAndSkipNotice(page);
-    });
-
-    await test.step("fill the title", async () => {
-      await waitForHydration(page);
+    await test.step("start documentation flow and fill the title", async () => {
+      await startDocumentation(page);
       await page
-        .getByLabel(digitalDocumentation.info.inputTitle.label)
+        .getByLabel("Titel des Regelungsvorhabens")
         .fill(testData.title);
     });
 
     await test.step("go back to start page", async () => {
-      await page.goBack();
-      await expect(page).toHaveURL(dokumentation_hinweise.path);
-      await page.goBack();
-      await expect(page).toHaveURL(dokumentation.path);
-      await waitForHydration(page);
+      await gotoStartPage(page);
     });
   });
 
@@ -354,46 +276,39 @@ test.describe("with partial documentation started", () => {
         name: "Dokumentation fortsetzen",
       })
       .click();
-    await page.waitForURL(dokumentation_regelungsvorhabenTitel.path);
+    await page.waitForURL(assistent_dokumentation_regelungsvorhaben.path);
     await waitForHydration(page);
-    await expect(
-      page.getByLabel(digitalDocumentation.info.inputTitle.label),
-    ).toHaveValue(testData.title);
+    await expect(page.getByLabel("Titel des Regelungsvorhabens")).toHaveValue(
+      testData.title,
+    );
   });
 
   test("can start over", async ({ page }, testInfo) => {
-    await waitForHydration(page);
     const startOverButton = page.getByRole("button", {
-      name: "Neue Dokumentation beginnen",
+      name: "Neue Dokumentation starten",
     });
-
-    async function openDialog() {
-      await startOverButton.click();
-      const dialog = page.getByRole("dialog");
-      // `toBeVisible` does not work on the dialog even though it is visible visually
-      await expect(dialog).toHaveAttribute("data-open");
-      // assert visibility of heading instead
-      await expect(dialog.getByRole("heading")).toBeVisible();
-      return dialog;
-    }
+    const dialog = page.getByRole("dialog");
 
     await test.step("open start-over dialog but cancel", async () => {
-      const dialog = await openDialog();
+      await startOverButton.click();
+      await expect(dialog.getByRole("heading")).toBeVisible();
       await dialog.getByRole("button", { name: "Abbrechen" }).click();
-      expect(page.url().endsWith(dokumentation.path)).toBe(true);
+      await expect(page).toHaveURL(assistent_dokumentation.path);
       await expect(dialog).toBeHidden();
     });
 
     await test.step("open start-over dialog and download draft", async () => {
-      await openDialog();
+      await startOverButton.click();
+      await expect(dialog.getByRole("heading")).toBeVisible();
+      await expect(dialog.locator("astro-island[ssr]")).toHaveCount(0);
 
       const docText = await downloadDocumentAndGetText(
         page,
-        page.getByRole("button", {
+        dialog.getByRole("button", {
           name: "Zwischenstand herunterladen (.docx)",
         }),
-        testInfo.outputPath("documentation-v2-draft.docx"),
-        "Dokumentation_der_Digitaltauglichkeit.docx",
+        testInfo.outputPath("documentation-draft.docx"),
+        fileName,
       );
       expect(docText).toHaveStringsOrdered([
         "Titel Ihres Regelungsvorhabens",
@@ -402,16 +317,12 @@ test.describe("with partial documentation started", () => {
     });
 
     await test.step("confirm start over", async () => {
-      const dialog = page.getByRole("dialog");
-      await dialog.getByRole("button", { name: "Neu beginnen" }).click();
-
-      await expectAndSkipNotice(page);
-
-      await page.waitForURL(dokumentation_regelungsvorhabenTitel.path);
-
-      await expect(
-        page.getByLabel(digitalDocumentation.info.inputTitle.label),
-      ).toBeEmpty();
+      await dialog
+        .getByRole("link", { name: "Neue Dokumentation starten" })
+        .click();
+      await page.waitForURL(assistent_dokumentation_regelungsvorhaben.path);
+      await waitForHydration(page);
+      await expect(page.getByLabel("Titel des Regelungsvorhabens")).toBeEmpty();
     });
   });
 });

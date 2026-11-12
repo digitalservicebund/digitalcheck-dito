@@ -1,9 +1,16 @@
-import { prinzipienRoutes } from "@/config/prinzipienRoutes";
+import {
+  dokumentationPrinzipienRoutes,
+  prinzipienRoutes,
+} from "@/config/prinzipienRoutes";
 import { allRoutes, type Route } from "@/config/routes";
 import { isProduction } from "@/config/stage";
 import { removeTrailingSlash } from "../path";
 
-const navigationRoutes: Route[] = [...allRoutes, ...prinzipienRoutes];
+const navigationRoutes: Route[] = [
+  ...allRoutes,
+  ...prinzipienRoutes,
+  ...dokumentationPrinzipienRoutes,
+];
 
 export const getRouteByPath = (path: string): Route | null =>
   navigationRoutes.find((route) => route.path === removeTrailingSlash(path)) ??
@@ -30,7 +37,7 @@ export const isRouteVisible = (route: Route) =>
 
 export const getVisibleChildren = (route: Route) =>
   navigationRoutes
-    .filter((r) => r.parent === route)
+    .filter((r) => r.parent?.key === route.key)
     .filter(isRouteVisible)
     .toSorted(orderRoutesForNavigation);
 

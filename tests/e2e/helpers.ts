@@ -1,4 +1,3 @@
-import { dokumentation_hinweise } from "@/config/routes.ts";
 import {
   expect as baseExpect,
   type Locator,
@@ -107,47 +106,7 @@ export function expectDocumentToNotContainTags(text: string) {
   expect(tagsIdx).toBeNull();
 }
 
-export async function expectAndSkipNotice(page: Page) {
-  await page.waitForURL(dokumentation_hinweise.path);
-  await waitForHydration(page);
-  await expect(
-    page.getByRole("heading", { name: "Wichtige Hinweise" }),
-  ).toBeVisible();
-  await page.getByRole("checkbox", { name: "gelesen", exact: false }).check();
-  await page.getByRole("button", { name: "Weiter" }).click();
-}
-
+// "Weiter" in the wizard button bar, a link to the next step
 export async function clickNext(page: Page) {
-  await page
-    .getByRole("link", { name: "Weiter" })
-    .or(page.getByRole("button", { name: "Weiter" })) // form submit button
-    .click();
-}
-
-export async function skipUntil(
-  page: Page,
-  wantedUrl: string,
-  options: { name: string; groupName?: string },
-): Promise<void> {
-  await waitForHydration(page);
-  if (page.url().endsWith(wantedUrl)) return;
-  if (await page.getByTestId("stepper").isVisible()) {
-    // use mobile navigation buttons, click next repeatedly
-    let previousUrl = page.url();
-    while (!page.url().includes(wantedUrl)) {
-      await clickNext(page);
-      await page.waitForURL((url) => url.href !== previousUrl, {
-        timeout: 5_000,
-      });
-      previousUrl = page.url();
-      await waitForHydration(page);
-    }
-  } else {
-    // navigate directly
-    if (options.groupName) {
-      await page.getByRole("button", { name: options.groupName }).click();
-    }
-    await page.getByRole("link", { name: options.name }).click();
-    await expect(page).toHaveURL(wantedUrl);
-  }
+  await page.getByRole("link", { name: "Weiter", exact: true }).click();
 }
