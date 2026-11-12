@@ -2,6 +2,7 @@ import { persistentAtom } from "@nanostores/persistent";
 import { createWizardStore } from "./createWizardStore";
 import { dokumentationFlow } from "./dokumentationFlow";
 import { dokumentationFields } from "./dokumentationSchema";
+import { migrateLegacyDokumentation } from "./migrateLegacyDokumentation";
 import { pruefbereich, type Pruefbereich } from "./pruefbereichSchema";
 import {
   pruefbereichStorageKey,
@@ -10,6 +11,9 @@ import {
 } from "./session";
 import { vorpruefungFlow } from "./vorpruefungFlow";
 import { vorpruefungFields } from "./vorpruefungSchema";
+
+// Before the stores read their data
+migrateLegacyDokumentation();
 
 export const wizardStores = {
   vorpruefung: createWizardStore(
