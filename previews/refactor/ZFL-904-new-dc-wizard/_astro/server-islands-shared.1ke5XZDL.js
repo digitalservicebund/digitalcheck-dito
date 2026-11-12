@@ -1,1 +1,0 @@
-var e=`[if astro]>server-island-start<![endif]`;export{e as t};

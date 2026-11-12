@@ -1,1 +1,0 @@
-import{h as e,n as t}from"./stores.fDV3FkgN.js";var{$isReachable:n,$resumePath:r}=t.dokumentation;n.subscribe(t=>{t(e.path)||globalThis.location.replace(r.get())});
