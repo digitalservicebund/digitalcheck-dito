@@ -8,7 +8,7 @@ import {
   prinzipien,
 } from "@/config/routes";
 import { preCheck } from "@/resources/content/vorpruefung";
-import { waitForHydration } from "../e2e/helpers";
+import { clickNext, waitForHydration } from "../e2e/helpers";
 import { checkHeadingsForFlowContent } from "./utils.ts";
 
 // The vorpruefung sub-routes redirect to the first step (/assistent/vorpruefung/it-system)
@@ -78,7 +78,7 @@ test.describe("basic example a11y test", () => {
       await page.waitForURL(question.path);
       await checkPage(page);
       await page.getByLabel("Ja").click();
-      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await clickNext(page);
     }
 
     // Check the result page after all questions are answered
