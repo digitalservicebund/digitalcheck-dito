@@ -8,7 +8,6 @@ import {
   assistent_dokumentation_euInteroperabilitaet,
   assistent_dokumentation_regelungsvorhaben,
   assistent_dokumentation_zusammenfassung,
-  dokumentation,
 } from "@/config/routes";
 import {
   clickNext,
@@ -63,7 +62,7 @@ async function startDocumentation(page: Page) {
 test("old documentation landing page redirects to the new one", async ({
   page,
 }) => {
-  await page.goto(dokumentation.path);
+  await page.goto("/dokumentation");
   await expect(page).toHaveURL(assistent_dokumentation.path);
 });
 
@@ -255,15 +254,6 @@ test("go to landing page and download empty document template", async ({
     testData.irrelevantReasoning,
   ]);
   expectDocumentToNotContainTags(docText);
-});
-
-test("redirects to answer page when navigating directly to erläuterung without an answer", async ({
-  page,
-}) => {
-  const principlePageUrl = `${dokumentation.path}/digitale-angebote-fuer-alle-nutzbar-gestalten`;
-
-  await page.goto(`${principlePageUrl}/erlaeuterung`);
-  await expect(page).toHaveURL(principlePageUrl);
 });
 
 test.describe("with partial documentation started", () => {

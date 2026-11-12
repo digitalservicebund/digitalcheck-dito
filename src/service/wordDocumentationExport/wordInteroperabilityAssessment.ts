@@ -1,11 +1,9 @@
-import type {
-  BindingRequirementsData,
-  DocumentationData,
-} from "@/pages/dokumentation/_react/documentationDataSchema";
 import {
   serviceAreaOptions,
   stakeholderOptions,
-} from "@/pages/dokumentation/_react/interoperability/values.ts";
+  type BindingRequirementsData,
+  type DocumentationData,
+} from "@/service/wordDocumentationExport/documentationData.ts";
 import { metadataTable } from "@/service/wordDocumentationExport/docxUtils.ts";
 import { keyValueToMap } from "@/utils/keyValue.ts";
 import type { FileChild } from "docx";

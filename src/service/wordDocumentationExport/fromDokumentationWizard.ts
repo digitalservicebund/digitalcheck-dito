@@ -1,11 +1,11 @@
 import type { Prinzip } from "@/content.config";
 import {
   DATA_SCHEMA_VERSION,
+  principleAnswerOptions,
   type DocumentationData,
   type InteroperabilityAssessmentData,
   type Principle,
-} from "@/pages/dokumentation/_react/documentationDataSchema";
-import { digitalDocumentation } from "@/resources/content/dokumentation";
+} from "@/service/wordDocumentationExport/documentationData.ts";
 import {
   ebeneFieldNames,
   isAnforderungFilled,
@@ -21,8 +21,7 @@ import type { StoreValue } from "nanostores";
 
 type DokumentationData = StoreValue<typeof wizardStores.dokumentation.$data>;
 
-const [yesLabel, noLabel, notRelevantLabel] =
-  digitalDocumentation.principlePages.radioOptions;
+const [yesLabel, noLabel, notRelevantLabel] = principleAnswerOptions;
 
 // The levels of interoperability by their key in the old data
 const ebenen = {

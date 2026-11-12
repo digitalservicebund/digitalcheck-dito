@@ -11,7 +11,6 @@ import {
   assistent_vorpruefung_ergebnis,
   barrierefreiheit,
   datenschutz,
-  dokumentation,
   grundlagen,
   home,
   impressum,
@@ -41,10 +40,7 @@ function getExpectedTitle(route: Pick<Route, "path" | "title">) {
     // only reachable once all pages are answered, redirects to the first page otherwise
     return `Dokumentation: ${assistent_dokumentation_regelungsvorhaben.title}${titleSuffix}`;
   }
-  if (
-    isSubpage(route, dokumentation) ||
-    isSubpage(route, assistent_dokumentation)
-  ) {
+  if (isSubpage(route, assistent_dokumentation)) {
     return `Dokumentation: ${route.title}${titleSuffix}`;
   }
   if (isSubpage(route, assistent_erarbeitung)) {

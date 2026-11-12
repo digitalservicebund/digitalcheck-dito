@@ -1,16 +1,15 @@
 import { templateDokumentationDerDigitaltauglichkeitInteroperabilitaet_docx } from "@/config/downloads";
 import type { Prinzip } from "@/content.config";
-import { useDocumentationDataService } from "@/pages/dokumentation/_react/DocumentationDataProvider";
-import type { DocumentationData } from "@/pages/dokumentation/_react/documentationDataSchema";
-import { DATA_SCHEMA_VERSION } from "@/pages/dokumentation/_react/documentationDataSchema";
+import { documentationDocument } from "@/resources/content/documentation-document";
+import { contact } from "@/resources/content/shared/contact";
 import {
+  DATA_SCHEMA_VERSION,
   euInteroperabilityQuestion,
   formatRating,
   interoperabilityRatingPlaceholder,
-} from "@/pages/dokumentation/_react/interoperability/values.ts";
-import { documentationDocument } from "@/resources/content/documentation-document";
-import { digitalDocumentation } from "@/resources/content/dokumentation";
-import { contact } from "@/resources/content/shared/contact";
+  principleAnswerOptions,
+  type DocumentationData,
+} from "@/service/wordDocumentationExport/documentationData.ts";
 import {
   toMailtoHyperlinkPatch,
   toParagraphPatch,
@@ -20,11 +19,9 @@ import { slugify } from "@/utils/utilFunctions";
 import type { IPatch } from "docx";
 import { convertInchesToTwip, patchDocument, PatchType } from "docx";
 import fileSaver from "file-saver";
-import { useCallback } from "react";
 import markdownBlocksToDocx from "./markdownBlocksToWord";
 
 const { saveAs } = fileSaver;
-const { principlePages } = digitalDocumentation;
 
 /** Fills the Word template with the answers (unless templateOnly) and downloads it */
 export async function downloadWordDocumentation(
@@ -47,18 +44,6 @@ export async function downloadWordDocumentation(
   } catch (e) {
     console.error(e);
   }
-}
-
-export function useWordDocumentation() {
-  const { documentationData } = useDocumentationDataService();
-
-  const downloadDocumentation = useCallback(
-    (prinzips: Prinzip[], options?: { templateOnly?: boolean }) =>
-      downloadWordDocumentation(documentationData, prinzips, options),
-    [documentationData],
-  );
-
-  return { downloadDocumentation };
 }
 
 function getInteroperabilityOutcomeValue(documentationData: DocumentationData) {
@@ -216,7 +201,7 @@ export const buildPrinciplePatches = (
         children: markdownBlocksToDocx(prinzip.Hilfetext),
       },
       [`PRINCIPLE_${prinzipIndex + 1}_ANSWER`]: toParagraphPatch(
-        answer?.answer ?? principlePages.radioOptions.join(" | "),
+        answer?.answer ?? principleAnswerOptions.join(" | "),
       ),
       // We always need to fill both patches to avoid the tags rendering
       [`PRINCIPLE_${prinzipIndex + 1}_REASONING`]: toParagraphPatch(
