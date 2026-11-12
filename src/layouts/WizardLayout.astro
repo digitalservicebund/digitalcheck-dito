@@ -24,13 +24,14 @@ const { title, progress, isWide = false } = Astro.props;
 <Layout title={title} noFooter>
   <!-- h-full fills the sidebar grid cell, flex-1 the body without sidebar -->
   <div class="flex h-full min-w-0 flex-1">
-    <div class="flex min-w-0 flex-1 flex-col">
+    <!-- The context bar is inside main, so all content is within a landmark -->
+    <main class="flex min-w-0 flex-1 flex-col">
       {Astro.slots.has("context") && (
         <div class="relative px-kern-md pt-kern-md pb-kern-sm">
           <slot name="context" />
         </div>
       )}
-      <main
+      <div
         class:list={[
           "flex-1 py-48 sm:pt-64 sm:pb-80 print:pb-0",
           !isWide && "px-kern-md",
@@ -64,8 +65,8 @@ const { title, progress, isWide = false } = Astro.props;
             </div>
           )}
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
     {Astro.slots.has("help") && (
       <HelpSidepanel class="xl:w-300 xl:shrink-0 min-[94rem]:w-384">
         <slot name="help" />
