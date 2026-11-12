@@ -3,6 +3,9 @@ import { expect, test } from "@playwright/test";
 import {
   allRoutes,
   assistent,
+  assistent_dokumentation,
+  assistent_dokumentation_abschliessen,
+  assistent_dokumentation_regelungsvorhaben,
   assistent_erarbeitung,
   assistent_vorpruefung,
   assistent_vorpruefung_ergebnis,
@@ -18,6 +21,10 @@ import {
 import { preCheck } from "@/resources/content/vorpruefung";
 import { waitForHydration } from "./helpers";
 
+function isSubpage(route: Pick<Route, "path">, parent: Pick<Route, "path">) {
+  return route.path.startsWith(`${parent.path}/`);
+}
+
 function getExpectedTitle(route: Pick<Route, "path" | "title">) {
   const titleSuffix = " — Digitalcheck";
 
@@ -30,14 +37,20 @@ function getExpectedTitle(route: Pick<Route, "path" | "title">) {
     // this page does not exist and redirects to the sub-page
     return `${prinzipien.title}${titleSuffix}`;
   }
+  if (route.path === assistent_dokumentation_abschliessen.path) {
+    // only reachable once all pages are answered, redirects to the first page otherwise
+    return `Dokumentation: ${assistent_dokumentation_regelungsvorhaben.title}${titleSuffix}`;
+  }
   if (
-    route.path.startsWith(dokumentation.path) &&
-    route.path !== dokumentation.path
+    isSubpage(route, dokumentation) ||
+    isSubpage(route, assistent_dokumentation)
   ) {
-    // subpages of documentation
     return `Dokumentation: ${route.title}${titleSuffix}`;
   }
-  if (route.path.startsWith(assistent_vorpruefung.path)) {
+  if (isSubpage(route, assistent_erarbeitung)) {
+    return `Erarbeitung: ${route.title}${titleSuffix}`;
+  }
+  if (isSubpage(route, assistent_vorpruefung)) {
     return `Vorprüfung: ${route.title}${titleSuffix}`;
   }
 
@@ -70,7 +83,7 @@ test.describe("page titles", () => {
       await waitForHydration(page);
       await expect(page).toHaveTitle(getExpectedTitle(question));
       await page.getByLabel("Ja").click();
-      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await page.getByRole("link", { name: "Weiter", exact: true }).click();
     }
 
     await expect(page).toHaveURL(assistent_vorpruefung_ergebnis.path);
@@ -97,7 +110,7 @@ test.describe("landing page", () => {
   test("CTA on landing works", async ({ page }) => {
     await page.goto(home.path);
     await page
-      .getByRole("link", { name: "Digitalcheck starten" })
+      .getByRole("link", { name: "Digitalcheck durchführen" })
       .first()
       .click();
     await expect(page).toHaveURL(assistent.path);

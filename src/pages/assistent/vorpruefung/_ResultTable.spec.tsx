@@ -14,6 +14,14 @@ describe("ResultTable", () => {
     store.reset();
   });
 
+  it("labels each column", () => {
+    render(<ResultTable />);
+
+    expect(
+      screen.getAllByRole("columnheader").map((header) => header.textContent),
+    ).toEqual(["Prinzip", "Frage", "Antwort", "Aktion"]);
+  });
+
   it("shows the stored answers with their explanation", () => {
     store.save({ "it-system": "yes", automatisierung: "no" });
     render(<ResultTable />);

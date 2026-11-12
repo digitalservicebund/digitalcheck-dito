@@ -2,14 +2,13 @@ import {
   assistent_vorpruefung,
   assistent_vorpruefung_ergebnis,
 } from "@/config/routes";
-import { PRE_CHECK_START_BUTTON_ID } from "@/resources/constants";
 import { preCheck } from "@/resources/content/vorpruefung";
 import { expect, test } from "@playwright/test";
 import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;
 
-const SCREEN_LG = 1024; // tailwind lg breakpoint
+const SIDEBAR_MIN_WIDTH = 900; // the sidebar is hidden below this width
 
 test.describe("test questions form", () => {
   test("all answer options are submittable", async ({ page }) => {
@@ -27,7 +26,7 @@ test.describe("test questions form", () => {
   test("clicking through pre-check works", async ({ page }) => {
     await page.goto(assistent_vorpruefung.path);
     await waitForHydration(page);
-    await page.getByTestId(PRE_CHECK_START_BUTTON_ID).click();
+    await page.getByRole("link", { name: "Vorprüfung starten" }).click();
     for (const element of questions) {
       await page.waitForURL(element.path);
       await waitForHydration(page);
@@ -52,8 +51,8 @@ test.describe("test questions form", () => {
     await page.getByLabel("Ja").click();
     await page.getByRole("button", { name: "Weiter", exact: true }).click();
     const modal = page.getByRole("dialog");
-    await expect(modal).toContainText("Bitte beantworten Sie alle Fragen");
-    await modal.getByRole("link", { name: "Zur offenen Frage" }).click();
+    await expect(modal).toContainText("Beantworten Sie bitte alle Fragen");
+    await modal.getByRole("link", { name: "Zurück zur Vorprüfung" }).click();
     await expect(page).toHaveURL(questions[0].path);
 
     await page.goto(assistent_vorpruefung_ergebnis.path);
@@ -65,7 +64,7 @@ test.describe("test questions form", () => {
     viewport,
   }) => {
     test.skip(
-      Boolean(viewport && viewport.width < 900),
+      Boolean(viewport && viewport.width < SIDEBAR_MIN_WIDTH),
       "sidebar is hidden on small screens",
     );
     await page.goto(questions[0].path);
@@ -95,21 +94,10 @@ test.describe("test questions form", () => {
     await expect(page).toHaveURL(questions[0].path);
   });
 
-  test("answers are saved and loaded from cookie and persisted across navigations and submissions", async ({
+  test("answers are saved when selected and persisted across navigations and reloads", async ({
     page,
-    browserName,
-    browser,
   }) => {
-    // TODO remove skip condition, check on 2025-12-10
-    test.skip(
-      browserName === "webkit" && browser.version() === "26.0",
-      "due to https://github.com/microsoft/playwright/issues/37766, to be addressed in Playwright 1.57",
-    );
-    // was a bit of a hassle to get the cookie and react-hook-form to work together with useEffect
-    // that's why the test is a bit more extensive than it could be
-    // we've sinced moved to using rvf but we'll keep it like this for now
     await page.goto(questions[0].path);
-    await page.waitForURL(questions[0].path);
     await waitForHydration(page);
     await page.getByLabel("Ja").click();
     await page.getByRole("link", { name: "Weiter", exact: true }).click();
@@ -120,73 +108,73 @@ test.describe("test questions form", () => {
     await page.waitForURL(questions[2].path);
     await waitForHydration(page);
     await page.getByLabel("Ich bin unsicher").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[3].path);
-    await waitForHydration(page);
-    await expect(page).toHaveURL(questions[3].path);
-    await page.getByLabel("Ja").click();
+
+    // saved without leaving the page
     await page.reload();
     await waitForHydration(page);
-    await expect(page).toHaveURL(questions[3].path);
+    await expect(page.getByLabel("Ich bin unsicher")).toBeChecked();
+
+    await page.getByRole("link", { name: "Zurück" }).click();
+    await page.waitForURL(questions[1].path);
+    await waitForHydration(page);
+    await expect(page.getByLabel("Nein")).toBeChecked();
+    await page.getByRole("link", { name: "Zurück" }).click();
+    await page.waitForURL(questions[0].path);
+    await waitForHydration(page);
+    await expect(page.getByLabel("Ja")).toBeChecked();
+
+    // changing an answer overwrites it
+    await page.getByLabel("Nein").click();
+    await page.reload();
+    await waitForHydration(page);
+    await expect(page.getByLabel("Nein")).toBeChecked();
     await expect(page.getByLabel("Ja")).not.toBeChecked();
-    await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(page.getByLabel("Ich bin unsicher")).toBeChecked();
-    await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(page.getByLabel("Nein")).toBeChecked();
-    await page.goto(questions[0].path);
+
+    await page.goto(questions[3].path);
     await waitForHydration(page);
-    await expect(page.getByLabel("Ja")).toBeChecked();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[1].path);
-    await expect(page.getByLabel("Nein")).toBeChecked();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[2].path);
-    await expect(page.getByLabel("Ich bin unsicher")).toBeChecked();
-    await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(page.getByLabel("Nein")).toBeChecked();
-    await page.reload();
-    await waitForHydration(page);
-    await page.getByRole("link", { name: "Zurück" }).click();
-    await expect(page.getByLabel("Ja")).toBeChecked();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[1].path);
-    await expect(page.getByLabel("Nein")).toBeChecked();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[2].path);
-    await expect(page.getByLabel("Ich bin unsicher")).toBeChecked();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[3].path);
     await expect(page.getByLabel("Ja")).not.toBeChecked();
     await expect(page.getByLabel("Nein")).not.toBeChecked();
     await expect(page.getByLabel("Ich bin unsicher")).not.toBeChecked();
   });
 
-  test("redirect to first unanswered question", async ({ page }) => {
+  test("pre-check continues at the first unanswered question", async ({
+    page,
+  }) => {
     await page.goto(questions[0].path);
-    await page.waitForURL(questions[0].path);
     await waitForHydration(page);
     await page.getByLabel("Ja").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[1].path);
+    await page.goto(questions[2].path);
     await waitForHydration(page);
     await page.getByLabel("Nein").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[2].path);
-    await page.goto(questions[4].path);
-    await expect(page).toHaveURL(questions[2].path);
+
+    await page.goto(assistent_vorpruefung.path);
     await waitForHydration(page);
-    await page.getByLabel("Nein").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await page.waitForURL(questions[3].path);
-    await page.goto(questions[4].path);
-    await expect(page).toHaveURL(questions[3].path);
+    await page.getByRole("link", { name: "Vorprüfung fortsetzen" }).click();
+    await expect(page).toHaveURL(questions[1].path);
+  });
+
+  test("starting over deletes the answers", async ({ page }) => {
+    await page.goto(questions[0].path);
+    await waitForHydration(page);
+    await page.getByLabel("Ja").click();
+
+    await page.goto(assistent_vorpruefung.path);
+    await waitForHydration(page);
+    await page.getByRole("button", { name: "Neue Vorprüfung starten" }).click();
+    await page
+      .getByRole("dialog")
+      .getByRole("link", { name: "Neue Vorprüfung starten" })
+      .click();
+    await page.waitForURL(questions[0].path);
+    await waitForHydration(page);
+    await expect(page.getByLabel("Ja")).not.toBeChecked();
   });
 });
 
 test.describe("test question navigation", () => {
   test.beforeEach("skip tests on small screens", ({ viewport }) => {
     test.skip(
-      Boolean(viewport && viewport.width < SCREEN_LG),
+      Boolean(viewport && viewport.width < SIDEBAR_MIN_WIDTH),
       "Skipping because sidebar navigation is not visible on small screen",
     );
   });
@@ -211,77 +199,62 @@ test.describe("test question navigation", () => {
     }
   });
 
-  test("only answered and first unanswered question are clickable", async ({
+  test("all questions are reachable, the result only once all are answered", async ({
     page,
   }) => {
     await page.goto(questions[0].path);
     await waitForHydration(page);
-    const navigation = page.getByTestId("main-nav");
-    for (let i = 1; i < questions.length; i++) {
-      await expect(navigation.getByText(questions[i].title)).toHaveAttribute(
-        "aria-disabled",
-        "true",
-      );
+    const navigation = page.getByRole("navigation", {
+      name: "Abschnittsnavigation",
+    });
+    for (const question of questions) {
+      await expect(
+        navigation.getByRole("link", { name: question.title }),
+      ).toHaveAttribute("href", question.path);
     }
 
-    await page.getByLabel("Ja").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-    await expect(
-      page.getByRole("link", { name: questions[0].title }),
-    ).toBeEnabled();
-    for (const question of questions.slice(2)) {
-      await expect(navigation.getByText(question.title)).toHaveAttribute(
-        "aria-disabled",
-        "true",
-      );
-    }
+    // The result opens a modal, which links the first unanswered question
+    await navigation
+      .getByRole("button", { name: assistent_vorpruefung_ergebnis.title })
+      .click();
+    const modal = page.getByRole("dialog");
+    await expect(modal).toContainText("Beantworten Sie bitte alle Fragen");
+    await modal.getByRole("link", { name: "Zurück zur Vorprüfung" }).click();
+    await expect(page).toHaveURL(questions[0].path);
 
-    await page.goto(questions[0].path);
-    await expect(
-      page.getByRole("link", { name: questions[1].title }),
-    ).toBeEnabled();
-    for (const question of questions.slice(2)) {
-      await expect(navigation.getByText(question.title)).toHaveAttribute(
-        "aria-disabled",
-        "true",
-      );
+    for (const question of questions) {
+      await page.goto(question.path);
+      await waitForHydration(page);
+      await page.getByLabel("Ja").click();
     }
+    await navigation
+      .getByRole("link", { name: assistent_vorpruefung_ergebnis.title })
+      .click();
+    await expect(page).toHaveURL(assistent_vorpruefung_ergebnis.path);
   });
 
-  test("navigation resets when starting fresh", async ({ page }) => {
-    await page.goto(questions[0].path);
-    const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
-    await expect(navigation.getByText(questions[0].title)).toHaveAttribute(
-      "aria-current",
-      "page",
-    );
-    for (const question of questions.slice(1)) {
-      await expect(navigation.getByText(question.title)).toHaveAttribute(
-        "aria-disabled",
-      );
-    }
-  });
-
-  test("current page has aria-current and active styling", async ({ page }) => {
+  test("current page has aria-current", async ({ page }) => {
     await page.goto(questions[0].path);
     await waitForHydration(page);
 
-    const navigation = page.getByRole("navigation", { name: "Alle Fragen" });
-    // Check if the first question has aria-current attribute
-    const firstQuestionElement = navigation.getByText(questions[0].title);
-    await expect(firstQuestionElement).toHaveAttribute("aria-current", "page");
-    await expect(firstQuestionElement).toHaveClass(/border-l-/);
+    const navigation = page.getByRole("navigation", {
+      name: "Abschnittsnavigation",
+    });
+    await expect(
+      navigation.getByRole("link", { name: questions[0].title }),
+    ).toHaveAttribute("aria-current", "page");
 
     // Navigate to the second question
     await page.getByLabel("Ja").click();
     await page.getByRole("link", { name: "Weiter", exact: true }).click();
-
     await page.waitForURL(questions[1].path);
 
-    // Check if the second question element has aria-current attribute
-    const secondQuestionElement = navigation.getByText(questions[1].title);
-    await expect(secondQuestionElement).toHaveAttribute("aria-current", "page");
-    await expect(secondQuestionElement).toHaveClass(/border-l-/);
+    await expect(
+      navigation.getByRole("link", { name: questions[1].title }),
+    ).toHaveAttribute("aria-current", "page");
+    await expect(
+      navigation.getByRole("link", { name: questions[0].title }),
+    ).not.toHaveAttribute("aria-current");
   });
 
   test("answered question have check mark icon", async ({ page }) => {
@@ -314,75 +287,5 @@ test.describe("test question navigation", () => {
         .getByRole("link", { name: questions[1].title })
         .getByTestId("CheckIcon"),
     ).toBeVisible();
-  });
-});
-
-test.describe("test question navigation on mobile screens", () => {
-  test.beforeEach("Only run tests on mobile screens", ({ viewport }) => {
-    test.skip(
-      Boolean(!viewport || viewport.width >= SCREEN_LG),
-      "Skipping LinkBar is not visible on small screen",
-    );
-  });
-
-  test("Navigation with LinkBar works and restricts unanswered questions", async ({
-    page,
-  }) => {
-    await page.goto(questions[0].path);
-
-    // Answer the first question
-    await page.getByLabel("Ja").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-
-    await page.waitForURL(questions[1].path);
-
-    const linkBar = page.getByTestId("stepper");
-
-    // Check that the first and second question link has a dark color
-    await expect(
-      linkBar.getByRole("link", { name: questions[0].title }),
-    ).toHaveClass(/bg-kern-darkblue-800/);
-    await expect(
-      linkBar.getByRole("link", { name: questions[1].title }),
-    ).toHaveClass(/bg-kern-darkblue-800/);
-
-    // Navigate back to answered question
-    await linkBar.getByRole("link", { name: questions[0].title }).click();
-    await expect(page).toHaveURL(questions[0].path);
-
-    // Navigate forward again to second question
-    await linkBar.getByRole("link", { name: questions[1].title }).click();
-    await expect(page).toHaveURL(questions[1].path);
-
-    // Navigation to the next (unanswered) question is not possible
-    const unansweredQuestionLink = linkBar.getByRole("link", {
-      name: questions[2].title,
-    });
-    await expect(unansweredQuestionLink).toHaveAttribute(
-      "aria-disabled",
-      "true",
-    );
-
-    const originalURL = page.url();
-    await page.goto(questions[2].path);
-    await expect(page).toHaveURL(originalURL);
-
-    // Answer the second question
-    await page.getByLabel("Ja").click();
-    await page.getByRole("link", { name: "Weiter", exact: true }).click();
-
-    await page.waitForURL(questions[2].path);
-
-    // Check that the second question link still has a dark color
-    await expect(
-      linkBar.getByRole("link", { name: questions[1].title }),
-    ).toHaveClass(/bg-kern-darkblue-800/);
-    await expect(
-      linkBar.getByRole("link", { name: questions[2].title }),
-    ).toHaveClass(/bg-kern-darkblue-800/);
-
-    // Clicking on the second question should now navigate
-    await linkBar.getByRole("link", { name: questions[1].title }).click();
-    await expect(page).toHaveURL(questions[1].path);
   });
 });

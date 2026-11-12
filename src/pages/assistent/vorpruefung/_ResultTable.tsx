@@ -17,12 +17,11 @@ export default function ResultTable() {
         <thead className="kern-table__head sr-only">
           <tr className="kern-table__row">
             <th className="kern-table__header" scope="col">
-              Frage
+              Prinzip
             </th>
             <th className="kern-table__header max-sm:hidden" scope="col">
               Frage
             </th>
-
             <th className="kern-table__header" scope="col">
               Antwort
             </th>

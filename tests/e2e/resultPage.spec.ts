@@ -1,18 +1,16 @@
 import { assistent_vorpruefung_ergebnis } from "@/config/routes";
 import { preCheck } from "@/resources/content/vorpruefung";
+import { resultRows } from "@/wizard/vorpruefungResult";
 import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 import { waitForHydration } from "./helpers";
 
 const { questions } = preCheck;
 
-const positiveResultContent = [
-  "einer Anpassung oder Neuentwicklung einer IT-Lösung.",
-  "einer Festlegung von Mitwirkungspflichten für Akteurinnen und Akteure.",
-  "einem Austausch von Daten.",
-  "einer Interaktion zwischen Behörden und Bürgerinnen und Bürgern bzw. Unternehmen.",
-  "einer Verbesserung der Umsetzung der Regelung durch die Automatisierung von Schritten.",
-  "einem Daten- und Informationsaustausch zwischen EU-Mitgliedstaaten.",
+const emailContent = [
+  "Das Vorhaben hat einen Digitalbezug.",
+  "Das Vorhaben hat einen Bezug zur EU-Interoperabilität.",
+  ...Object.values(resultRows).map(({ summary }) => summary),
 ];
 
 test.describe("Vorprüfung Ergebnis happy path", () => {
@@ -27,7 +25,7 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
       await page.waitForURL(question.path);
       await waitForHydration(page);
       await page.getByLabel("Ja").click();
-      await page.getByRole("button", { name: "Weiter", exact: true }).click();
+      await page.getByRole("link", { name: "Weiter", exact: true }).click();
     }
   });
 
@@ -47,39 +45,28 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
 
   test("page headline shows expected result", async () => {
     await expect(
-      page.getByRole("heading", { name: "Das Regelungsvorhaben hat" }),
-    ).toContainText(
-      "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
-    );
+      page.getByRole("heading", { name: "Ergebnis Ihrer Vorprüfung" }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Ihr Vorhaben hat einen Digitalbezug.", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Ihr Vorhaben hat einen Bezug zur EU-Interoperabilität.", {
+        exact: true,
+      }),
+    ).toBeVisible();
   });
 
-  test("details summary shows correct content", async () => {
-    const summaryElement = page.getByText("Aufschlüsselung Ihres Ergebnisses", {
-      exact: true,
-    });
-    await expect(summaryElement).toBeVisible();
-    await summaryElement.click();
-
-    await expect(
-      page.getByText(
-        "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
-        { exact: true },
-      ),
-    ).toBeVisible();
-
-    await expect(
-      page.getByText(
-        "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
-        { exact: true },
-      ),
-    ).toBeVisible();
-
-    for (const resultText of positiveResultContent) {
+  test("answer overview shows all answers", async () => {
+    const table = page.getByRole("table");
+    for (const question of questions) {
+      const row = table.getByRole("row", { name: question.title });
       await expect(
-        page.getByText(resultText, {
-          exact: true,
-        }),
+        row.getByRole("cell", { name: "Ja", exact: true }),
       ).toBeVisible();
+      await expect(
+        row.getByRole("link", { name: `Bearbeiten : ${question.title}` }),
+      ).toHaveAttribute("href", question.path);
     }
   });
 
@@ -91,72 +78,37 @@ test.describe("Vorprüfung Ergebnis happy path", () => {
     await expect(page.getByLabel("Begründung")).toBeHidden();
   });
 
-  test("email body contains title and reasoning", async () => {
+  test("email contains title and result", async () => {
     await page.getByLabel("Arbeitstitel des Vorhabens").fill("Vorhaben ABC");
 
-    const mailLink = page.getByRole("link", { name: "E-Mail erstellen" });
+    const mailLink = page.getByRole("link", { name: "E-Mail-Programm öffnen" });
     const mailUri = decodeURIComponent(
       (await mailLink.getAttribute("href")) ?? "",
     );
 
     expect(mailUri).toContain("Digitalcheck Vorprüfung: „Vorhaben ABC“");
-
     expect(mailUri).toContain("poststelle@nkr.bund.de");
     expect(mailUri).toContain("interoperabel@digitalservice.bund.de");
-
-    expect(mailUri).toContain(
-      "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
-    );
-    expect(mailUri).toContain(
-      "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
-    );
-    expect(mailUri).toContain(
-      "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
-    );
-
-    for (const resultText of positiveResultContent) {
-      expect(mailUri).toContain(resultText);
+    for (const text of emailContent) {
+      expect(mailUri).toContain(text);
     }
   });
 
-  // only run on chromium because clipboard permissions don't work with firefox / safari
-  // https://github.com/microsoft/playwright/issues/13037
-  test("can copy email content to clipboard", async ({ browserName }) => {
-    if (
-      browserName === "webkit" ||
-      browserName === "firefox" ||
-      test.info().project.name === "Desktop Edge"
-    ) {
-      test.skip(
-        true,
-        "Skipping clipboard test on WebKit, Firefox, and Desktop Edge.",
-      );
-    }
+  test("email text can be previewed", async () => {
+    await page.getByLabel("Arbeitstitel des Vorhabens").fill("Vorhaben ABC");
 
-    await page.getByLabel("Arbeitstitel des Vorhabens").fill("Test title");
-
-    const copyContentButton = page.getByRole("button", {
-      name: "E-Mail-Text kopieren",
+    const previewButton = page.getByRole("button", {
+      name: "E-Mail-Text anzeigen",
     });
-    await expect(copyContentButton).toBeVisible();
-    await copyContentButton.click();
+    await previewButton.click();
+    await expect(previewButton).toHaveAttribute("aria-expanded", "true");
 
-    const clipboardText = await page.evaluate(() =>
-      navigator.clipboard.readText(),
-    );
-
-    expect(clipboardText).toContain(
-      "Das Regelungsvorhaben hat einen Digitalbezug und enthält Anforderungen der Interoperabilität.",
-    );
-    expect(clipboardText).toContain(
-      "In Bezug auf digitale Aspekte führt Ihr Regelungsvorhaben zu...",
-    );
-    expect(clipboardText).toContain(
-      "In Bezug auf Interoperabilität führt Ihr Regelungsvorhaben zu...",
-    );
-
-    for (const resultText of positiveResultContent) {
-      expect(clipboardText).toContain(resultText);
+    const previewId = await previewButton.getAttribute("aria-controls");
+    const preview = page.locator(`[id="${previewId}"]`);
+    await expect(preview).toBeVisible();
+    await expect(preview).toContainText("Vorhaben ABC");
+    for (const text of emailContent) {
+      await expect(preview).toContainText(text);
     }
   });
 });
