@@ -25,7 +25,7 @@ const { title, progress, isWide = false } = Astro.props;
   <!-- h-full fills the sidebar grid cell, flex-1 the body without sidebar -->
   <div class="flex h-full min-w-0 flex-1">
     <!-- The context bar is inside main, so all content is within a landmark -->
-    <main class="flex min-w-0 flex-1 flex-col">
+    <main id="main" class="flex min-w-0 flex-1 flex-col">
       {Astro.slots.has("context") && (
         <div class="relative px-kern-md pt-kern-md pb-kern-sm">
           <slot name="context" />
