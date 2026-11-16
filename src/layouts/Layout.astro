@@ -15,6 +15,7 @@ import {
   hasVisibleChildren,
 } from "@/utils/navigation/routeUtils";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
+import SkipNavLink from "@/components/SkipNavLink.astro";
 
 interface Props {
   title?: string;
@@ -115,6 +116,7 @@ const showSectionSidebar =
     ></script>
   </head>
   <body class="flex min-h-screen flex-col">
+    <SkipNavLink label="Zum Inhalt springen" target="#main" />
     <PageHeader />
     {showSectionSidebar ? (
       <div class="flex-1 min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">

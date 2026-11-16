@@ -1,0 +1,22 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"a">, "href"> {
+  label: string;
+  target: string;
+  class?: string;
+}
+
+const { label, target, class: className, ...attrs } = Astro.props;
+---
+
+<a
+  href={target}
+  class:list={[
+    "kern-btn kern-btn--primary fixed top-8 w-fit mx-auto inset-x-0 z-50 not-focus:sr-only",
+    className,
+  ]}
+  {...attrs}
+>
+  <span class="kern-label">{label}</span>
+</a>

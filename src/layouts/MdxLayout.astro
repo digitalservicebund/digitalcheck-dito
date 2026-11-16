@@ -11,7 +11,7 @@ const { frontmatter } = Astro.props;
 ---
 
 <Layout title={frontmatter.title}>
-  <main class="breakout-grid">
+  <main id="main" class="breakout-grid">
     <Hero>
       <h1>{frontmatter.heroTitle ?? frontmatter.title}</h1>
     </Hero>
