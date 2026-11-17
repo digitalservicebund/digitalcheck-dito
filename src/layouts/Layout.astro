@@ -16,6 +16,7 @@ import {
 } from "@/utils/navigation/routeUtils";
 import SectionSidebar from "@/components/global/SectionSidebar.astro";
 import SkipNavLink from "@/components/SkipNavLink.astro";
+import ogImagePath from "@/assets/images/og-image.png?url";
 
 interface Props {
   title?: string;
@@ -38,7 +39,7 @@ const pageTitle = title
   : siteMeta.titleWithTagline;
 
 const canonicalUrl = Astro.url.href.replace(/\/$/, "");
-const ogImage = `${Astro.url.origin}/images/og-image.png`;
+const ogImage = `${Astro.url.origin}${ogImagePath}`;
 
 const jsonLdMetadata = {
   "@context": "https://schema.org",
