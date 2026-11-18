@@ -44,7 +44,7 @@ function navItemStyle(active = false) {
 ---
 
 <header
-  class="page-header relative z-30 border-b-2 border-kern-darkblue-100 bg-white"
+  class="page-header relative z-30 border-b-2 border-kern-darkblue-100"
   x-data="pageHeader()"
   :class="{ 'header-floating': headerFloating, 'header-visible': headerVisible }"
   @scroll.window="handleScroll($el)"
@@ -59,7 +59,7 @@ function navItemStyle(active = false) {
     ]}
   >
     <!-- Logo and title -->
-    <a href={home.path} class="link-unstyled flex items-center gap-24">
+    <a href={home.path} class="link-unstyled shrink-0 flex items-center gap-24">
       {isProduction ? (
         <>
           <img
@@ -99,7 +99,7 @@ function navItemStyle(active = false) {
         return (
           <a
             href={route.path}
-            class={navItemStyle(isActive)}
+            class:list={[navItemStyle(isActive), "max-xl:w-min"]}
             aria-current={isActive ? "page" : undefined}
           >
             {getRouteLabel(route)}
