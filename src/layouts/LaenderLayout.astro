@@ -3,6 +3,7 @@ import Layout from "./Layout.astro";
 import laenderMapUrl from "@/pages/bundeslaender/_assets/laender-map.svg?url";
 import onlineSchulungImg from "@/pages/bundeslaender/_assets/online-schulung.jpg";
 import KernCard from "@/components/KernCard.astro";
+import Hero from "@/components/Hero.astro";
 
 interface Props {
   title: string;
@@ -14,39 +15,35 @@ const { title, bundesland } = Astro.props;
 
 <Layout title={title}>
   <main id="main" class="breakout-grid">
-    <div class="breakout bg-kern-darkblue-100">
-      <div class="flex flex-col lg:flex-row">
-        <div class="space-y-24 py-32 sm:py-48 lg:w-1/2 lg:self-center lg:pr-48">
+    <Hero class="py-48 lg:py-24">
+      <div class="flex gap-32 max-lg:flex-col lg:items-center">
+        <div class="space-y-24 lg:flex-1">
           <h1>{title}</h1>
           <slot name="subtitle" />
         </div>
-        <div class="relative max-lg:mb-48 max-sm:hidden lg:w-1/2">
-          <div class="flex h-full w-630 flex-col justify-center align-middle lg:w-[50vw]">
-            <div class="relative mx-auto h-400 py-24 lg:h-450">
-              <img
-                src={laenderMapUrl}
-                alt="Eine stilisierte Karte von Deutschland"
-                class="h-full w-auto object-contain"
+        <div class="relative shrink-0 max-lg:mx-auto max-sm:hidden">
+          <img
+            src={laenderMapUrl}
+            alt="Eine stilisierte Karte von Deutschland"
+            class="h-400"
+          />
+          {bundesland && (
+            <svg
+              viewBox="0 0 592 801"
+              class="absolute inset-0 size-full"
+              aria-hidden="true"
+            >
+              <use
+                href={`${laenderMapUrl}#${bundesland}`}
+                fill="#a5b7e1"
+                stroke="#0e2792"
+                stroke-width="1.5"
               />
-              {bundesland && (
-                <svg
-                  viewBox="0 0 592 801"
-                  class="absolute inset-0 h-full w-full"
-                  aria-hidden="true"
-                >
-                  <use
-                    href={`${laenderMapUrl}#${bundesland}`}
-                    fill="#a5b7e1"
-                    stroke="#0e2792"
-                    stroke-width="1.5"
-                  />
-                </svg>
-              )}
-            </div>
-          </div>
+            </svg>
+          )}
         </div>
       </div>
-    </div>
+    </Hero>
     <slot />
     {bundesland && (
       <section>
@@ -70,23 +67,3 @@ const { title, bundesland } = Astro.props;
     )}
   </main>
 </Layout>
-
-<style>
-  @reference "@/styles/global.css";
-
-  /* TODO: these rules will be default after DC redesign and can be removed from here then */
-  main {
-    > section:not(.kern-card__body) {
-      @apply py-40 md:py-64;
-
-      /* collapse padding for consecutive sections with no background */
-      &:not(.breakout) + &:not(.breakout) {
-        @apply pt-0;
-      }
-
-      > h2 {
-        @apply mb-16;
-      }
-    }
-  }
-</style>
