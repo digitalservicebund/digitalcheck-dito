@@ -1,0 +1,3 @@
+# picomatch ReDoS, no fixed release yet. Build-time only (static site served by nginx).
+# Remove once a patched picomatch is out and pinned via overrides in pnpm-workspace.yaml.
+CVE-2026-112366 exp:2026-12-31
