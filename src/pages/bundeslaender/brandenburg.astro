@@ -1,0 +1,131 @@
+---
+import LaenderLayout from "@/layouts/LaenderLayout.astro";
+import { Image } from "astro:assets";
+import brandenburgLogo from "./_assets/brandenburg-logo.svg";
+import ablaufImg from "./_assets/brandenburg-ablauf.png";
+
+export const frontmatter = {
+  title: "Digitalcheck in Brandenburg",
+  isStagingOnly: true,
+};
+---
+
+<LaenderLayout title={frontmatter.title} bundesland="Brandenburg">
+  <p slot="subtitle">
+    In Brandenburg unterstützt die{" "}
+    <strong>Zentralstelle für bessere Rechtsetzung (ZbR)</strong> dabei,
+    Regelungen digitaltauglich zu gestalten.
+  </p>
+  <section class="breakout bg-(--kern-color-layout-layer-surface-contextual)">
+    <div class="flex gap-32 max-sm:flex-col">
+      <div class="h-162 w-208 shrink-0 overflow-hidden">
+        <Image
+          src={brandenburgLogo}
+          alt="Landeswappen von Brandenburg. Unterhalb der Schriftzug „Land Brandenburg“."
+        />
+      </div>
+      <div>
+        <p>
+          Die ZbR ist ein interdisziplinäres Team. Sie bietet den Mitarbeitenden
+          aller Ressorts methodische Unterstützung bei der Erarbeitung der
+          Digitaltauglichkeit von Rechtsetzungsvorhaben.
+        </p>
+        <p>
+          Unser Ziel: Digitale Transformation beginnt, wenn Theorie auf Praxis
+          trifft – das digitale Ende an den Anfang gedacht!
+        </p>
+        <p>
+          Regelungen sollen sich in der Praxis gut umsetzen lassen und digitale
+          Möglichkeiten von Anfang an berücksichtigen. Wir möchten
+          zukunftsfähige Rahmenbedingungen gestalten, die Praxistauglichkeit und
+          konsequente Digitalisierung als untrennbare Einheit begreifen.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="space-y-32">
+    <div>
+      <h2 class="mb-16">So funktioniert der Digitalcheck in Brandenburg</h2>
+      <p>
+        Der Digitalcheck in Brandenburg ist als verpflichtender Bestandteil bei
+        der Erarbeitung von Gesetzen, Rechtsverordnungen und
+        Verwaltungsvorschriften in der{" "}
+        <a
+          href="https://bravors.brandenburg.de/verwaltungsvorschriften/ggo2016"
+          target="_blank"
+        >
+          gemeinsamen Geschäftsordnung für die Ministerien des Landes
+          Brandenburg (GGO)
+        </a>{" "}
+        verankert.
+      </p>
+    </div>
+    <figure class="space-y-24">
+      <Image
+        src={ablaufImg}
+        alt="Der Prozess in Brandenburg beginnt mit der geführten Vorprüfung, bei der das Fachressort den Digitalbezug online einschätzt. Das Ergebnis soll anschließend per E-Mail an die ZbR gesendet werden. Falls kein Digitalbezug besteht, ist der Digitalcheck damit abgeschlossen. Falls Digitalbezug besteht, soll im zweiten Schritt die Regelung nach den Prinzipien der Digitaltauglichkeit erarbeitet werden. Die ZbR unterstützt Sie in diesem Schritt mit Vorlagen sowie optionalen Lern- und Unterstützungsangeboten. Im dritten Schritt soll die Dokumentation online ausgefüllt werden und per E-Mail an die ZbR geschickt werden. Anschließend stimmt sich die ZbR mit dem Fachressort ab."
+        class="h-auto w-full"
+      />
+      <figcaption class="kern-subline kern-subline--small text-kern-layout-text-muted">
+        Ablauf des Digitalcheck in Brandenburg: Schritte von Vorprüfung bis
+        Dokumentation
+      </figcaption>
+    </figure>
+  </section>
+  <section>
+    <div class="flex justify-between gap-32 max-lg:flex-col">
+      <h2 class="lg:w-336">Die ZbR unterstützt beim Digitalcheck</h2>
+      <div class="lg:w-736">
+        <p>Die ZbR unterstützt je nach Bedarf mit:</p>
+        <ul class="space-y-8">
+          <li>
+            <strong>Beratung</strong> zu Digitalbezug und Digitaltauglichkeit,
+          </li>
+          <li>
+            <strong>Schulungen und Workshops</strong> zu Methoden und
+            Prinzipien,
+          </li>
+          <li>
+            <strong>Handreichungen und Werkzeugen</strong> für die eigene
+            Anwendung,
+          </li>
+          <li>
+            <strong>Methodischer, intensiver Begleitung</strong> bei
+            ausgewählten Regelungsvorhaben.
+          </li>
+        </ul>
+        <p>
+          Die fachliche Verantwortung für die Regelung verbleibt stets bei den
+          zuständigen Ressorts. Die ZbR unterstützt vorwiegend methodisch und
+          ggf. bei der Ausführung (z. B. Beteiligtenumfragen).
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="breakout bg-kern-darkblue-025">
+    <h2>Frühzeitige Einbeziehung ist wichtig!</h2>
+    <p>
+      Die ZbR sollte{" "}
+      <strong>
+        möglichst direkt am Anfang des Erarbeitungsprozesses eines
+        Regelungsvorhabens
+      </strong>{" "}
+      einbezogen werden.
+    </p>
+    <p>
+      In dieser Phase lassen sich Prozesse und Anforderungen noch gut verändern.
+      Steht der Regelungstext hingegen weitgehend fest, führen Anpassungen
+      häufig zu Mehraufwand.
+    </p>
+    <p>
+      ZbR – Zentralstelle für bessere Rechtsetzung Brandenburg
+      <br />
+      <a href="mailto:zbr@mdjd.brandenburg.de">zbr@mdjd.brandenburg.de</a>
+    </p>
+    <p>
+      Mitarbeitende der Ministerien des Landes Brandenburg finden spezifische
+      Handreichungen sowie weitere Informationen zum Unterstützungsangebot auf
+      der Intranetseite der ZbR.
+    </p>
+  </section>
+</LaenderLayout>

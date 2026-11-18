@@ -303,6 +303,15 @@ export const bundeslaender = {
   navLabel: "Bundesländer",
 } as const;
 
+export const bundeslaender_brandenburg = {
+  key: "bundeslaender_brandenburg",
+  path: "/bundeslaender/brandenburg",
+  title: "Digitalcheck in Brandenburg",
+  parent: bundeslaender,
+  sitemap: true,
+  isStagingOnly: true,
+} as const;
+
 export const bundeslaender_hessen = {
   key: "bundeslaender_hessen",
   path: "/bundeslaender/hessen",
@@ -496,6 +505,7 @@ export const allRoutes = [
   assistent_vorpruefung_verpflichtungenFuerBeteiligte,
   barrierefreiheit,
   bundeslaender,
+  bundeslaender_brandenburg,
   bundeslaender_hessen,
   bundeslaender_nordrheinWestfalen,
   dasIstNeu,
