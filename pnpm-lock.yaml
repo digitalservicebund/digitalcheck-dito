@@ -54,8 +54,8 @@ importers:
         specifier: ^7.4.12
         version: 7.4.12(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
       astro-route-generator:
-        specifier: github:digitalservicebund/astro-route-generator#0.4.0
-        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/2df96eaf060160d68c473c398b5fa66de1aa3c32(astro@7.4.12(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
+        specifier: github:digitalservicebund/astro-route-generator#0.4.1
+        version: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/f254b931db577b4f1213af61f5e1225e9d8b86d4(astro@7.4.12(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1))
       docx:
         specifier: ^9.15.4
         version: 9.15.4
@@ -1798,9 +1798,9 @@ packages:
     resolution: {integrity: sha512-WavQUarfgwSbpCq4xsdcIBdX5KArfI2d6DD8EIloJIMthnB1508iNpx4C77EhUyMd03LpEt8HAPzwF/cG0V39g==}
     engines: {node: ^22.22.3 || ^24.16.0 || >=26.3.0}
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/2df96eaf060160d68c473c398b5fa66de1aa3c32:
-    resolution: {gitHosted: true, integrity: sha512-Ma4EGFxjsEZIyip/O9lx+o/DQD3T4HEKpLKgqDtoCIkBIhIzQbA2Si9+Zfo5w+GY3MXQWaQUsVSbUf76UgFfFA==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/2df96eaf060160d68c473c398b5fa66de1aa3c32}
-    version: 0.4.0
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/f254b931db577b4f1213af61f5e1225e9d8b86d4:
+    resolution: {gitHosted: true, integrity: sha512-P/V85O8/OjMYHtMN8V5U5hyv/9CI5deKPPOH8c9YTDgvR8L9u0HpY7cjXQolO1yIVeqMZYUIJnaj5HNJZ8KVCQ==, tarball: https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/f254b931db577b4f1213af61f5e1225e9d8b86d4}
+    version: 0.4.1
     peerDependencies:
       astro: '>=4.0.0'
 
@@ -3127,8 +3127,8 @@ packages:
     resolution: {integrity: sha512-vpLQEs+VLCr1nU0BXS07maYoFwlDAH0gngQuuttxIwutDFEMHq2blX+8vpgxDdK3J1PwjCJiep77OitTZ4Ll1A==}
     engines: {node: 18 || 20 || >=22}
 
-  minimatch@11.0.9:
-    resolution: {integrity: sha512-KCFkfyjqerNlSstjlhIGNXIKZGA/6O4V4RlhZ+Dsr621SPPw0mzlypE9D9ZOoPiVefHID+j7/XuMMlqfD/F60Q==}
+  minimatch@11.0.8:
+    resolution: {integrity: sha512-nFQuYSTVrGvysVBps5Ih+0BdnYFN/Cj3C816r6+p7yK+FHrVLGE4O4N9AFwykrlNlvM2HYt+Rad1Uiro6h88Ig==}
     engines: {node: 20 || >=22}
 
   minimatch@3.1.5:
@@ -5899,7 +5899,7 @@ snapshots:
       '@typescript-eslint/types': 8.73.0
       '@typescript-eslint/visitor-keys': 8.73.0
       debug: 4.4.3(supports-color@7.2.0)
-      minimatch: 11.0.9
+      minimatch: 11.0.8
       semver: 7.8.6
       tinyglobby: 0.2.17
       ts-api-utils: 2.5.0(typescript@6.0.3)
@@ -6232,7 +6232,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/2df96eaf060160d68c473c398b5fa66de1aa3c32(astro@7.4.12(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
+  astro-route-generator@https://codeload.github.com/digitalservicebund/astro-route-generator/tar.gz/f254b931db577b4f1213af61f5e1225e9d8b86d4(astro@7.4.12(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)):
     dependencies:
       astro: 7.4.12(@types/node@26.6.6)(jiti@2.7.0)(yaml@2.9.1)
       js-yaml: 5.5.0
@@ -7767,7 +7767,7 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.13
 
-  minimatch@11.0.9:
+  minimatch@11.0.8:
     dependencies:
       '@isaacs/nonrecursive-glob-match': 1.1.0
       brace-expansion: 5.0.13
