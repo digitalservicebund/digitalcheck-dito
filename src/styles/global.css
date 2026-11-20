@@ -50,6 +50,9 @@
   --container-padding-inline: clamp(1rem, 5vw, 3rem);
   --max-content-width: 82rem; /* 1216px + container padding (2 x 48px) = 1312px or 82rem */
   --max-width-a11y: 720px; /* 80ch @ 18px font size = 720px */
+
+  --breakpoint-section-sidebar: 56.25rem; /* 900px */
+  --breakpoint-header-desktop: 75rem; /* 1200px */
 }
 
 :root {

@@ -91,7 +91,7 @@ function navItemStyle(active = false) {
     </a>
 
     <!-- Desktop Navigation -->
-    <nav class="hidden h-full lg:flex" aria-label="Hauptnavigation">
+    <nav class="hidden h-full header-desktop:flex" aria-label="Hauptnavigation">
       {headerNavigation.map((route) => {
         const isActive =
           currentPath === route.path ||
@@ -99,7 +99,7 @@ function navItemStyle(active = false) {
         return (
           <a
             href={route.path}
-            class:list={[navItemStyle(isActive), "max-xl:w-min"]}
+            class={navItemStyle(isActive)}
             aria-current={isActive ? "page" : undefined}
           >
             {getRouteLabel(route)}
@@ -109,7 +109,7 @@ function navItemStyle(active = false) {
     </nav>
 
     <!-- Mobile Menu Toggle -->
-    <div class="flex h-full lg:hidden">
+    <div class="flex h-full header-desktop:hidden">
       <button
         type="button"
         class={navItemStyle()}
@@ -126,14 +126,14 @@ function navItemStyle(active = false) {
   <div
     x-cloak
     x-show="mobileMenuOpen"
-    class="absolute inset-x-0 top-full h-screen bg-black/40 lg:hidden"
+    class="absolute inset-x-0 top-full h-screen bg-black/40 header-desktop:hidden"
     @click="mobileMenuOpen = false"
     aria-hidden="true"
   ></div>
   <!-- Mobile Navigation -->
   <nav
     id={mobileMenuId}
-    class="mobile-menu-popover absolute inset-x-0 top-full border-t-2 border-blue-300 lg:hidden"
+    class="mobile-menu-popover absolute inset-x-0 top-full border-t-2 border-blue-300 header-desktop:hidden"
     x-data={`{ currentPanel: "${mobileMenu.activePanel.id}", initialPanel: "${mobileMenu.activePanel.id}", currentDepth: ${mobileMenuInitialDepth}, initialDepth: ${mobileMenuInitialDepth} }`}
     x-cloak
     x-show="mobileMenuOpen"
@@ -167,9 +167,10 @@ function navItemStyle(active = false) {
     --active-item-bg-color: var(--color-kern-darkblue-100);
   }
 
-  /* Below the desktop nav breakpoint, the header scrolls away with the page
-     and only becomes a floating bar once the user scrolls back up. */
-  @media (width < 64rem) {
+  /* While the section sidebar is hidden, the header scrolls away with the page
+     and only becomes a floating bar once the user scrolls back up.
+     From that breakpoint on, it would cover the sticky sidebar. */
+  @variant max-section-sidebar {
     .page-header.header-floating {
       position: sticky;
       top: 0;

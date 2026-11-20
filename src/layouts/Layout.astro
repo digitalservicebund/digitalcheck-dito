@@ -120,7 +120,7 @@ const showSectionSidebar =
     <SkipNavLink label="Zum Inhalt springen" target="#main" />
     <PageHeader />
     {showSectionSidebar ? (
-      <div class="flex-1 min-[900px]:grid min-[900px]:grid-cols-[264px_minmax(0,1fr)]">
+      <div class="flex-1 section-sidebar:grid section-sidebar:grid-cols-[264px_minmax(0,1fr)]">
         <SectionSidebar />
         <div>
           <slot />

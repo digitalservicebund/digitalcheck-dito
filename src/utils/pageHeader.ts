@@ -1,5 +1,6 @@
-// Matches the `lg` breakpoint, from which on the desktop navigation is shown.
-const DESKTOP_NAV_MIN_WIDTH = 1024;
+// Matches --breakpoint-section-sidebar. From there on, the header doesn't float,
+// as it would cover the sticky section sidebar.
+const SECTION_SIDEBAR_MIN_WIDTH = 900;
 const SCROLL_THRESHOLD = 4;
 
 /**
@@ -30,14 +31,17 @@ export function pageHeaderData() {
     },
 
     /**
-     * Below the desktop nav breakpoint, the header scrolls away with the
+     * Below the section sidebar breakpoint, the header scrolls away with the
      * page normally and only becomes a floating bar once the user scrolls
      * back up (see the `.header-floating` styles in PageHeader.astro).
      */
     handleScroll(el: HTMLElement) {
       const currentScrollY = window.scrollY;
 
-      if (this.mobileMenuOpen || window.innerWidth >= DESKTOP_NAV_MIN_WIDTH) {
+      if (
+        this.mobileMenuOpen ||
+        window.innerWidth >= SECTION_SIDEBAR_MIN_WIDTH
+      ) {
         this.lastScrollY = currentScrollY;
         return;
       }
