@@ -83,7 +83,7 @@ describe("Abschliessen", () => {
       "Dokumentation herunterladen",
       "Fertige Dokumentation an die ZbR senden",
     ]);
-    expect(screen.getByText(/um sie zu verakten/)).toBeVisible();
+    expect(screen.getByText(/an die ZbR weiterleiten/)).toBeVisible();
   });
 
   it("skips the NKR for a Land with EU-Bezug", () => {

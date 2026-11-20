@@ -16,10 +16,9 @@ export default function Abschliessen({
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
-  const pruefbereich = useStore($pruefbereich) ?? "Bund";
-  const { pruefstelle } = getPruefbereichData(pruefbereich);
-  // As in the design, only the Bund mentions forwarding (open question, see tasks.md)
-  const isBund = pruefbereich === "Bund";
+  const { pruefstelle } = getPruefbereichData(
+    useStore($pruefbereich) ?? "Bund",
+  );
   // The EU steps only apply with EU-Bezug, see dokumentationFlow
   const hasEuBezug = data["eu-interoperabilitaet-bezug"] === "yes";
 
@@ -29,8 +28,8 @@ export default function Abschliessen({
       content: (
         <>
           <p>
-            {isBund
-              ? "Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter. Sie können diese vorab intern abstimmen und anschließend an den NKR weiterleiten."
+            {pruefstelle
+              ? `Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter. Sie können diese vorab intern abstimmen und anschließend an ${accusative(pruefstelle)} ${pruefstelle.shortName} weiterleiten.`
               : "Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter, um sie zu verakten."}
           </p>
           <div className="pt-16">
