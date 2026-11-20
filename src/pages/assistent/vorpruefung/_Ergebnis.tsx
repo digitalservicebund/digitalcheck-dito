@@ -1,7 +1,12 @@
 import InputError from "@/components/InputError";
 import { contact } from "@/resources/content/shared/contact";
 import { mailto } from "@/utils/mailtoHelper";
-import type { Pruefbereich } from "@/wizard/pruefbereichSchema";
+import { uppercaseFirst } from "@/utils/utilFunctions";
+import {
+  accusative,
+  getPruefbereichData,
+  type Pruefbereich,
+} from "@/wizard/pruefbereichSchema";
 import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import {
   getVorpruefungResult,
@@ -240,7 +245,7 @@ function Steps({
   data: VorpruefungData;
   pruefbereich: Pruefbereich;
 }>) {
-  const isBund = pruefbereich === "Bund";
+  const { pruefstelle } = getPruefbereichData(pruefbereich);
   const hasInteroperability = result === "digitalAndInteroperability";
   const body = (title: string) => emailBody(result, data, pruefbereich, title);
   const sendNote = (
@@ -274,26 +279,26 @@ function Steps({
         </>
       ),
     },
-    // The NKR only checks Regelungsvorhaben of the Bund, the Digitalcheck
-    // team gets a copy with Interoperabilität
-    isBund && {
-      heading: "Ergebnis per E-Mail an den NKR senden",
+    // Only some Prüfbereiche have a Prüfstelle, the Digitalcheck team gets a
+    // copy with Interoperabilität
+    !!pruefstelle && {
+      heading: `Ergebnis per E-Mail an ${accusative(pruefstelle)} ${pruefstelle.shortName} senden`,
       content: (
         <>
           <p>
-            Der Normenkontrollrat berät und unterstützt Sie bereits in der
-            frühen Phase Ihres Vorhabens.
+            {uppercaseFirst(pruefstelle.article)} {pruefstelle.name} berät und
+            unterstützt Sie bereits in der frühen Phase Ihres Vorhabens.
           </p>
           {sendNote}
           <EmailForm
-            to={contact.nkrEmail}
+            to={pruefstelle.email}
             cc={hasInteroperability ? contact.interoperabilityEmail : undefined}
             body={body}
           />
         </>
       ),
     },
-    !isBund &&
+    !pruefstelle &&
       hasInteroperability && {
         heading: "Ergebnis per E-Mail an das Digitalcheck-Team senden",
         content: (
@@ -369,19 +374,28 @@ export default function Ergebnis() {
   const isClear = result !== "contradiction" && result !== "unsure";
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
   const pruefbereich = useStore($pruefbereich) ?? "Bund";
-  const isBund = pruefbereich === "Bund";
+  const { pruefstelle, support } = getPruefbereichData(pruefbereich);
   // Same condition as the e-mail steps in <Steps>
-  const hasEmail = isBund || result === "digitalAndInteroperability";
+  const hasEmail = !!pruefstelle || result === "digitalAndInteroperability";
 
   return (
     <div className="breakout space-y-48 sm:space-y-64 print:[&_.kern-icon]:[print-color-adjust:exact]">
       {result === "contradiction" && <ContradictionAlert />}
       {result === "unsure" && (
         <WarningAlert title="Sie haben mehrere Fragen mit „Ich bin unsicher“ beantwortet">
-          <p className="kern-body">
-            Bitte kontaktieren Sie das Digitalcheck-Team unter{" "}
-            <SupportContact />. Wir helfen Ihnen, die Vorprüfung abzuschließen.
-          </p>
+          {support ? (
+            <p className="kern-body">
+              {support.intro}{" "}
+              <a href={`mailto:${support.email}`}>{support.email}</a>.{" "}
+              {support.outro}
+            </p>
+          ) : (
+            <p className="kern-body">
+              Bitte kontaktieren Sie das Digitalcheck-Team unter{" "}
+              <SupportContact />. Wir helfen Ihnen, die Vorprüfung
+              abzuschließen.
+            </p>
+          )}
         </WarningAlert>
       )}
       {isClear && (

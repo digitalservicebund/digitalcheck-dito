@@ -57,6 +57,35 @@ describe("Abschliessen", () => {
     expect(stepHeadings()).toContain("Fertige Dokumentation an den NKR senden");
   });
 
+  it("adds the ZbR and the Nationale Kontaktstelle for Brandenburg with EU-Bezug", () => {
+    $pruefbereich.set("Brandenburg");
+    store.save({ "eu-interoperabilitaet-bezug": "yes" });
+    render(<Abschliessen prinzipien={[]} />);
+
+    expect(stepHeadings()).toEqual([
+      "Dokumentation herunterladen",
+      "Fertige Dokumentation an die ZbR senden",
+      "An die Nationale Kontaktstelle senden",
+    ]);
+    expect(
+      screen.getByRole("link", { name: "zbr@mdjd.brandenburg.de" }),
+    ).toHaveAttribute("href", "mailto:zbr@mdjd.brandenburg.de");
+    expect(screen.getByText(/^Die ZbR prüft Ihren Entwurf/)).toBeVisible();
+    expect(screen.queryByText(/NKR/)).not.toBeInTheDocument();
+  });
+
+  it("only adds the ZbR for Brandenburg without EU-Bezug", () => {
+    $pruefbereich.set("Brandenburg");
+    store.save({ "eu-interoperabilitaet-bezug": "no" });
+    render(<Abschliessen prinzipien={[]} />);
+
+    expect(stepHeadings()).toEqual([
+      "Dokumentation herunterladen",
+      "Fertige Dokumentation an die ZbR senden",
+    ]);
+    expect(screen.getByText(/um sie zu verakten/)).toBeVisible();
+  });
+
   it("skips the NKR for a Land with EU-Bezug", () => {
     $pruefbereich.set("Hessen");
     store.save({ "eu-interoperabilitaet-bezug": "yes" });

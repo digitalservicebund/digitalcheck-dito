@@ -1,5 +1,7 @@
 import type { Prinzip } from "@/content.config";
 import { contact } from "@/resources/content/shared/contact";
+import { uppercaseFirst } from "@/utils/utilFunctions";
+import { accusative, getPruefbereichData } from "@/wizard/pruefbereichSchema";
 import { $pruefbereich, wizardStores } from "@/wizard/stores";
 import { useStore } from "@nanostores/react";
 import WordDownloadButton from "./_WordDownloadButton";
@@ -14,7 +16,10 @@ export default function Abschliessen({
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
-  const isBund = (useStore($pruefbereich) ?? "Bund") === "Bund";
+  const pruefbereich = useStore($pruefbereich) ?? "Bund";
+  const { pruefstelle } = getPruefbereichData(pruefbereich);
+  // As in the design, only the Bund mentions forwarding (open question, see tasks.md)
+  const isBund = pruefbereich === "Bund";
   // The EU steps only apply with EU-Bezug, see dokumentationFlow
   const hasEuBezug = data["eu-interoperabilitaet-bezug"] === "yes";
 
@@ -38,23 +43,24 @@ export default function Abschliessen({
         </>
       ),
     },
-    // The NKR only checks Regelungsvorhaben of the Bund
-    isBund && {
-      heading: "Fertige Dokumentation an den NKR senden",
+    // Only some Prüfbereiche have a Prüfstelle
+    !!pruefstelle && {
+      heading: `Fertige Dokumentation an ${accusative(pruefstelle)} ${pruefstelle.shortName} senden`,
       content: (
         <ul>
           <li>
             Senden Sie die finale Dokumentation{" "}
             <strong>als PDF per E-Mail</strong> an{" "}
-            <a href={`mailto:${contact.nkrEmail}`}>{contact.nkrEmail}</a>.
+            <a href={`mailto:${pruefstelle.email}`}>{pruefstelle.email}</a>.
           </li>
           <li>
             <strong>Visualisierungen</strong> können Sie als separate Anlage (z.
             B. als PDF oder Bilddatei) beifügen.
           </li>
           <li>
-            Der NKR prüft Ihren Entwurf auf Digital- und Praxistauglichkeit und
-            kommt bei Rückfragen direkt auf Sie zu.
+            {uppercaseFirst(pruefstelle.article)} {pruefstelle.shortName} prüft
+            Ihren Entwurf auf Digital- und Praxistauglichkeit und kommt bei
+            Rückfragen direkt auf Sie zu.
           </li>
         </ul>
       ),

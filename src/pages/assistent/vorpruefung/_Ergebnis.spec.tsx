@@ -58,6 +58,38 @@ describe("Ergebnis", () => {
     expect(screen.queryByText(/Kopie/)).not.toBeInTheDocument();
   });
 
+  it("sends the result to the ZbR with a copy for Interoperabilität", () => {
+    $pruefbereich.set("Brandenburg");
+    store.save({ ...withInteroperability });
+    render(<Ergebnis />);
+
+    expect(
+      screen.getByRole("heading", {
+        name: "Ergebnis per E-Mail an die ZbR senden",
+      }),
+    ).toBeVisible();
+    expect(
+      screen.getByText(/^Die Zentralstelle für bessere Rechtsetzung berät/),
+    ).toBeVisible();
+    expect(emailLink().getAttribute("href")).toMatch(
+      /^mailto:zbr@mdjd\.brandenburg\.de\?cc=interoperabel%40digitalservice\.bund\.de&/,
+    );
+    expect(
+      screen.queryByText(/an das Digitalcheck-Team/),
+    ).not.toBeInTheDocument();
+  });
+
+  it("sends the result to the ZbR without a copy for Brandenburg without Interoperabilität", () => {
+    $pruefbereich.set("Brandenburg");
+    store.save({ ...allNo });
+    render(<Ergebnis />);
+
+    expect(screen.getByText("Schritt 2")).toBeVisible();
+    expect(emailLink().getAttribute("href")).toMatch(
+      /^mailto:zbr@mdjd\.brandenburg\.de\?(?!.*cc=)/,
+    );
+  });
+
   it("sends the result to the Digitalcheck team for a Land with Interoperabilität", () => {
     $pruefbereich.set("Hessen");
     store.save({ ...withInteroperability });
@@ -137,6 +169,40 @@ describe("Ergebnis", () => {
     expect(
       screen.queryByText("Ergebnis herunterladen"),
     ).not.toBeInTheDocument();
+    expect(screen.getByText(/das Digitalcheck-Team/)).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "digitalcheck@digitalservice.bund.de" }),
+    ).toBeVisible();
+  });
+
+  it("asks to contact the ZbR in Brandenburg when unsure", () => {
+    $pruefbereich.set("Brandenburg");
+    store.save({ ...allNo, kommunikation: "unsure" });
+    render(<Ergebnis />);
+
+    expect(
+      screen.getByText(
+        /^Bitte kontaktieren Sie die Zentralstelle für bessere Rechtsetzung \(ZbR\) per E-Mail an/,
+      ),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "zbr@mdjd.brandenburg.de" }),
+    ).toHaveAttribute("href", "mailto:zbr@mdjd.brandenburg.de");
+    expect(screen.queryByText(/Digitalcheck-Team/)).not.toBeInTheDocument();
+  });
+
+  it("asks to contact the support in Nordrhein-Westfalen when unsure", () => {
+    $pruefbereich.set("Nordrhein-Westfalen");
+    store.save({ ...allNo, kommunikation: "unsure" });
+    render(<Ergebnis />);
+
+    expect(
+      screen.getByText(/zuständigen Kolleginnen und Kollegen unter/),
+    ).toBeVisible();
+    expect(
+      screen.getByRole("link", { name: "fp-r213@mhkbd.nrw.de" }),
+    ).toHaveAttribute("href", "mailto:fp-r213@mhkbd.nrw.de");
+    expect(screen.queryByText(/Digitalcheck-Team/)).not.toBeInTheDocument();
   });
 
   it("links to the Datenaustausch for a contradiction", () => {

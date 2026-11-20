@@ -27,9 +27,7 @@ const startRoute = startRoutes[wizardId];
 
 // The tallest logo of the offered options, so switching doesn't shift the layout
 const minHeight = Math.max(
-  ...pruefbereichOptions.map(
-    ({ value }) => pruefbereichLogos[value]?.height ?? 0,
-  ),
+  ...pruefbereichOptions.map(({ value }) => pruefbereichLogos[value].height),
 );
 ---
 
@@ -45,17 +43,15 @@ const minHeight = Math.max(
   {pruefbereichOptions.map(({ value }) => {
     const logo = pruefbereichLogos[value];
     return (
-      logo && (
-        <Image
-          src={logo.image}
-          alt=""
-          width={logo.width}
-          height={logo.height}
-          densities={[1, 2]}
-          data-pruefbereich={value}
-          hidden={value !== "Bund"}
-        />
-      )
+      <Image
+        src={logo.image}
+        alt=""
+        width={logo.width}
+        height={logo.height}
+        densities={[1, 2]}
+        data-pruefbereich={value}
+        hidden={value !== "Bund"}
+      />
     );
   })}
   <div class="kern-body kern-body--small py-0 my-0">

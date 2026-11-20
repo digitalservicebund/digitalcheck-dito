@@ -46,6 +46,9 @@ export const gesetzStatusMap = {
   Text_im_Parlament: "Text im Parlament",
 };
 
+export const uppercaseFirst = (text: string) =>
+  text.charAt(0).toUpperCase() + text.slice(1);
+
 export const isExternalUrl = (url: string) => url.startsWith("http");
 
 export const idFromText = (text: string, preText?: string) =>
