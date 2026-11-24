@@ -6,6 +6,7 @@ import PageHeader from "@/components/global/PageHeader.astro";
 import { siteMeta } from "@/resources/content/shared/meta";
 import { isProduction } from "@/config/stage";
 import { isNoIndexPath } from "@/config/seo";
+import { withBase } from "@/utils/path";
 import firaSansRegularUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Regular.woff2?url";
 import firaSansMediumUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-Medium.woff2?url";
 import firaSansSemiBoldUrl from "@kern-ux/native/dist/fonts/fira-sans/FiraSans-SemiBold.woff2?url";
@@ -106,9 +107,45 @@ const showSectionSidebar =
       type="font/woff2"
       crossorigin
     />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon_32.png" type="image/png" sizes="32x32" />
-    <link rel="icon" href="/favicon_64.png" type="image/png" sizes="64x64" />
+    {isProduction ? (
+      <>
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link
+          rel="icon"
+          href="/favicon_32.png"
+          type="image/png"
+          sizes="32x32"
+        />
+        <link
+          rel="icon"
+          href="/favicon_64.png"
+          type="image/png"
+          sizes="64x64"
+        />
+      </>
+    ) : (
+      <>
+        <link
+          rel="icon"
+          type="image/png"
+          href={withBase("/dachmarke/favicon-96x96.png")}
+          sizes="96x96"
+        />
+        <link
+          rel="icon"
+          type="image/svg+xml"
+          href={withBase("/dachmarke/favicon.svg")}
+        />
+        <link rel="shortcut icon" href={withBase("/dachmarke/favicon.ico")} />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href={withBase("/dachmarke/apple-touch-icon.png")}
+        />
+        <meta name="apple-mobile-web-app-title" content="Digitalcheck" />
+        <link rel="manifest" href={withBase("/dachmarke/site.webmanifest")} />
+      </>
+    )}
 
     <script
       is:inline
