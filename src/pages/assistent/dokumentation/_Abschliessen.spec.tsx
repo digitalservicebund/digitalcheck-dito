@@ -107,5 +107,17 @@ describe("Abschliessen", () => {
 
     expect(stepHeadings()).toEqual(["Dokumentation herunterladen"]);
     expect(screen.queryByText("Schritt 1")).not.toBeInTheDocument();
+    expect(screen.getByText(/um sie zu verakten\.$/)).toBeVisible();
+  });
+
+  it("shows the download text of Nordrhein-Westfalen", () => {
+    $pruefbereich.set("Nordrhein-Westfalen");
+    render(<Abschliessen prinzipien={[]} />);
+
+    expect(
+      screen.getByText(
+        "Laden Sie die ausgefüllte Dokumentation herunter und fügen Sie diese Ihrem Gesetzesvorhaben bei.",
+      ),
+    ).toBeVisible();
   });
 });

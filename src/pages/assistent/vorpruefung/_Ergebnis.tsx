@@ -12,7 +12,7 @@ import {
   getVorpruefungResult,
   questionNames,
   resultRows,
-  type VorpruefungResult,
+  type ClearResult,
 } from "@/wizard/vorpruefungResult";
 import type { Answer } from "@/wizard/vorpruefungSchema";
 import { useStore } from "@nanostores/react";
@@ -22,10 +22,8 @@ import ResultTable from "./_ResultTable";
 
 type VorpruefungData = ReturnType<typeof wizardStores.vorpruefung.$data.get>;
 
-/** A result without open questions, shown in "Ihr Ergebnis" */
-type ClearResult = Exclude<VorpruefungResult, "contradiction" | "unsure">;
-
-const meanings: Record<ClearResult, string> = {
+/** Unless the Prüfbereich has its own, see PruefbereichData.vorpruefungTexts */
+const defaultMeanings: Record<ClearResult, string> = {
   negative:
     "Sie haben den Digitalcheck erfolgreich abgeschlossen. Es sind keine weiteren Schritte erforderlich.",
   digital:
@@ -98,7 +96,13 @@ function SupportContact() {
   );
 }
 
-function ResultAlert({ result }: Readonly<{ result: ClearResult }>) {
+function ResultAlert({
+  result,
+  pruefbereich,
+}: Readonly<{ result: ClearResult; pruefbereich: Pruefbereich }>) {
+  const customMeaning =
+    getPruefbereichData(pruefbereich).vorpruefungTexts?.meanings?.[result];
+
   return (
     <div className="kern-alert kern-alert--info max-w-736">
       <div className="kern-alert__header">
@@ -118,10 +122,14 @@ function ResultAlert({ result }: Readonly<{ result: ClearResult }>) {
             </li>
           ))}
         </ul>
-        <div>
-          <b>Was bedeutet das für Ihr Vorhaben?</b>
-          <p className="kern-body">{meanings[result]}</p>
-        </div>
+        {customMeaning ? (
+          <p className="kern-body">{customMeaning}</p>
+        ) : (
+          <div>
+            <b>Was bedeutet das für Ihr Vorhaben?</b>
+            <p className="kern-body">{defaultMeanings[result]}</p>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -245,7 +253,7 @@ function Steps({
   data: VorpruefungData;
   pruefbereich: Pruefbereich;
 }>) {
-  const { pruefstelle } = getPruefbereichData(pruefbereich);
+  const { pruefstelle, vorpruefungTexts } = getPruefbereichData(pruefbereich);
   const hasInteroperability = result === "digitalAndInteroperability";
   const body = (title: string) => emailBody(result, data, pruefbereich, title);
   const sendNote = (
@@ -261,7 +269,10 @@ function Steps({
       heading: "Ergebnis herunterladen",
       content: (
         <>
-          <p>Laden Sie Ihr Vorprüfungsergebnis herunter, um es zu verakten.</p>
+          <p>
+            {vorpruefungTexts?.download ??
+              "Laden Sie Ihr Vorprüfungsergebnis herunter, um es zu verakten."}
+          </p>
           <div className="pt-16">
             {/* TODO: Generate the PDF, until then the print dialog can save one */}
             <button
@@ -400,7 +411,7 @@ export default function Ergebnis() {
       )}
       {isClear && (
         <>
-          <ResultAlert result={result} />
+          <ResultAlert result={result} pruefbereich={pruefbereich} />
           <Steps result={result} data={data} pruefbereich={pruefbereich} />
         </>
       )}

@@ -16,7 +16,7 @@ export default function Abschliessen({
   // Rendered client-only (no HTML from the build), so the stored data is known
   const data = useStore(wizardStores.dokumentation.$data);
   // Without a stored Prüfbereich, the Bund is assumed (as in the breadcrumb)
-  const { pruefstelle } = getPruefbereichData(
+  const { pruefstelle, dokumentationTexts } = getPruefbereichData(
     useStore($pruefbereich) ?? "Bund",
   );
   // The EU steps only apply with EU-Bezug, see dokumentationFlow
@@ -28,9 +28,10 @@ export default function Abschliessen({
       content: (
         <>
           <p>
-            {pruefstelle
-              ? `Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter. Sie können diese vorab intern abstimmen und anschließend an ${accusative(pruefstelle)} ${pruefstelle.shortName} weiterleiten.`
-              : "Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter, um sie zu verakten."}
+            {dokumentationTexts?.download ??
+              (pruefstelle
+                ? `Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter. Sie können diese vorab intern abstimmen und anschließend an ${accusative(pruefstelle)} ${pruefstelle.shortName} weiterleiten.`
+                : "Laden Sie die ausgefüllte Dokumentation als Word-Datei herunter, um sie zu verakten.")}
           </p>
           <div className="pt-16">
             <WordDownloadButton

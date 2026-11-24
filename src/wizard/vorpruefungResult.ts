@@ -23,6 +23,12 @@ export type VorpruefungResult =
   | "digital"
   | "digitalAndInteroperability";
 
+/** A result without open questions, shown in "Ihr Ergebnis" */
+export type ClearResult = Exclude<
+  VorpruefungResult,
+  "contradiction" | "unsure"
+>;
+
 // All questions but the EU-Bezug, which only decides on the Interoperabilität
 const digitalQuestions = [
   "it-system",

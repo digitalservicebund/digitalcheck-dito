@@ -1,10 +1,12 @@
 import { showLaender } from "@/config/features";
 import { contact } from "@/resources/content/shared/contact";
+import type { ReactNode } from "react";
 import { z } from "zod";
+import type { ClearResult } from "./vorpruefungResult";
 
 // The Prüfbereich (Bund or a Bundesland), shared by both wizards and chosen on
 // their start pages, with its Prüfstelle. Only depends on zod, the feature
-// flags and the contact data, so it can be imported anywhere.
+// flags and the contact data (plus JSX for texts), so it can be imported anywhere.
 
 /** Checks the Regelungsvorhaben, gets the results of both wizards by e-mail */
 type Pruefstelle = {
@@ -28,6 +30,18 @@ type PruefbereichData = {
   pruefstelle?: Pruefstelle;
   /** Without one, the Digitalcheck team helps */
   support?: Support;
+  /** Replaces the default texts on the result page of the Vorprüfung */
+  vorpruefungTexts?: {
+    /** Shown without the heading "Was bedeutet das für Ihr Vorhaben?" */
+    meanings?: Record<ClearResult, ReactNode>;
+    /** Intro of the download step */
+    download?: string;
+  };
+  /** Replaces the default texts on the last page of the Dokumentation */
+  dokumentationTexts?: {
+    /** Intro of the download step */
+    download?: string;
+  };
 };
 
 const zbrEmail = "zbr@mdjd.brandenburg.de";
@@ -67,6 +81,28 @@ const allPruefbereiche = {
       intro:
         "Bei Fragen zur Vorprüfung wenden Sie sich gerne per E-Mail an die zuständigen Kolleginnen und Kollegen unter",
       outro: "Sie unterstützen Sie gerne beim Ausfüllen der Vorprüfung.",
+    },
+    vorpruefungTexts: {
+      meanings: {
+        negative:
+          "Sie müssen nichts weiter veranlassen. Der Digitalcheck für Ihr Regelungsvorhaben ist damit abgeschlossen.",
+        digital: (
+          <>
+            Bitte berücksichtigen Sie in den weiteren Schritten Ihres
+            Regelungsvorhabens die Anforderungen an die Digitaltauglichkeit. Für
+            die EU-Interoperabilität sind <b>keine</b> weiteren Maßnahmen
+            erforderlich.
+          </>
+        ),
+        digitalAndInteroperability:
+          "Bitte berücksichtigen Sie in den weiteren Schritten Ihres Regelungsvorhabens die Anforderungen an die Digitaltauglichkeit sowie die europäischen Vorgaben zur Interoperabilität.",
+      },
+      download:
+        "Laden Sie Ihr Vorprüfungsergebnis herunter und fügen Sie es bei Bedarf Ihren Unterlagen bei.",
+    },
+    dokumentationTexts: {
+      download:
+        "Laden Sie die ausgefüllte Dokumentation herunter und fügen Sie diese Ihrem Gesetzesvorhaben bei.",
     },
   },
 } as const satisfies Record<string, PruefbereichData>;

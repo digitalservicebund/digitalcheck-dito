@@ -120,6 +120,30 @@ describe("Ergebnis", () => {
     expect(
       screen.queryByRole("link", { name: "E-Mail-Programm öffnen" }),
     ).not.toBeInTheDocument();
+    // Without texts of its own, the Land gets the default ones
+    expect(
+      screen.getByText("Was bedeutet das für Ihr Vorhaben?"),
+    ).toBeVisible();
+    expect(screen.getByText(/um es zu verakten\.$/)).toBeVisible();
+  });
+
+  it("shows the texts of Nordrhein-Westfalen without the heading for the meaning", () => {
+    $pruefbereich.set("Nordrhein-Westfalen");
+    store.save({ ...allNo, "it-system": "yes" });
+    render(<Ergebnis />);
+
+    expect(
+      screen.getByText(/^Bitte berücksichtigen Sie in den weiteren Schritten/),
+    ).toBeVisible();
+    expect(screen.getByText("keine").tagName).toBe("B");
+    expect(
+      screen.queryByText("Was bedeutet das für Ihr Vorhaben?"),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "Laden Sie Ihr Vorprüfungsergebnis herunter und fügen Sie es bei Bedarf Ihren Unterlagen bei.",
+      ),
+    ).toBeVisible();
   });
 
   it("adds the title to the e-mail", () => {
