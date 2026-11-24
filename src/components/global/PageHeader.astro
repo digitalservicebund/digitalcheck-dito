@@ -55,7 +55,7 @@ function navItemStyle(active = false) {
   <div
     class:list={[
       "flex justify-between px-kern-lg",
-      isProduction ? "h-72" : "h-96",
+      isProduction ? "h-72" : "h-72 sm:h-96",
     ]}
   >
     <!-- Logo and title -->
@@ -79,12 +79,12 @@ function navItemStyle(active = false) {
           <img
             src={withBase("/logo/dachmarke-logo.png")}
             alt="Digitalcheck – Logo des Bundes"
-            class="mt-14 h-72 self-start forced-colors:dark:hidden"
+            class="mt-4 h-53 sm:h-72 forced-colors:dark:hidden"
           />
           <img
             src={withBase("/logo/dachmarke-logo-white.png")}
             alt="Digitalcheck – Logo des Bundes"
-            class="mt-14 hidden h-72 self-start forced-colors:dark:block"
+            class="mt-4 hidden h-53 sm:h-72 forced-colors:dark:block"
           />
         </>
       )}
