@@ -26,6 +26,8 @@ type Support = {
 
 type PruefbereichData = {
   label: string;
+  /** Neither offered nor accepted, stored ones fall back to the Bund */
+  hidden?: boolean;
   /** Without one, the results aren't sent to a Prüfstelle */
   pruefstelle?: Pruefstelle;
   /** Without one, the Digitalcheck team helps */
@@ -46,8 +48,7 @@ type PruefbereichData = {
 
 const zbrEmail = "zbr@mdjd.brandenburg.de";
 
-// Bund comes first, so it's preselected. The Länder are only offered (and
-// accepted) with the feature flag, otherwise stored ones fall back to the Bund.
+// Bund comes first, so it's preselected. Remove `hidden` to launch a Land.
 const allPruefbereiche = {
   Bund: {
     label: "Bund",
@@ -60,6 +61,7 @@ const allPruefbereiche = {
   },
   Brandenburg: {
     label: "Brandenburg",
+    hidden: !showLaender,
     pruefstelle: {
       article: "die",
       shortName: "ZbR",
@@ -73,9 +75,10 @@ const allPruefbereiche = {
       outro: "Sie unterstützt Sie dabei, die Vorprüfung abzuschließen.",
     },
   },
-  Hessen: { label: "Hessen" },
+  Hessen: { label: "Hessen", hidden: !showLaender },
   "Nordrhein-Westfalen": {
     label: "Nordrhein-Westfalen",
+    hidden: !showLaender,
     support: {
       email: "fp-r213@mhkbd.nrw.de",
       intro:
@@ -107,18 +110,16 @@ const allPruefbereiche = {
   },
 } as const satisfies Record<string, PruefbereichData>;
 
-type AnyPruefbereich = keyof typeof allPruefbereiche;
-
-export const pruefbereichOptions = (
-  Object.keys(allPruefbereiche) as AnyPruefbereich[]
-)
-  .filter((value) => showLaender || value === "Bund")
-  .map((value) => ({ value, label: allPruefbereiche[value].label }));
-
-export type Pruefbereich = (typeof pruefbereichOptions)[number]["value"];
+export type Pruefbereich = keyof typeof allPruefbereiche;
 
 export const getPruefbereichData = (value: Pruefbereich): PruefbereichData =>
   allPruefbereiche[value];
+
+export const pruefbereichOptions = (
+  Object.keys(allPruefbereiche) as Pruefbereich[]
+)
+  .filter((value) => !getPruefbereichData(value).hidden)
+  .map((value) => ({ value, label: allPruefbereiche[value].label }));
 
 /** The article in the accusative, e.g. "den" for "an den NKR" */
 export const accusative = ({ article }: Pruefstelle) =>
