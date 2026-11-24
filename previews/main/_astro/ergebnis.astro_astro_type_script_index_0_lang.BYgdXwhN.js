@@ -1,0 +1,1 @@
+import{A as e,n as t}from"./stores.DSd4fwWo.js";var{$isReachable:n,$resumePath:r}=t.vorpruefung;n.subscribe(t=>{t(e.path)||globalThis.location.replace(r.get())});
