@@ -26,6 +26,17 @@ export const news = {
     },
     {
       badge: {
+        text: "12.11.2026",
+      },
+      headline: {
+        text: "Überarbeitung der 3 Schritte des Digitalcheck",
+      },
+      content: dedent`
+        - Anpassung des Designs und eine verbesserte Navigation durch den Digitalcheck.
+        - Der Schritt „Erarbeiten“ ist jetzt als interaktive Klickstrecke verfügbar.`,
+    },
+    {
+      badge: {
         text: "14.09.2026",
       },
       headline: {
