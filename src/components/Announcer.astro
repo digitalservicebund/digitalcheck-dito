@@ -1,0 +1,24 @@
+<details class="group breakout block!">
+  <summary class="bg-kern-feedback-info-background cursor-pointer list-none py-16 [&::-webkit-details-marker]:hidden">
+    <span class="container flex flex-wrap items-center gap-8">
+      <span
+        class="kern-icon kern-icon--info bg-kern-feedback-info"
+        aria-hidden="true"
+      ></span>
+      <slot />
+      <span class="kern-btn kern-btn--tertiary">
+        <span class="kern-label group-open:hidden">Mehr dazu</span>
+        <span class="kern-label not-group-open:hidden">Schließen</span>
+        <span
+          class="kern-icon kern-icon--arrow-down group-open:rotate-180"
+          aria-hidden="true"
+        ></span>
+      </span>
+    </span>
+  </summary>
+  <div class="bg-kern-lightblue-025 py-16">
+    <div class="container">
+      <slot name="details" />
+    </div>
+  </div>
+</details>
