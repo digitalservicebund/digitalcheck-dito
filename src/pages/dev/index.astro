@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import RouteTabs from "@/components/tabs/RouteTabs.astro";
 import Tabs from "@/components/tabs/Tabs.astro";
 import Hero from "@/components/Hero.astro";
+import Announcement from "@/components/Announcement.astro";
 import { withBase } from "@/utils/path";
 
 export const frontmatter = {
@@ -16,6 +17,13 @@ export const frontmatter = {
     <Hero>
       <h1>{frontmatter.title}</h1>
     </Hero>
+    <Announcement>
+      <strong>Announcement mit kurzer Überschrift</strong>
+      <p slot="details">
+        Hier stehen weitere Details zur Ankündigung, die erst nach dem
+        Aufklappen sichtbar sind.
+      </p>
+    </Announcement>
     <div class="space-y-64 py-80">
       <h2>Tabs</h2>
       <section>
