@@ -1,30 +1,31 @@
-<details class="group breakout block! bg-kern-feedback-info-background">
-  <summary class="group/summary cursor-pointer list-none py-16 group-open:pb-0 focus-visible:outline-none [&::-webkit-details-marker]:hidden">
-    <span class="container flex items-center">
+---
+const titleId = `announcement-${crypto.randomUUID()}`;
+---
+
+<div class="breakout block! bg-kern-feedback-info-background py-16">
+  <div class="container flex flex-wrap items-center">
+    <span class="mr-8 flex items-center">
       <span
-        class="kern-icon kern-icon--info size-40 shrink-0 bg-kern-feedback-info"
+        class="kern-icon kern-icon--info kern-icon--default shrink-0 bg-kern-feedback-info"
         aria-hidden="true"
       ></span>
-      <span class="kern-heading-medium flex flex-1 flex-wrap items-center gap-x-16 p-8">
+      <span id={titleId} class="kern-heading-small p-8">
         <slot />
-        <span class="kern-btn kern-btn--tertiary group-focus-visible/summary:outline-kern-action-focus-default -my-8 flex-none px-8 group-focus-visible/summary:outline-4 group-focus-visible/summary:outline-offset-2">
-          <span class="kern-label kern-heading-medium pr-4 group-open:hidden">
-            Mehr dazu
-          </span>
-          <span class="kern-label kern-heading-medium pr-4 not-group-open:hidden">
-            Schließen
-          </span>
-          <span
-            class="kern-icon kern-icon--arrow-down kern-icon--large group-open:rotate-180"
-            aria-hidden="true"
-          ></span>
-        </span>
       </span>
     </span>
-  </summary>
-  <div class="container pb-16">
-    <div class="max-w-a11y p-8">
-      <slot name="details" />
-    </div>
+    <!-- `contents` lets the body wrap onto its own full-width row below the title -->
+    <details class="kern-details group details-content:basis-full contents">
+      <summary class="kern-details__header py-8" aria-describedby={titleId}>
+        <span class="kern-title kern-title--small group-open:hidden">
+          Mehr dazu
+        </span>
+        <span class="kern-title kern-title--small not-group-open:hidden">
+          Schließen
+        </span>
+      </summary>
+      <div class="max-w-a11y py-8">
+        <slot name="details" />
+      </div>
+    </details>
   </div>
-</details>
+</div>
