@@ -43,6 +43,8 @@ type PruefbereichData = {
   dokumentationTexts?: {
     /** Intro of the download step */
     download?: string;
+    /** Last point of the Prüfstelle step */
+    review?: string;
   };
 };
 
@@ -73,6 +75,10 @@ const allPruefbereiche = {
       intro:
         "Bitte kontaktieren Sie die Zentralstelle für bessere Rechtsetzung (ZbR) per E-Mail an",
       outro: "Sie unterstützt Sie dabei, die Vorprüfung abzuschließen.",
+    },
+    dokumentationTexts: {
+      review:
+        "Die ZbR prüft Ihre Dokumentation und kommt bei Rückfragen direkt auf Sie zu.",
     },
   },
   Hessen: { label: "Hessen", hidden: !showLaender },

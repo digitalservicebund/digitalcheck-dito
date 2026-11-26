@@ -58,9 +58,8 @@ export default function Abschliessen({
             B. als PDF oder Bilddatei) beifügen.
           </li>
           <li>
-            {uppercaseFirst(pruefstelle.article)} {pruefstelle.shortName} prüft
-            Ihren Entwurf auf Digital- und Praxistauglichkeit und kommt bei
-            Rückfragen direkt auf Sie zu.
+            {dokumentationTexts?.review ??
+              `${uppercaseFirst(pruefstelle.article)} ${pruefstelle.shortName} prüft Ihren Entwurf auf Digital- und Praxistauglichkeit und kommt bei Rückfragen direkt auf Sie zu.`}
           </li>
         </ul>
       ),

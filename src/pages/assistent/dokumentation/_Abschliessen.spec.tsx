@@ -44,6 +44,7 @@ describe("Abschliessen", () => {
       "Fertige Dokumentation an den NKR senden",
     ]);
     expect(screen.getByText(/an den NKR weiter/)).toBeVisible();
+    expect(screen.getByText(/^Der NKR prüft Ihren Entwurf/)).toBeVisible();
     expect(
       screen.getByText(
         "Damit haben Sie den Digitalcheck erfolgreich abgeschlossen.",
@@ -70,7 +71,11 @@ describe("Abschliessen", () => {
     expect(
       screen.getByRole("link", { name: "zbr@mdjd.brandenburg.de" }),
     ).toHaveAttribute("href", "mailto:zbr@mdjd.brandenburg.de");
-    expect(screen.getByText(/^Die ZbR prüft Ihren Entwurf/)).toBeVisible();
+    expect(
+      screen.getByText(
+        "Die ZbR prüft Ihre Dokumentation und kommt bei Rückfragen direkt auf Sie zu.",
+      ),
+    ).toBeVisible();
     expect(screen.queryByText(/NKR/)).not.toBeInTheDocument();
   });
 
