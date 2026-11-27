@@ -16,7 +16,6 @@ import {
   assistent_erarbeitung,
   assistent_vorpruefung,
 } from "@/config/routes";
-import { isProduction } from "@/config/stage";
 import Announcement from "@/components/Announcement.astro";
 import Layout from "@/layouts/Layout.astro";
 import {
@@ -111,21 +110,19 @@ const principles = (await getCollection("prinzipien"))
 
 <Layout>
   <main id="main" class="breakout-grid">
-    {!isProduction && (
-      <Announcement>
-        Aus digitalcheck.bund.de wird digitalcheck.gov.de
-        <p slot="details">
-          Das Digitalcheck-Angebot entwickelt sich weiter und ist nun auch für
-          die <a href={bundeslaender.path}>Bundesländer</a> verfügbar. Zu diesem
-          Anlass führen wir die neue Bildwortmarke und einen neuen Domainnamen
-          ein. Damit setzt der Digitalcheck alle Elemente der{" "}
-          <a href="https://dachmarke.gov.de/" target="_blank">
-            Digitalen Dachmarke
-          </a>{" "}
-          um.
-        </p>
-      </Announcement>
-    )}
+    <Announcement>
+      Aus digitalcheck.bund.de wird digitalcheck.gov.de
+      <p slot="details">
+        Das Digitalcheck-Angebot entwickelt sich weiter und ist nun auch für die{" "}
+        <a href={bundeslaender.path}>Bundesländer</a> verfügbar. Zu diesem
+        Anlass führen wir die neue Bildwortmarke und einen neuen Domainnamen
+        ein. Damit setzt der Digitalcheck alle Elemente der{" "}
+        <a href="https://dachmarke.gov.de/" target="_blank">
+          Digitalen Dachmarke
+        </a>{" "}
+        um.
+      </p>
+    </Announcement>
     <Hero variant="dark">
       <h1 class="mb-24">Digitaltaugliche Regelungen erarbeiten</h1>
       <p class="kern-body py-0">
