@@ -1,6 +1,6 @@
 export const contact = {
-  email: "digitalcheck@digitalservice.bund.de",
-  interoperabilityEmail: "interoperabel@digitalservice.bund.de",
+  email: "kontakt@digitalcheck.gov.de",
+  interoperabilityEmail: "interoperabel@digitalcheck.gov.de",
   nkrEmail: "poststelle@nkr.bund.de",
   bmdsEmail: "SBII3@bmds.bund.de",
   mdMailToLink: (email: string, subject?: string) =>

@@ -43,7 +43,7 @@ describe("Ergebnis", () => {
       }),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).toMatch(
-      /^mailto:poststelle@nkr\.bund\.de\?cc=interoperabel%40digitalservice\.bund\.de&/,
+      /^mailto:poststelle@nkr\.bund\.de\?cc=interoperabel%40digitalcheck\.gov\.de&/,
     );
   });
 
@@ -72,7 +72,7 @@ describe("Ergebnis", () => {
       screen.getByText(/^Die Zentralstelle für bessere Rechtsetzung berät/),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).toMatch(
-      /^mailto:zbr@mdjd\.brandenburg\.de\?cc=interoperabel%40digitalservice\.bund\.de&/,
+      /^mailto:zbr@mdjd\.brandenburg\.de\?cc=interoperabel%40digitalcheck\.gov\.de&/,
     );
     expect(
       screen.queryByText(/an das Digitalcheck-Team/),
@@ -101,7 +101,7 @@ describe("Ergebnis", () => {
       }),
     ).toBeVisible();
     expect(emailLink().getAttribute("href")).toMatch(
-      /^mailto:interoperabel@digitalservice\.bund\.de\?/,
+      /^mailto:interoperabel@digitalcheck\.gov\.de\?/,
     );
   });
 
@@ -195,7 +195,7 @@ describe("Ergebnis", () => {
     ).not.toBeInTheDocument();
     expect(screen.getByText(/das Digitalcheck-Team/)).toBeVisible();
     expect(
-      screen.getByRole("link", { name: "digitalcheck@digitalservice.bund.de" }),
+      screen.getByRole("link", { name: "kontakt@digitalcheck.gov.de" }),
     ).toBeVisible();
   });
 
