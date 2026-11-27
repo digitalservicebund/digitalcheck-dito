@@ -63,7 +63,6 @@ const allPruefbereiche = {
   },
   Brandenburg: {
     label: "Brandenburg",
-    hidden: !showLaender,
     pruefstelle: {
       article: "die",
       shortName: "ZbR",

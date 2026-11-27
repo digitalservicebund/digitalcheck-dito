@@ -89,7 +89,7 @@ function SupportContact() {
   return (
     <>
       <a href={contact.phone}>{contact.phoneDisplay}</a> oder per E-Mail an{" "}
-      <a href={mailto(contact.email, "Supportanfrage: digitalcheck.bund.de")}>
+      <a href={mailto(contact.email, "Supportanfrage: digitalcheck.gov.de")}>
         {contact.email}
       </a>
     </>

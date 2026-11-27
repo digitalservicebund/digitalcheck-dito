@@ -3,7 +3,7 @@
 [![Pipeline](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/pipeline.yml)
 [![Scan](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml/badge.svg)](https://github.com/digitalservicebund/digitalcheck-dito/actions/workflows/scan.yml)
 
-The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcheck.bund.de).
+The website code for [_Digitalcheck: Digitaltaugliche Regelung erarbeiten_](https://digitalcheck.gov.de).
 Built with [Astro](https://astro.build/) as a static site, with React for interactive parts (see [ADR 27](./doc/adr/0027-migrate-to-astro.md)).
 
 ## Setup

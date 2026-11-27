@@ -1,3 +1,5 @@
 User-agent: *
 Disallow: /download/
 Disallow: /health-check/
+
+Sitemap: https://digitalcheck.gov.de/sitemap-index.xml

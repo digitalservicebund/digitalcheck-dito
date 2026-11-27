@@ -1,6 +1,7 @@
 import {
   assistent_dokumentation,
   bundeslaender,
+  bundeslaender_brandenburg,
   dasIstNeu,
   interoperabel,
   interoperabel_angrenzendesEuRecht,
@@ -18,11 +19,23 @@ export const news = {
   subtitle: dedent`
       Das Digitalcheck-Angebot wird kontinuierlich weiterentwickelt. Bedürfnisse und Rückmeldungen von Nutzenden werden kurzfristig eingearbeitet. Auch geänderte und neue rechtliche Anforderungen führen zu Anpassungen. Unten finden Sie eine chronologische Übersicht der Ergänzungen und Änderungen auf der Website.
       
-      Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.bund.de")}.
+      Haben Sie Anregungen oder Wünsche? Kontaktieren Sie uns jederzeit gerne unter ${contact.mdPhoneLink()} oder ${contact.mdMailToLink(contact.email, "Supportanfrage: digitalcheck.gov.de")}.
   `,
   items: [
     {
       year: "2026",
+    },
+    {
+      badge: {
+        text: "30.11.2026",
+      },
+      headline: {
+        text: "Aus digitalcheck.bund.de wird digitalcheck.gov.de",
+      },
+      content: dedent`
+        - **Digitalcheck für Bundesländer:** Das Digitalcheck-Angebot entwickelt sich weiter und ist nun auch für die [Bundesländer](${bundeslaender.path}) verfügbar. Als erstes Bundesland nutzt [Brandenburg](${bundeslaender_brandenburg.path}) den Digitalcheck.
+        - **Neue Bildwortmarke und neuer Domainname:** Zu diesem Anlass führen wir die neue Bildwortmarke und den neuen Domainnamen digitalcheck.gov.de ein. Damit setzt der Digitalcheck alle Elemente der [Digitalen Dachmarke](https://dachmarke.gov.de/) um.
+        - **Neue Kontaktadresse:** ${contact.mdMailToLink(contact.email)}`,
     },
     {
       badge: {
