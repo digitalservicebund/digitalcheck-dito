@@ -309,7 +309,7 @@ export const bundeslaender_brandenburg = {
   title: "Digitalcheck in Brandenburg",
   parent: bundeslaender,
   sitemap: true,
-  isStagingOnly: true,
+  isStagingOnly: false,
   navLabel: "Brandenburg",
 } as const;
 
