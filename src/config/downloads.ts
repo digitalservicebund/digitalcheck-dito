@@ -52,8 +52,8 @@ export const interviewLeitfaden_zielgruppenanaylseBuergercheck_pptx: DownloadRou
   path: "/documents/interview-leitfaden/Zielgruppenanaylse-Buergercheck.pptx",
 } as const;
 
-export const leitfadenDigitalcheckBundeslandAug2026_pdf: DownloadRoute = {
-  path: "/documents/Leitfaden_Digitalcheck_Bundesland_Aug2026.pdf",
+export const leitfadenDigitalcheckBundeslandNov2026_pdf: DownloadRoute = {
+  path: "/documents/Leitfaden_Digitalcheck_Bundesland_Nov2026.pdf",
 } as const;
 
 export const prinzipienPoster_pdf: DownloadRoute = {
