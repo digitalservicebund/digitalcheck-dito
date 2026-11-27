@@ -189,7 +189,7 @@ jobs:
     concurrency: deploy
     with:
       environment_name: production
-      environment_url: https://digitalcheck.bund.de
+      environment_url: https://digitalcheck.gov.de
     secrets:
       GITOPS_DIGITALCHECK_APP_ID: ${{ secrets.GITOPS_DIGITALCHECK_APP_ID }}
       GITOPS_DIGITALCHECK_APP_PRIVATE_KEY: ${{ secrets.GITOPS_DIGITALCHECK_APP_PRIVATE_KEY }}

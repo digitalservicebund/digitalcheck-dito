@@ -1,7 +1,7 @@
 export const siteMeta = {
   siteName: "Digitalcheck",
-  alternateName: ["Digitalcheck des Bundes", "digitalcheck.bund.de"],
-  siteURL: "https://digitalcheck.bund.de/",
+  alternateName: ["Digitalcheck des Bundes", "digitalcheck.gov.de"],
+  siteURL: "https://digitalcheck.gov.de/",
   title: "Digitalcheck",
   titleWithTagline: "Digitalcheck: Digitaltaugliche Regelungen erarbeiten",
   description:
